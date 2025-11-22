@@ -4,7 +4,6 @@ import numpy as np
 from pandas import Series
 
 npNaN = np.nan
-from pandas_ta_classic.momentum import cmo
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
@@ -19,10 +18,24 @@ def vidya(close, length=None, drift=None, offset=None, **kwargs):
     if close is None:
         return
 
+    def _cmo(source: Series, n: int, d: int):
+        """Chande Momentum Oscillator (CMO) - Inlined to avoid circular import
+
+        Note: This is inlined rather than imported from pandas_ta_classic.momentum.cmo
+        to prevent a circular import issue:
+        ma -> vidya -> cmo -> (momentum/__init__) -> apo -> ma
+        """
+        mom = source.diff(d)
+        positive = mom.copy().clip(lower=0)
+        negative = mom.copy().clip(upper=0).abs()
+        pos_sum = positive.rolling(n).sum()
+        neg_sum = negative.rolling(n).sum()
+        return (pos_sum - neg_sum) / (pos_sum + neg_sum)
+
     # Calculate Result
     m = close.size
     alpha = 2 / (length + 1)
-    abs_cmo = cmo(close, length=length, scalar=1, drift=drift).abs()
+    abs_cmo = _cmo(close, length, drift).abs()
     vidya = Series(0, index=close.index)
     for i in range(length, m):
         vidya.iloc[i] = alpha * abs_cmo.iloc[i] * close.iloc[i] + vidya.iloc[i - 1] * (

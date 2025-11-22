@@ -2,7 +2,7 @@
 # Bollinger Bands (BBANDS)
 from pandas import DataFrame
 from pandas_ta_classic import Imports
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.statistics import stdev
 from pandas_ta_classic.utils import get_offset, non_zero_range, tal_ma, verify_series
 

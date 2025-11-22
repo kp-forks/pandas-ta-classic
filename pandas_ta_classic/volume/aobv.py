@@ -2,7 +2,7 @@
 # Archer On Balance Volume (AOBV)
 from pandas import DataFrame
 from .obv import obv
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.trend import long_run, short_run
 from pandas_ta_classic.utils import get_offset, verify_series
 

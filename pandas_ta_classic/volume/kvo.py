@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # Klinger Volume Oscillator (KVO)
 from pandas import DataFrame
-from pandas_ta_classic.overlap import hlc3, ma
+from pandas_ta_classic.overlap.hlc3 import hlc3
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_drift, get_offset, signed_series, verify_series
 
 

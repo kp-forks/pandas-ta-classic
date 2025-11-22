@@ -8,7 +8,7 @@ from pandas import DataFrame, Series
 npNaN = np.nan
 
 from .rsi import rsi
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 

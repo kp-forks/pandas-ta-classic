@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Volume Weighted Moving Average Convergence Divergence (Volume Weighted MACD)
 from pandas import DataFrame
-from pandas_ta_classic.overlap import vwma
+from pandas_ta_classic.overlap.vwma import vwma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

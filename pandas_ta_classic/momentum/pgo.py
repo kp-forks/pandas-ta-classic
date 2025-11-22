@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Pretty Good Oscillator (PGO)
-from pandas_ta_classic.overlap import ema, sma
+from pandas_ta_classic.overlap.ema import ema
+from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 

@@ -1017,6 +1017,11 @@ class AnalysisIndicators(BasePandasObject):
         return self._post_process(result, **kwargs)
 
     # Cycles
+    def dsp(self, length=None, offset=None, **kwargs):
+        close = self._get_column(kwargs.pop("close", "close"))
+        result = dsp(close=close, length=length, offset=offset, **kwargs)
+        return self._post_process(result, **kwargs)
+
     def ebsw(self, close=None, length=None, bars=None, offset=None, **kwargs):
         close = self._get_column(kwargs.pop("close", "close"))
         result = ebsw(close=close, length=length, bars=bars, offset=offset, **kwargs)
@@ -1211,6 +1216,11 @@ class AnalysisIndicators(BasePandasObject):
         )
         return self._post_process(result, **kwargs)
 
+    def lrsi(self, length=None, offset=None, **kwargs):
+        close = self._get_column(kwargs.pop("close", "close"))
+        result = lrsi(close=close, length=length, offset=offset, **kwargs)
+        return self._post_process(result, **kwargs)
+
     def kst(
         self,
         roc1=None,
@@ -1261,6 +1271,11 @@ class AnalysisIndicators(BasePandasObject):
         result = pgo(
             high=high, low=low, close=close, length=length, offset=offset, **kwargs
         )
+        return self._post_process(result, **kwargs)
+
+    def po(self, length=None, offset=None, **kwargs):
+        close = self._get_column(kwargs.pop("close", "close"))
+        result = po(close=close, length=length, offset=offset, **kwargs)
         return self._post_process(result, **kwargs)
 
     def ppo(
@@ -1550,6 +1565,21 @@ class AnalysisIndicators(BasePandasObject):
         )
         return self._post_process(result, **kwargs)
 
+    def trixh(
+        self, length=None, signal=None, scalar=None, drift=None, offset=None, **kwargs
+    ):
+        close = self._get_column(kwargs.pop("close", "close"))
+        result = trixh(
+            close=close,
+            length=length,
+            signal=signal,
+            scalar=scalar,
+            drift=drift,
+            offset=offset,
+            **kwargs,
+        )
+        return self._post_process(result, **kwargs)
+
     def tsi(self, fast=None, slow=None, drift=None, mamode=None, offset=None, **kwargs):
         close = self._get_column(kwargs.pop("close", "close"))
         result = tsi(
@@ -1589,6 +1619,20 @@ class AnalysisIndicators(BasePandasObject):
             medium_w=medium_w,
             slow_w=slow_w,
             drift=drift,
+            offset=offset,
+            **kwargs,
+        )
+        return self._post_process(result, **kwargs)
+
+    def vwmacd(self, fast=None, slow=None, signal=None, offset=None, **kwargs):
+        close = self._get_column(kwargs.pop("close", "close"))
+        volume = self._get_column(kwargs.pop("volume", "volume"))
+        result = vwmacd(
+            close=close,
+            volume=volume,
+            fast=fast,
+            slow=slow,
+            signal=signal,
             offset=offset,
             **kwargs,
         )
@@ -1733,6 +1777,11 @@ class AnalysisIndicators(BasePandasObject):
         result = mcgd(close=close, length=length, offset=offset, **kwargs)
         return self._post_process(result, **kwargs)
 
+    def mmar(self, length=None, offset=None, **kwargs):
+        close = self._get_column(kwargs.pop("close", "close"))
+        result = mmar(close=close, length=length, offset=offset, **kwargs)
+        return self._post_process(result, **kwargs)
+
     def midpoint(self, length=None, offset=None, **kwargs):
         close = self._get_column(kwargs.pop("close", "close"))
         result = midpoint(close=close, length=length, offset=offset, **kwargs)
@@ -1757,6 +1806,11 @@ class AnalysisIndicators(BasePandasObject):
     def pwma(self, length=None, offset=None, **kwargs):
         close = self._get_column(kwargs.pop("close", "close"))
         result = pwma(close=close, length=length, offset=offset, **kwargs)
+        return self._post_process(result, **kwargs)
+
+    def rainbow(self, length=None, offset=None, **kwargs):
+        close = self._get_column(kwargs.pop("close", "close"))
+        result = rainbow(close=close, length=length, offset=offset, **kwargs)
         return self._post_process(result, **kwargs)
 
     def rma(self, length=None, offset=None, **kwargs):
@@ -2107,6 +2161,22 @@ class AnalysisIndicators(BasePandasObject):
             af0=af0,
             af=af,
             max_af=max_af,
+            offset=offset,
+            **kwargs,
+        )
+        return self._post_process(result, **kwargs)
+
+    def pmax(self, length=None, multiplier=None, mamode=None, offset=None, **kwargs):
+        high = self._get_column(kwargs.pop("high", "high"))
+        low = self._get_column(kwargs.pop("low", "low"))
+        close = self._get_column(kwargs.pop("close", "close"))
+        result = pmax(
+            high=high,
+            low=low,
+            close=close,
+            length=length,
+            multiplier=multiplier,
+            mamode=mamode,
             offset=offset,
             **kwargs,
         )
@@ -2694,6 +2764,23 @@ class AnalysisIndicators(BasePandasObject):
         close = self._get_column(kwargs.pop("close", "close"))
         volume = self._get_column(kwargs.pop("volume", "volume"))
         result = pvt(close=close, volume=volume, offset=offset, **kwargs)
+        return self._post_process(result, **kwargs)
+
+    def vfi(
+        self, length=None, coef=None, vcoef=None, mamode=None, offset=None, **kwargs
+    ):
+        close = self._get_column(kwargs.pop("close", "close"))
+        volume = self._get_column(kwargs.pop("volume", "volume"))
+        result = vfi(
+            close=close,
+            volume=volume,
+            length=length,
+            coef=coef,
+            vcoef=vcoef,
+            mamode=mamode,
+            offset=offset,
+            **kwargs,
+        )
         return self._post_process(result, **kwargs)
 
     def vp(self, width=None, percent=None, **kwargs):

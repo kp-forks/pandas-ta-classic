@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Price Max (PMAX)
 from pandas import Series
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 

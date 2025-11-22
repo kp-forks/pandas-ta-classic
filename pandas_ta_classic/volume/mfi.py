@@ -2,7 +2,7 @@
 # Money Flow Index (MFI)
 from pandas import DataFrame
 from pandas_ta_classic import Imports
-from pandas_ta_classic.overlap import hlc3
+from pandas_ta_classic.overlap.hlc3 import hlc3
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 

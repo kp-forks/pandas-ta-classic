@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Detrended Synthetic Price (DSP)
-from pandas_ta_classic.overlap import ema
+from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

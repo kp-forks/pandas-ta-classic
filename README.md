@@ -20,7 +20,7 @@
 
 ![Example Chart](https://raw.githubusercontent.com/xgboosted/pandas-ta-classic/main/images/TA_Chart.png)
 
-**Pandas TA Classic** is an easy-to-use library that leverages the Pandas package with **150 indicators and utility functions** and **62 TA Lib candlestick patterns** (**212 total**). Many commonly used indicators are included, such as: _Simple Moving Average_ (**sma**), _Moving Average Convergence Divergence_ (**macd**), _Hull Exponential Moving Average_ (**hma**), _Bollinger Bands_ (**bbands**), _On-Balance Volume_ (**obv**), _Aroon & Aroon Oscillator_ (**aroon**), _Squeeze_ (**squeeze**) and **many more**.
+> **Pandas TA Classic** is an easy-to-use library that leverages the Pandas package with **150 indicators and utility functions** and **62 TA Lib candlestick patterns** (**212 total**). Many commonly used indicators are included, such as: _Simple Moving Average_ (**sma**), _Moving Average Convergence Divergence_ (**macd**), _Hull Exponential Moving Average_ (**hma**), _Bollinger Bands_ (**bbands**), _On-Balance Volume_ (**obv**), _Aroon & Aroon Oscillator_ (**aroon**), _Squeeze_ (**squeeze**) and **many more**.
 
 This is the **classic/community maintained version** of the popular pandas-ta library.
 

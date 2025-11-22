@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Relative Vigor Index (RVGI)
 from pandas import DataFrame
-from pandas_ta_classic.overlap import swma
+from pandas_ta_classic.overlap.swma import swma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
@@ -77,7 +77,7 @@ def rvgi(open_, high, low, close, length=None, swma_length=None, offset=None, **
     rvgi.category = signal.category = histogram.category = "momentum"
 
     # Prepare DataFrame to return
-    df = DataFrame({rvgi.name: rvgi, signal.name: signal, histogram.name: histogram})
+    df = DataFrame({histogram.name: histogram, rvgi.name: rvgi, signal.name: signal})
     df.name = f"RVGI_{length}_{swma_length}"
     df.category = rvgi.category
 

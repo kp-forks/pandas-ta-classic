@@ -5,7 +5,8 @@ from pandas import DataFrame
 
 npNaN = np.nan
 from pandas_ta_classic.momentum import mom
-from pandas_ta_classic.overlap import ema, sma
+from pandas_ta_classic.overlap.ema import ema
+from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.trend import decreasing, increasing
 from pandas_ta_classic.volatility import bbands, kc
 from pandas_ta_classic.utils import get_offset

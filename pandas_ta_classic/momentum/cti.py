@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Correlation Trend Indicator (CTI)
 from pandas import Series
-from pandas_ta_classic.overlap import linreg
+from pandas_ta_classic.overlap.linreg import linreg
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
