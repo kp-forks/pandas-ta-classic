@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Projection Oscillator (PO)
 from pandas_ta_classic.overlap.linreg import linreg
-from pandas_ta_classic.utils import get_offset, verify_series
+from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def po(close, length=None, offset=None, **kwargs):
@@ -19,6 +19,8 @@ def po(close, length=None, offset=None, **kwargs):
     lr = linreg(close, length=length)
 
     # Projection oscillator as percentage
+    # Use non_zero_range to avoid division by zero
+    lr = non_zero_range(lr, lr)
     po = 100 * (close - lr) / lr
 
     # Offset
