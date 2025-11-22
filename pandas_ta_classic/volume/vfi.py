@@ -91,18 +91,18 @@ Calculation:
         length=130, coef=0.2, vcoef=2.5, mamode='ema'
 
     typical = close
-    inter = typical.diff()
+    inter = typical - typical.shift(1)  # Price change
     cutoff = coef * close  # Volatility threshold
     mf = inter if abs(inter) > cutoff else 0  # Filter minimal price changes
     
-    vave = SMA(volume, length)
+    vave = SMA(volume, length).shift(1)
     vmax = vave * vcoef
-    vc = min(volume, vmax)
+    vc = min(volume, vmax)  # Clipped volume
 
-    vcp = vc * mf
+    vcp = vc * mf  # Volume-weighted money flow
 
-    VFI = SUM(vcp, length) / SMA(vave, length)
-    VFI = EMA(VFI, 3)
+    VFI = SUM(vcp, length) / SMA(vave, length)  # Protected against division by zero
+    VFI = EMA(VFI, 3)  # Smooth the result
 
 Args:
     close (pd.Series): Series of 'close's
