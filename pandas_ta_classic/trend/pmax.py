@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Price Max (PMAX)
+from numpy import maximum, minimum
 from pandas import Series
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.volatility import atr
@@ -33,32 +34,39 @@ def pmax(
     pmax_up = ma_value - (multiplier * atr_value)
     pmax_down = ma_value + (multiplier * atr_value)
 
-    # Initialize PMAX and trend
-    pmax = Series(0.0, index=close.index)
-    trend = Series(1, index=close.index)
+    # Convert to numpy arrays for faster iteration
+    close_arr = close.values
+    pmax_up_arr = pmax_up.values
+    pmax_down_arr = pmax_down.values
+    
+    # Initialize arrays
+    n = len(close)
+    trend_arr = [1] * n  # Start with uptrend
+    pmax_arr = [0.0] * n
 
-    for i in range(1, len(close)):
-        # Update upper band
-        if close.iloc[i - 1] > pmax_up.iloc[i - 1]:
-            pmax_up.iloc[i] = max(pmax_up.iloc[i], pmax_up.iloc[i - 1])
+    # Iterate using numpy arrays (much faster than pandas .iloc)
+    for i in range(1, n):
+        # Update upper band: if price was above upper band, maintain higher of current or previous
+        if close_arr[i - 1] > pmax_up_arr[i - 1]:
+            pmax_up_arr[i] = max(pmax_up_arr[i], pmax_up_arr[i - 1])
 
-        # Update lower band
-        if close.iloc[i - 1] < pmax_down.iloc[i - 1]:
-            pmax_down.iloc[i] = min(pmax_down.iloc[i], pmax_down.iloc[i - 1])
+        # Update lower band: if price was below lower band, maintain lower of current or previous
+        if close_arr[i - 1] < pmax_down_arr[i - 1]:
+            pmax_down_arr[i] = min(pmax_down_arr[i], pmax_down_arr[i - 1])
 
-        # Determine trend
-        if close.iloc[i] > pmax_down.iloc[i - 1]:
-            trend.iloc[i] = 1
-        elif close.iloc[i] < pmax_up.iloc[i - 1]:
-            trend.iloc[i] = -1
+        # Determine trend: price crosses lower band (uptrend) or upper band (downtrend)
+        if close_arr[i] > pmax_down_arr[i - 1]:
+            trend_arr[i] = 1
+        elif close_arr[i] < pmax_up_arr[i - 1]:
+            trend_arr[i] = -1
         else:
-            trend.iloc[i] = trend.iloc[i - 1]
+            trend_arr[i] = trend_arr[i - 1]  # Maintain previous trend
 
         # Set PMAX value based on trend
-        if trend.iloc[i] == 1:
-            pmax.iloc[i] = pmax_up.iloc[i]
-        else:
-            pmax.iloc[i] = pmax_down.iloc[i]
+        pmax_arr[i] = pmax_up_arr[i] if trend_arr[i] == 1 else pmax_down_arr[i]
+
+    # Convert back to Series
+    pmax = Series(pmax_arr, index=close.index)
 
     # Offset
     if offset != 0:
