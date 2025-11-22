@@ -4,6 +4,7 @@ import numpy as np
 from pandas import Series
 
 npNaN = np.nan
+from pandas_ta_classic.momentum import cmo
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
@@ -18,24 +19,10 @@ def vidya(close, length=None, drift=None, offset=None, **kwargs):
     if close is None:
         return
 
-    def _cmo(source: Series, n: int, d: int):
-        """Chande Momentum Oscillator (CMO) Patch
-        For some reason: from pandas_ta_classic.momentum import cmo causes
-        pandas_ta.momentum.coppock to not be able to import it's
-        wma like from pandas_ta_classic.overlap import wma?
-        Weird Circular TypeError!?!
-        """
-        mom = source.diff(d)
-        positive = mom.copy().clip(lower=0)
-        negative = mom.copy().clip(upper=0).abs()
-        pos_sum = positive.rolling(n).sum()
-        neg_sum = negative.rolling(n).sum()
-        return (pos_sum - neg_sum) / (pos_sum + neg_sum)
-
     # Calculate Result
     m = close.size
     alpha = 2 / (length + 1)
-    abs_cmo = _cmo(close, length, drift).abs()
+    abs_cmo = cmo(close, length=length, scalar=1, drift=drift).abs()
     vidya = Series(0, index=close.index)
     for i in range(length, m):
         vidya.iloc[i] = alpha * abs_cmo.iloc[i] * close.iloc[i] + vidya.iloc[i - 1] * (

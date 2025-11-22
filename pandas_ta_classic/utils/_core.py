@@ -18,7 +18,7 @@ def category_files(category: str) -> list:
     """Helper function to return all filenames in the category directory."""
     files = [
         x.stem
-        for x in list(Path(f"pandas_ta/{category}/").glob("*.py"))
+        for x in list(Path(f"pandas_ta_classic/{category}/").glob("*.py"))
         if x.stem != "__init__"
     ]
     return files
