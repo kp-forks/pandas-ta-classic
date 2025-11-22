@@ -116,3 +116,8 @@ class TestVolumeExtension(TestCase):
         result = self.data.ta.vp()
         self.assertIsInstance(result, DataFrame)
         self.assertEqual(result.name, "VP_10")
+
+    def test_vfi_ext(self):
+        self.data.ta.vfi(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        self.assertEqual(self.data.columns[-1], "VFI_130")

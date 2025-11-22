@@ -202,3 +202,8 @@ class TestVolume(TestCase):
         result = pandas_ta.vp(self.close, self.volume_)
         self.assertIsInstance(result, DataFrame)
         self.assertEqual(result.name, "VP_10")
+
+    def test_vfi(self):
+        result = pandas_ta.vfi(self.close, self.volume_)
+        self.assertIsInstance(result, Series)
+        self.assertEqual(result.name, "VFI_130")

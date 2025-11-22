@@ -196,3 +196,17 @@ class TestOverlapExtension(TestCase):
         self.data.ta.zlma(append=True)
         self.assertIsInstance(self.data, DataFrame)
         self.assertEqual(self.data.columns[-1], "ZL_EMA_10")
+
+    def test_mmar_ext(self):
+        self.data.ta.mmar(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        # MMAR returns multiple columns, check if any MMAR columns were added
+        mmar_cols = [col for col in self.data.columns if col.startswith("MMAR_")]
+        self.assertTrue(len(mmar_cols) > 0)
+
+    def test_rainbow_ext(self):
+        self.data.ta.rainbow(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        # RAINBOW returns multiple columns, check if any RAINBOW columns were added
+        rainbow_cols = [col for col in self.data.columns if col.startswith("RAINBOW_")]
+        self.assertTrue(len(rainbow_cols) > 0)

@@ -41,3 +41,9 @@ class TestPerformaceExtension(TestCase):
         self.data.ta.percent_return(append=True, cumulative=True)
         self.assertIsInstance(self.data, DataFrame)
         self.assertEqual(self.data.columns[-1], "CUMPCTRET_1")
+
+    def test_drawdown_ext(self):
+        self.data.ta.drawdown(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        # Drawdown returns 3 columns: DD, DD_PCT, DD_LOG
+        self.assertEqual(list(self.data.columns[-3:]), ["DD", "DD_PCT", "DD_LOG"])

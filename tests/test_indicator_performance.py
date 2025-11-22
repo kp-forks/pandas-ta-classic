@@ -2,7 +2,7 @@ from tests.config import get_sample_data
 from tests.context import pandas_ta_classic as pandas_ta
 
 from unittest import TestCase
-from pandas import Series
+from pandas import DataFrame, Series
 
 
 class TestPerformace(TestCase):
@@ -46,3 +46,8 @@ class TestPerformace(TestCase):
     def test_cum_percent_return(self):
         result = pandas_ta.percent_return(self.close, cumulative=True)
         self.assertEqual(result.name, "CUMPCTRET_1")
+
+    def test_drawdown(self):
+        result = pandas_ta.drawdown(self.close)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "DD")

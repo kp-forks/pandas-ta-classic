@@ -508,3 +508,13 @@ class TestOverlap(TestCase):
         result = pandas_ta.zlma(self.close)
         self.assertIsInstance(result, Series)
         self.assertEqual(result.name, "ZL_EMA_10")
+
+    def test_mmar(self):
+        result = pandas_ta.mmar(self.close)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "MMAR_10_5_6")
+
+    def test_rainbow(self):
+        result = pandas_ta.rainbow(self.close)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "RAINBOW_2_10")
