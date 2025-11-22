@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # Laguerre Relative Strength Index (Laguerre RSI)
+from numpy import maximum, where, zeros
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
@@ -15,40 +17,40 @@ def lrsi(close, length=None, gamma=None, offset=None, **kwargs):
         return
 
     # Calculate Result
-    # Initialize Laguerre filter components
-    l0 = close.copy()
-    l1 = close.copy()
-    l2 = close.copy()
-    l3 = close.copy()
+    # Convert to numpy arrays for faster iteration
+    close_arr = close.values
+    n = len(close)
+    
+    # Initialize Laguerre filter components as numpy arrays
+    l0 = close_arr.copy()
+    l1 = close_arr.copy()
+    l2 = close_arr.copy()
+    l3 = close_arr.copy()
 
-    # Apply Laguerre filter
-    for i in range(1, len(close)):
-        l0.iloc[i] = (1 - gamma) * close.iloc[i] + gamma * l0.iloc[i - 1]
-        l1.iloc[i] = -gamma * l0.iloc[i] + l0.iloc[i - 1] + gamma * l1.iloc[i - 1]
-        l2.iloc[i] = -gamma * l1.iloc[i] + l1.iloc[i - 1] + gamma * l2.iloc[i - 1]
-        l3.iloc[i] = -gamma * l2.iloc[i] + l2.iloc[i - 1] + gamma * l3.iloc[i - 1]
+    # Apply Laguerre filter (state-dependent, requires iteration)
+    for i in range(1, n):
+        l0[i] = (1 - gamma) * close_arr[i] + gamma * l0[i - 1]
+        l1[i] = -gamma * l0[i] + l0[i - 1] + gamma * l1[i - 1]
+        l2[i] = -gamma * l1[i] + l1[i - 1] + gamma * l2[i - 1]
+        l3[i] = -gamma * l2[i] + l2[i - 1] + gamma * l3[i - 1]
 
-    # Calculate Laguerre RSI
-    cu = 0 * close
-    cd = 0 * close
+    # Calculate Laguerre RSI components (can be vectorized)
+    cu = zeros(n)
+    cd = zeros(n)
 
-    for i in range(len(close)):
-        if l0.iloc[i] >= l1.iloc[i]:
-            cu.iloc[i] = l0.iloc[i] - l1.iloc[i]
-        else:
-            cd.iloc[i] = l1.iloc[i] - l0.iloc[i]
+    # Vectorized calculation of up/down moves between filter stages
+    cu += maximum(l0 - l1, 0)
+    cd += maximum(l1 - l0, 0)
+    cu += maximum(l1 - l2, 0)
+    cd += maximum(l2 - l1, 0)
+    cu += maximum(l2 - l3, 0)
+    cd += maximum(l3 - l2, 0)
 
-        if l1.iloc[i] >= l2.iloc[i]:
-            cu.iloc[i] += l1.iloc[i] - l2.iloc[i]
-        else:
-            cd.iloc[i] += l2.iloc[i] - l1.iloc[i]
-
-        if l2.iloc[i] >= l3.iloc[i]:
-            cu.iloc[i] += l2.iloc[i] - l3.iloc[i]
-        else:
-            cd.iloc[i] += l3.iloc[i] - l2.iloc[i]
-
-    lrsi = 100 * cu / (cu + cd)
+    # Calculate LRSI with division by zero protection
+    denominator = cu + cd
+    # Replace zeros with 1 to avoid division by zero (result will be 0 anyway since cu=0 when denominator=0)
+    denominator = where(denominator == 0, 1, denominator)
+    lrsi = Series(100 * cu / denominator, index=close.index)
 
     # Offset
     if offset != 0:
