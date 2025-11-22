@@ -37,8 +37,13 @@ def vfi(
     vmax = vave * vcoef
     vc = volume.clip(upper=vmax)
 
-    # Calculate MF (Money Flow)
-    mf = typical - typical.shift(1)
+    # Calculate MF (Money Flow) with volatility threshold
+    # Only consider price changes above the threshold
+    inter = typical - typical.shift(1)
+    
+    # Apply volatility threshold: coef * close
+    cutoff = coef * close
+    mf = inter.where(inter.abs() > cutoff, 0)
 
     # VCP (Volume times Cutoff Price)
     vcp = vc * mf
@@ -84,12 +89,14 @@ Calculation:
         length=130, coef=0.2, vcoef=2.5, mamode='ema'
 
     typical = close
-    inter = typical.diff() (handle zeros)
+    inter = typical.diff()
+    cutoff = coef * close  # Volatility threshold
+    mf = inter if abs(inter) > cutoff else 0  # Filter minimal price changes
+    
     vave = SMA(volume, length)
     vmax = vave * vcoef
     vc = min(volume, vmax)
 
-    mf = typical - typical[1]
     vcp = vc * mf
 
     VFI = SUM(vcp, length) / SMA(vave, length)
@@ -99,7 +106,7 @@ Args:
     close (pd.Series): Series of 'close's
     volume (pd.Series): Series of 'volume's
     length (int): The period. Default: 130
-    coef (float): Calculation coefficient. Default: 0.2
+    coef (float): Volatility threshold coefficient (0.2 for day trading, 0.1 for intra-day). Default: 0.2
     vcoef (float): Volume coefficient. Default: 2.5
     mamode (str): Moving average mode for smoothing. Default: 'ema'
     offset (int): How many periods to offset the result. Default: 0
