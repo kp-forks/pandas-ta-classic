@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Volume Flow Indicator (VFI)
 from pandas_ta_classic.overlap.ma import ma
-from pandas_ta_classic.utils import get_offset, verify_series
+from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def vfi(
@@ -48,8 +48,10 @@ def vfi(
     # VCP (Volume times Cutoff Price)
     vcp = vc * mf
 
-    # Calculate VFI
-    vfi = vcp.rolling(length).sum() / vave.rolling(length).mean()
+    # Calculate VFI (protect against division by zero)
+    vave_mean = vave.rolling(length).mean()
+    vave_mean = non_zero_range(vave_mean, vave_mean)
+    vfi = vcp.rolling(length).sum() / vave_mean
 
     # Smooth VFI
     vfi = ma(mamode, vfi, length=3)
