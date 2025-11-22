@@ -38,7 +38,7 @@ def pmax(
     close_arr = close.values
     pmax_up_arr = pmax_up.values
     pmax_down_arr = pmax_down.values
-    
+
     # Initialize arrays
     n = len(close)
     trend_arr = [1] * n  # Start with uptrend

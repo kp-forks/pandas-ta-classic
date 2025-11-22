@@ -20,7 +20,7 @@ def lrsi(close, length=None, gamma=None, offset=None, **kwargs):
     # Convert to numpy arrays for faster iteration
     close_arr = close.values
     n = len(close)
-    
+
     # Initialize Laguerre filter components as numpy arrays
     l0 = close_arr.copy()
     l1 = close_arr.copy()

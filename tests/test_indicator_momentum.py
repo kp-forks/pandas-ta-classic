@@ -546,7 +546,6 @@ class TestMomentum(TestCase):
             except Exception as ex:
                 error_analysis(result.iloc[:, 0], CORRELATION, ex, newline=False)
 
-    @skip
     def test_td_seq(self):
         """TS Sequential: Working but SLOW implementation"""
         result = pandas_ta.td_seq(self.close)

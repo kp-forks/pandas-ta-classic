@@ -40,7 +40,7 @@ def vfi(
     # Calculate MF (Money Flow) with volatility threshold
     # Only consider price changes above the threshold
     inter = typical - typical.shift(1)
-    
+
     # Apply volatility threshold: coef * close
     cutoff = coef * close
     mf = inter.where(inter.abs() > cutoff, 0)
