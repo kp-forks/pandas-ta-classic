@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Keltner Channels (KC)
 from pandas import DataFrame
 from .true_range import true_range
 from pandas_ta_classic.overlap import ma

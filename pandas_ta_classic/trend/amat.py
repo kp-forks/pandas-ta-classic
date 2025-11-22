@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Archer Moving Averages Trends (AMAT)
 from pandas import DataFrame
 from .long_run import long_run
 from .short_run import short_run

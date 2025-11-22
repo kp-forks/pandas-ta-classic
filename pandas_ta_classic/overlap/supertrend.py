@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# SuperTrend (SUPERTREND)
 import numpy as np
 from pandas import DataFrame
 

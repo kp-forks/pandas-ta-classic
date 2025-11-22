@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Decreasing (DECREASING)
 from pandas_ta_classic.utils import get_drift, get_offset, is_percent, verify_series
 
 

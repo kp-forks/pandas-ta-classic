@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# True Range (TRUE_RANGE)
 import numpy as np
 from pandas import concat
 

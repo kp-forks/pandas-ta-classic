@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Efficiency Ratio (ER)
 from pandas import DataFrame, concat
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, signals
 

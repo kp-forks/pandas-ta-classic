@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Psychological Line (PSL)
 from numpy import sign as npSign
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 

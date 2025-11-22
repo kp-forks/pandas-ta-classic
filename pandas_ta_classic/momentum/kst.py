@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Know Sure Thing (KST)
 from pandas import DataFrame
 from .roc import roc
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series

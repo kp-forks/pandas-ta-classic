@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Elder Force Index (EFI)
 from pandas_ta_classic.overlap import ma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 

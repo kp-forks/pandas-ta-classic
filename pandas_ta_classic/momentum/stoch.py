@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Stochastic Oscillator (STOCH)
 from pandas import DataFrame
 from pandas_ta_classic.overlap import ma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series

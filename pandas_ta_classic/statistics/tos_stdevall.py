@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# TOS Standard Deviation All (TOS_STDEVALL)
 from numpy import array as npArray
 from numpy import arange as npArange
 from numpy import polyfit as npPolyfit

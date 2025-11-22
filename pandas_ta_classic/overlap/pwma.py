@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Pascal Weighted Moving Average (PWMA)
 from pandas_ta_classic.utils import get_offset, pascals_triangle, verify_series, weights
 
 

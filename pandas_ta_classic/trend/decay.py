@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Linear Decay (DECAY)
 from numpy import exp as npExp
 from pandas import DataFrame
 from pandas_ta_classic.utils import get_offset, verify_series

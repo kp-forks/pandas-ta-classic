@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Relative Volatility Index (RVI)
 from pandas_ta_classic.overlap import ma
 from pandas_ta_classic.statistics import stdev
 from pandas_ta_classic.utils import get_drift, get_offset

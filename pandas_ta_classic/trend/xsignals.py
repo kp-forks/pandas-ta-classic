@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Cross Signals (XSIGNALS)
 import numpy as np
 from pandas import DataFrame
 

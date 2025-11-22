@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Variable Index Dynamic Average (VIDYA)
 import numpy as np
 from pandas import Series
 

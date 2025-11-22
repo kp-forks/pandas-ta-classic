@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Candle Inside (CDL_INSIDE)
 from pandas_ta_classic.utils import candle_color, get_offset
 from pandas_ta_classic.utils import verify_series
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Choppiness Index (CHOP)
 from numpy import log10 as npLog10
 from numpy import log as npLn
 from pandas_ta_classic.volatility import atr

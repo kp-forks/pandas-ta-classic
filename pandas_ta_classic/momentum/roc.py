@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Rate of Change (ROC)
 from .mom import mom
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series

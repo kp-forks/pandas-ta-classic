@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Symmetric Weighted Moving Average (SWMA)
 from pandas_ta_classic.utils import (
     get_offset,
     symmetric_triangle,

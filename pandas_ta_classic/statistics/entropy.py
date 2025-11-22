@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Entropy (ENTROPY)
 from numpy import log as npLog
 from pandas_ta_classic.utils import get_offset, verify_series
 

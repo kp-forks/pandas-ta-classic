@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Ichimoku Kinko Hyo (ICHIMOKU)
 from pandas import date_range, DataFrame, RangeIndex, Timedelta
 from .midprice import midprice
 from pandas_ta_classic.utils import get_offset, verify_series

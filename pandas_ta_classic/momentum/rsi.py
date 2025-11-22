@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Relative Strength Index (RSI)
 from pandas import DataFrame, concat
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap import rma

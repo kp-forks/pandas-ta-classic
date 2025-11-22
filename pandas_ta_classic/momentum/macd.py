@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Moving Average Convergence Divergence (MACD)
 from pandas import concat, DataFrame
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap import ema

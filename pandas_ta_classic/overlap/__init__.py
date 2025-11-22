@@ -16,8 +16,10 @@ from .ma import ma
 from .mcgd import mcgd
 from .midpoint import midpoint
 from .midprice import midprice
+from .mmar import mmar
 from .ohlc4 import ohlc4
 from .pwma import pwma
+from .rainbow import rainbow
 from .rma import rma
 from .sinwma import sinwma
 from .sma import sma

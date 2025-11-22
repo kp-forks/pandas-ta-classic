@@ -13,4 +13,5 @@ from .pvi import pvi
 from .pvol import pvol
 from .pvr import pvr
 from .pvt import pvt
+from .vfi import vfi
 from .vp import vp

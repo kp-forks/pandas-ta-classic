@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Accumulation/Distribution Oscillator (ADOSC)
 from .ad import ad
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap import ema

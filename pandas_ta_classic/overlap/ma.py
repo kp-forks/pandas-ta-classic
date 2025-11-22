@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Moving Average (MA)
 from pandas import Series
 
 from .dema import dema

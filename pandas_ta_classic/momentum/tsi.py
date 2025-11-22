@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# True Strength Index (TSI)
 from pandas import DataFrame
 from pandas_ta_classic.overlap import ema, ma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series

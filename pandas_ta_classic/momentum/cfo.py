@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Chande Forecast Oscillator (CFO)
 from pandas_ta_classic.overlap import linreg
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 

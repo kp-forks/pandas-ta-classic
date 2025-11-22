@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Median (MEDIAN)
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

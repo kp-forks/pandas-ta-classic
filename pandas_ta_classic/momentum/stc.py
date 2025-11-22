@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Schaff Trend Cycle (STC)
 from pandas import DataFrame, Series
 from pandas_ta_classic.overlap import ema
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series

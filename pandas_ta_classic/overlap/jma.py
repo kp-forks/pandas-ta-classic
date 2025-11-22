@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Jurik Moving Average (JMA)
 import numpy as np
 from numpy import average as npAverage
 from numpy import log as npLog

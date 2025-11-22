@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Gann High-Low Activator (HILO)
 import numpy as np
 from pandas import DataFrame, Series
 

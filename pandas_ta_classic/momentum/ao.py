@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Awesome Oscillator (AO)
 from pandas_ta_classic.overlap import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 

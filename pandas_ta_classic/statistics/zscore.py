@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Z Score (ZSCORE)
 from pandas_ta_classic.overlap import sma
 from .stdev import stdev
 from pandas_ta_classic.utils import get_offset, verify_series

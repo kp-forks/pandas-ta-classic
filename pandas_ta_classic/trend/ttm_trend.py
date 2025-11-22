@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# TTM Trend (TTM_TREND)
 from pandas import DataFrame
 from pandas_ta_classic.overlap import hl2
 from pandas_ta_classic.utils import get_offset, verify_series

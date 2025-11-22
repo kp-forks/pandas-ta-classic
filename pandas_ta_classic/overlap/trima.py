@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Triangular Moving Average (TRIMA)
 from .sma import sma
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series

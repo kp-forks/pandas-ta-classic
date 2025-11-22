@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Standard Deviation (STDEV)
 from numpy import sqrt as npsqrt
 from .variance import variance
 from pandas_ta_classic import Imports

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Stochastic Momentum Index (SMI)
 from pandas import DataFrame
 from .tsi import tsi
 from pandas_ta_classic.overlap import ema

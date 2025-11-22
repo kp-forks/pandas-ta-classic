@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Fisher Transform (FISHER)
 import numpy as np
 from numpy import log as nplog
 from pandas import DataFrame, Series

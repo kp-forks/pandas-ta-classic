@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Q Stick (QSTICK)
 from pandas_ta_classic.overlap import dema, ema, hma, rma, sma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 

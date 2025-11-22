@@ -1,7 +1,7 @@
 Indicators Reference
 ===================
 
-**Pandas TA Classic** includes 141 indicators and utility functions plus 62 TA-Lib candlestick patterns (203 total) organized into the following categories:
+**Pandas TA Classic** includes 150 indicators and utility functions plus 62 TA-Lib candlestick patterns (212 total) organized into the following categories:
 
 * **Candles** (67) - Candlestick patterns for market sentiment analysis (5 native + 62 TA-Lib patterns)  
 * **Cycles** (1) - Cycle-based technical indicators  

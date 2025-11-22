@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Average True Range (ATR)
 from .true_range import true_range
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap import ma

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Candle Z (CDL_Z)
 from pandas import DataFrame
 from pandas_ta_classic.statistics import zscore
 from pandas_ta_classic.utils import get_offset, verify_series

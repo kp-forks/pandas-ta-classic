@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Volume Weighted Average Price (VWAP)
 from .hlc3 import hlc3
 from pandas_ta_classic.utils import get_offset, is_datetime_ordered, verify_series
 

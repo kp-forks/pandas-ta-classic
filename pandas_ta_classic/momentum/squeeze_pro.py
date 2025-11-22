@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Squeeze Pro (SQUEEZE_PRO)
 import numpy as np
 from pandas import DataFrame
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Even Better Sine Wave (EBSW)
 import numpy as np
 from numpy import cos as npCos
 from numpy import exp as npExp

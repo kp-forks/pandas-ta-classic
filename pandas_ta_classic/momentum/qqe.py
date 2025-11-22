@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Quantitative Qualitative Estimation (QQE)
 import numpy as np
 from numpy import maximum as npMaximum
 from numpy import minimum as npMinimum
