@@ -83,17 +83,17 @@ Sources:
 Calculation:
     Default Inputs:
         length=14, gamma=0.5
-    
+
     Apply Laguerre filter with gamma coefficient:
     L0 = (1 - gamma) * Close + gamma * L0[1]
     L1 = -gamma * L0 + L0[1] + gamma * L1[1]
     L2 = -gamma * L1 + L1[1] + gamma * L2[1]
     L3 = -gamma * L2 + L2[1] + gamma * L3[1]
-    
+
     Calculate ups and downs:
     CU = sum of (L0-L1, L1-L2, L2-L3) when positive
     CD = sum of (L0-L1, L1-L2, L2-L3) when negative (absolute)
-    
+
     LRSI = 100 * CU / (CU + CD)
 
 Args:

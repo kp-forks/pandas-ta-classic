@@ -6,7 +6,9 @@ from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def pmax(high, low, close, length=None, multiplier=None, mamode=None, offset=None, **kwargs):
+def pmax(
+    high, low, close, length=None, multiplier=None, mamode=None, offset=None, **kwargs
+):
     """Indicator: PMAX (Price Max)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 10
@@ -91,16 +93,16 @@ Sources:
 Calculation:
     Default Inputs:
         length=10, multiplier=3.0, mamode='ema'
-    
+
     ATR = ATR(high, low, close, length)
     MA = MA(close, length, mamode)
-    
+
     PMAX_UP = MA - (multiplier * ATR)
     PMAX_DOWN = MA + (multiplier * ATR)
-    
+
     If close > PMAX_DOWN[1]: trend = 1 (uptrend)
     If close < PMAX_UP[1]: trend = -1 (downtrend)
-    
+
     PMAX = PMAX_UP if trend == 1 else PMAX_DOWN
 
 Args:

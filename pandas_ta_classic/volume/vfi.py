@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 # Volume Flow Indicator (VFI)
 from pandas_ta_classic.overlap import ma
-from pandas_ta_classic.statistics import stdev
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def vfi(close, volume, length=None, coef=None, vcoef=None, mamode=None, offset=None, **kwargs):
+def vfi(
+    close,
+    volume,
+    length=None,
+    coef=None,
+    vcoef=None,
+    mamode=None,
+    offset=None,
+    **kwargs,
+):
     """Indicator: Volume Flow Indicator (VFI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 130
@@ -23,9 +31,6 @@ def vfi(close, volume, length=None, coef=None, vcoef=None, mamode=None, offset=N
     # Calculate Result
     # Typical price
     typical = close
-
-    # Inter calculation
-    inter = (typical.diff(1)).apply(lambda x: x if abs(x) > 0 else 0.0001)
 
     # Volume cutoff
     vave = volume.rolling(length).mean().shift(1)
@@ -77,16 +82,16 @@ Sources:
 Calculation:
     Default Inputs:
         length=130, coef=0.2, vcoef=2.5, mamode='ema'
-    
+
     typical = close
     inter = typical.diff() (handle zeros)
     vave = SMA(volume, length)
     vmax = vave * vcoef
     vc = min(volume, vmax)
-    
+
     mf = typical - typical[1]
     vcp = vc * mf
-    
+
     VFI = SUM(vcp, length) / SMA(vave, length)
     VFI = EMA(VFI, 3)
 

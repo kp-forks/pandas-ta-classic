@@ -63,7 +63,7 @@ Sources:
 Calculation:
     Default Inputs:
         length=2, num_ribbons=10
-    
+
     MA1 = SMA(close, length)
     MA2 = SMA(MA1, length)
     MA3 = SMA(MA2, length)

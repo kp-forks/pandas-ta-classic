@@ -62,11 +62,11 @@ Sources:
 Calculation:
     Default Inputs:
         length=10, step=5, num_ribbons=6
-    
+
     For i in range(num_ribbons):
         period = length + (i * step)
         MMAR[i] = EMA(close, period)
-    
+
     Returns DataFrame with columns:
     MMAR_10, MMAR_15, MMAR_20, MMAR_25, MMAR_30, MMAR_35
 

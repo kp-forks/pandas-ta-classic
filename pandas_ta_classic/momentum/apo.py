@@ -2,7 +2,7 @@
 # Absolute Price Oscillator (APO)
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap import ma
-from pandas_ta_classic.utils import get_offset, verify_series
+from pandas_ta_classic.utils import get_offset, tal_ma, verify_series
 
 
 def apo(close, fast=None, slow=None, mamode=None, talib=None, offset=None, **kwargs):

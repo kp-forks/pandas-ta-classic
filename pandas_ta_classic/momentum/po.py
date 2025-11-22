@@ -54,7 +54,7 @@ Sources:
 Calculation:
     Default Inputs:
         length=14
-    
+
     LR = Linear Regression(close, length)
     PO = 100 * (close - LR) / LR
 

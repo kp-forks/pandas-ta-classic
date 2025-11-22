@@ -54,7 +54,7 @@ Sources:
 Calculation:
     Default Inputs:
         length=14
-    
+
     EMA = EMA(close, length)
     DSP = close - EMA
 

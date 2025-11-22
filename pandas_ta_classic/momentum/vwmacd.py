@@ -88,10 +88,10 @@ Sources:
 Calculation:
     Default Inputs:
         fast=12, slow=26, signal=9
-    
+
     FastVWMA = VWMA(close, volume, fast)
     SlowVWMA = VWMA(close, volume, slow)
-    
+
     VWMACD = FastVWMA - SlowVWMA
     Signal = VWMA(VWMACD, volume, signal)
     Histogram = VWMACD - Signal

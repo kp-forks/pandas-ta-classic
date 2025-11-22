@@ -5,7 +5,9 @@ from pandas_ta_classic.momentum import trix
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def trixh(close, length=None, signal=None, scalar=None, drift=None, offset=None, **kwargs):
+def trixh(
+    close, length=None, signal=None, scalar=None, drift=None, offset=None, **kwargs
+):
     """Indicator: TRIX Histogram (TRIXH)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 18
@@ -20,14 +22,14 @@ def trixh(close, length=None, signal=None, scalar=None, drift=None, offset=None,
     # Calculate Result
     # Calculate TRIX (returns DataFrame with TRIX and signal)
     trix_df = trix(close, length=length, signal=signal, scalar=scalar, drift=drift)
-    
+
     if trix_df is None:
         return
-    
+
     # Extract TRIX line and signal
     trix_col = f"TRIX_{length}_{signal}"
     signal_col = f"TRIXs_{length}_{signal}"
-    
+
     trix_line = trix_df[trix_col]
     trix_signal = trix_df[signal_col]
 
@@ -87,7 +89,7 @@ Sources:
 Calculation:
     Default Inputs:
         length=18, signal=9, scalar=100
-    
+
     TRIX = TRIX(close, length, scalar)
     Signal = EMA(TRIX, signal)
     Histogram = TRIX - Signal
