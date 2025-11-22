@@ -225,3 +225,8 @@ class TestVolatility(TestCase):
         result = pandas_ta.ui(self.close, everget=True)
         self.assertIsInstance(result, Series)
         self.assertEqual(result.name, "UIe_14")
+
+    def test_hwc(self):
+        result = pandas_ta.hwc(self.close)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "HWC")

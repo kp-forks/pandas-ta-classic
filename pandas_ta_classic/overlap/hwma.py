@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Holt-Winter Moving Average (HWMA)
 from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 

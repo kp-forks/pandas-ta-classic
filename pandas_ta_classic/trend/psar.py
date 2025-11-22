@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Parabolic SAR (PSAR)
 import numpy as np
 from pandas import DataFrame, Series
 

@@ -54,32 +54,23 @@ class TestUtilities(TestCase):
         for col in result.columns:
             self.assertTrue(col.startswith("pre_") and col.endswith("_suf"))
 
-    @skip
     def test__above_below(self):
-        result = self.utils._above_below(
-            self.crosseddf["a"], self.crosseddf["zero"], above=True
-        )
+        result = self.utils.above(self.crosseddf["a"], self.crosseddf["zero"])
         self.assertIsInstance(result, Series)
         self.assertEqual(result.name, "a_A_zero")
         npt.assert_array_equal(result, self.crosseddf["c"])
 
-        result = self.utils._above_below(
-            self.crosseddf["a"], self.crosseddf["zero"], above=False
-        )
+        result = self.utils.below(self.crosseddf["a"], self.crosseddf["zero"])
         self.assertIsInstance(result, Series)
         self.assertEqual(result.name, "a_B_zero")
         npt.assert_array_equal(result, self.crosseddf["b"])
 
-        result = self.utils._above_below(
-            self.crosseddf["c"], self.crosseddf["zero"], above=True
-        )
+        result = self.utils.above(self.crosseddf["c"], self.crosseddf["zero"])
         self.assertIsInstance(result, Series)
         self.assertEqual(result.name, "c_A_zero")
         npt.assert_array_equal(result, self.crosseddf["c"])
 
-        result = self.utils._above_below(
-            self.crosseddf["c"], self.crosseddf["zero"], above=False
-        )
+        result = self.utils.below(self.crosseddf["c"], self.crosseddf["zero"])
         self.assertIsInstance(result, Series)
         self.assertEqual(result.name, "c_B_zero")
         npt.assert_array_equal(result, self.crosseddf["zero"])
@@ -167,17 +158,20 @@ class TestUtilities(TestCase):
         )
         self.assertEqual(5, result.shape[0])
 
-    @skip
     def test_df_month_to_date(self):
         result = self.utils.df_month_to_date(self.data)
+        self.assertIsInstance(result, DataFrame)
+        self.assertLessEqual(len(result), len(self.data))
 
-    @skip
     def test_df_quarter_to_date(self):
         result = self.utils.df_quarter_to_date(self.data)
+        self.assertIsInstance(result, DataFrame)
+        self.assertLessEqual(len(result), len(self.data))
 
-    @skip
     def test_df_year_to_date(self):
         result = self.utils.df_year_to_date(self.data)
+        self.assertIsInstance(result, DataFrame)
+        self.assertLessEqual(len(result), len(self.data))
 
     def test_fibonacci(self):
         self.assertIs(type(self.utils.fibonacci(zero=True, weighted=False)), np.ndarray)

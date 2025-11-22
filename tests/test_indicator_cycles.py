@@ -48,6 +48,11 @@ class TestCycles(TestCase):
     def tearDown(self):
         pass
 
+    def test_dsp(self):
+        result = pandas_ta.dsp(self.close)
+        self.assertIsInstance(result, Series)
+        self.assertEqual(result.name, "DSP_14")
+
     def test_ebsw(self):
         result = pandas_ta.ebsw(self.close)
         self.assertIsInstance(result, Series)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# Ulcer Index (UI)
 from numpy import sqrt as npsqrt
-from pandas_ta_classic.overlap import sma
+from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

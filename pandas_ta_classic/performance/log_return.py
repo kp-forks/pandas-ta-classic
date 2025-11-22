@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Log Return (LOG_RETURN)
 from numpy import log as nplog
 from pandas_ta_classic.utils import get_offset, verify_series
 

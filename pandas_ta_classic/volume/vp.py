@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Volume Profile (VP)
 from numpy import array_split
 from numpy import mean
 from pandas import cut, concat, DataFrame

@@ -273,7 +273,6 @@ class TestMomentumExtension(TestCase):
             list(self.data.columns[-2:]), ["STOCHRSIk_14_14_3_3", "STOCHRSId_14_14_3_3"]
         )
 
-    @skip
     def test_td_seq_ext(self):
         """TS Sequential DataFrame: Working but SLOW implementation"""
         self.data.ta.td_seq(show_all=False, append=True)
@@ -305,3 +304,28 @@ class TestMomentumExtension(TestCase):
         self.data.ta.willr(append=True)
         self.assertIsInstance(self.data, DataFrame)
         self.assertEqual(self.data.columns[-1], "WILLR_14")
+
+    def test_lrsi_ext(self):
+        self.data.ta.lrsi(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        self.assertEqual(self.data.columns[-1], "LRSI_14")
+
+    def test_po_ext(self):
+        self.data.ta.po(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        self.assertEqual(self.data.columns[-1], "PO_14")
+
+    def test_trixh_ext(self):
+        self.data.ta.trixh(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        self.assertEqual(
+            list(self.data.columns[-3:]), ["TRIX_18_9", "TRIXs_18_9", "TRIXh_18_9"]
+        )
+
+    def test_vwmacd_ext(self):
+        self.data.ta.vwmacd(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        self.assertEqual(
+            list(self.data.columns[-3:]),
+            ["VWMACD_12_26_9", "VWMACDh_12_26_9", "VWMACDs_12_26_9"],
+        )

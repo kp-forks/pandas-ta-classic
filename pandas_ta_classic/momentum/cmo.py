@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# Chande Momentum Oscillator (CMO)
 from pandas_ta_classic import Imports
-from pandas_ta_classic.overlap import rma
+from pandas_ta_classic.overlap.rma import rma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 

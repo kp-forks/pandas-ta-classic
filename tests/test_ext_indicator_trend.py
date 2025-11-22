@@ -134,3 +134,23 @@ class TestTrendExtension(TestCase):
         self.data.ta.vortex(append=True)
         self.assertIsInstance(self.data, DataFrame)
         self.assertEqual(list(self.data.columns[-2:]), ["VTXP_14", "VTXM_14"])
+
+    def test_pmax_ext(self):
+        self.data.ta.pmax(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        self.assertEqual(self.data.columns[-1], "PMAX_E_10_3.0")
+
+    def test_tsignals_ext(self):
+        # Create a simple trend series for testing
+        trend = self.data.ta.sma(length=10) - self.data.ta.sma(length=20)
+        trend = (trend > 0).astype(int)
+        result = self.data.ta.tsignals(trend)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "TS")
+
+    def test_xsignals_ext(self):
+        # Create simple signal series for testing
+        signal = self.data.ta.rsi()
+        result = self.data.ta.xsignals(signal, xa=70, xb=30)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "XS")

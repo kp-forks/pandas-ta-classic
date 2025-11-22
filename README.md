@@ -20,7 +20,7 @@
 
 ![Example Chart](https://raw.githubusercontent.com/xgboosted/pandas-ta-classic/main/images/TA_Chart.png)
 
-**Pandas TA Classic** is an easy-to-use library that leverages the Pandas package with **141 indicators and utility functions** and **62 TA Lib candlestick patterns** (**203 total**). Many commonly used indicators are included, such as: _Simple Moving Average_ (**sma**), _Moving Average Convergence Divergence_ (**macd**), _Hull Exponential Moving Average_ (**hma**), _Bollinger Bands_ (**bbands**), _On-Balance Volume_ (**obv**), _Aroon & Aroon Oscillator_ (**aroon**), _Squeeze_ (**squeeze**) and **many more**.
+> **Pandas TA Classic** is an easy-to-use library that leverages the Pandas package with **150 indicators and utility functions** and **62 TA Lib candlestick patterns** (**212 total**). Many commonly used indicators are included, such as: _Simple Moving Average_ (**sma**), _Moving Average Convergence Divergence_ (**macd**), _Hull Exponential Moving Average_ (**hma**), _Bollinger Bands_ (**bbands**), _On-Balance Volume_ (**obv**), _Aroon & Aroon Oscillator_ (**aroon**), _Squeeze_ (**squeeze**) and **many more**.
 
 This is the **classic/community maintained version** of the popular pandas-ta library.
 
@@ -42,7 +42,7 @@ This is the **classic/community maintained version** of the popular pandas-ta li
 
 ### 🎯 Key Features
 
-- **203 Technical Indicators**: 141 indicators + 62 TA-Lib candlestick patterns
+- **212 Technical Indicators**: 150 indicators + 62 TA-Lib candlestick patterns
 - **Native Candlestick Patterns**: 5 patterns (cdl_doji, cdl_inside, cdl_z, cdl_pattern, ha) work without TA-Lib
 - **Automatic Versioning**: Version management via git tags using setuptools-scm
 - **Modern Package Management**: Full support for both `uv` and `pip`
@@ -132,9 +132,9 @@ df.ta.strategy("CommonStrategy")         # Runs commonly used indicators
 
 ## 📊 Features
 
-- **141 Technical Indicators & Utilities** across 9 categories (Candles, Momentum, Overlap, Trend, Volume, etc.)
+- **150 Technical Indicators & Utilities** across 9 categories (Candles, Momentum, Overlap, Trend, Volume, etc.)
 - **62 TA Lib Candlestick Patterns** for comprehensive pattern recognition
-- **203 Total Indicators & Patterns** - the most comprehensive Python TA library
+- **212 Total Indicators & Patterns** - the most comprehensive Python TA library
 - **Dynamic Category Discovery** - automatically detects all available indicators from the filesystem
 - **Strategy System** with multiprocessing support for bulk indicator processing
 - **Pandas DataFrame Extension** for seamless integration (`df.ta.indicator()`)
@@ -154,9 +154,9 @@ df.ta.strategy("CommonStrategy")         # Runs commonly used indicators
 - 📓 **[Examples](https://github.com/xgboosted/pandas-ta-classic/tree/main/examples)** - Jupyter notebooks with real examples
 
 **Reference Documentation:**
-- �📖 [**Usage Guide**](https://xgboosted.github.io/pandas-ta-classic/usage.html) - Programming conventions and basic usage
+- 📖 [**Usage Guide**](https://xgboosted.github.io/pandas-ta-classic/usage.html) - Programming conventions and basic usage
 - 🏗️ [**Strategy System**](https://xgboosted.github.io/pandas-ta-classic/strategies.html) - Multiprocessing and bulk indicator processing  
-- 📊 [**Indicators Reference**](https://xgboosted.github.io/pandas-ta-classic/indicators.html) - Complete list of all 141 indicators & 62 patterns
+- 📊 [**Indicators Reference**](https://xgboosted.github.io/pandas-ta-classic/indicators.html) - Complete list of all 150 indicators & 62 patterns
 - 🔧 [**DataFrame API**](https://xgboosted.github.io/pandas-ta-classic/dataframe_api.html) - Properties and methods reference
 - 📈 [**Performance Metrics**](https://xgboosted.github.io/pandas-ta-classic/performance.html) - Backtesting and performance analysis
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Sine Weighted Moving Average (SINWMA)
 from numpy import pi as npPi
 from numpy import sin as npSin
 from pandas import Series

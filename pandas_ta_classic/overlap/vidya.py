@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Variable Index Dynamic Average (VIDYA)
 import numpy as np
 from pandas import Series
 
@@ -18,11 +19,11 @@ def vidya(close, length=None, drift=None, offset=None, **kwargs):
         return
 
     def _cmo(source: Series, n: int, d: int):
-        """Chande Momentum Oscillator (CMO) Patch
-        For some reason: from pandas_ta_classic.momentum import cmo causes
-        pandas_ta.momentum.coppock to not be able to import it's
-        wma like from pandas_ta_classic.overlap import wma?
-        Weird Circular TypeError!?!
+        """Chande Momentum Oscillator (CMO) - Inlined to avoid circular import
+
+        Note: This is inlined rather than imported from pandas_ta_classic.momentum.cmo
+        to prevent a circular import issue:
+        ma -> vidya -> cmo -> (momentum/__init__) -> apo -> ma
         """
         mom = source.diff(d)
         positive = mom.copy().clip(lower=0)

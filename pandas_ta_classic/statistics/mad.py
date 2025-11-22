@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Mean Absolute Deviation (MAD)
 from numpy import fabs as npfabs
 from pandas_ta_classic.utils import get_offset, verify_series
 

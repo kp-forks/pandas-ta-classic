@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Normalized Average True Range (NATR)
 from .atr import atr
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series

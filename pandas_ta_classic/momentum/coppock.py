@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# Coppock Curve (COPC)
 from .roc import roc
-from pandas_ta_classic.overlap import wma
+from pandas_ta_classic.overlap.wma import wma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

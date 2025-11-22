@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Relative Strength Xtra (RSX)
 import numpy as np
 from pandas import concat, DataFrame, Series
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Zero Lag Moving Average (ZLMA)
 from . import dema, ema, hma, linreg, rma, sma, swma, t3, tema, trima, vidya, wma
 from pandas_ta_classic.utils import get_offset, verify_series
 

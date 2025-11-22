@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Arnaud Legoux Moving Average (ALMA)
 import numpy as np
 from numpy import exp as npExp
 from pandas import Series

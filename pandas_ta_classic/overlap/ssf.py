@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Super Smoother Filter (SSF)
 from numpy import cos as npCos
 from numpy import exp as npExp
 from numpy import pi as npPi

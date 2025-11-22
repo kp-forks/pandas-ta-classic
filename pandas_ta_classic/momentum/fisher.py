@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+# Fisher Transform (FISHER)
 import numpy as np
 from numpy import log as nplog
 from pandas import DataFrame, Series
 
 npNaN = np.nan
-from pandas_ta_classic.overlap import hl2
+from pandas_ta_classic.overlap.hl2 import hl2
 from pandas_ta_classic.utils import get_offset, high_low_range, verify_series
 
 

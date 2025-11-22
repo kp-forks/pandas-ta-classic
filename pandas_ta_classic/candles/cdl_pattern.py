@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Candle Pattern (CDL_PATTERN)
 from typing import Sequence, Union
 from pandas import Series, DataFrame
 

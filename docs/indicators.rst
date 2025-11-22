@@ -1,18 +1,18 @@
 Indicators Reference
 ===================
 
-**Pandas TA Classic** includes 141 indicators and utility functions plus 62 TA-Lib candlestick patterns (203 total) organized into the following categories:
+**Pandas TA Classic** includes 150 indicators and utility functions plus 62 TA-Lib candlestick patterns (212 total) organized into the following categories:
 
 * **Candles** (67) - Candlestick patterns for market sentiment analysis (5 native + 62 TA-Lib patterns)  
-* **Cycles** (1) - Cycle-based technical indicators  
-* **Momentum** (41) - Momentum and oscillator indicators
-* **Overlap** (34) - Moving averages and trend-following indicators
+* **Cycles** (2) - Cycle-based technical indicators  
+* **Momentum** (46) - Momentum and oscillator indicators
+* **Overlap** (36) - Moving averages and trend-following indicators
 * **Performance** (3) - Performance and return metrics
 * **Statistics** (10) - Statistical analysis functions
-* **Trend** (18) - Trend identification and direction indicators
+* **Trend** (19) - Trend identification and direction indicators
 * **Utility** (10) - Helper and utility functions
 * **Volatility** (14) - Volatility and range-based indicators
-* **Volume** (15) - Volume analysis indicators
+* **Volume** (16) - Volume analysis indicators
 
 .. note::
    The category system now uses **dynamic discovery** - indicators are automatically detected from the package structure, ensuring the list is always up-to-date with available indicators.
@@ -53,12 +53,13 @@ Available patterns:
 .. note::
    **Bold patterns** are native implementations. Use ``df.ta.cdl_doji()`` or ``df.ta.cdl_inside()`` to access the native doji and inside bar patterns directly.
 
-Cycles (1)
+Cycles (2)
 ----------
 
+* *Detrended Synthetic Price*: **dsp**
 * *Even Better Sinewave*: **ebsw**
 
-Momentum (41)
+Momentum (46)
 -------------
 
 Momentum and oscillator indicators for measuring the speed of price changes:
@@ -81,9 +82,11 @@ Momentum and oscillator indicators for measuring the speed of price changes:
 * *Inertia*: **inertia**
 * *KDJ*: **kdj**
 * *KST Oscillator*: **kst**
+* *Linear Regression RSI*: **lrsi**
 * *Moving Average Convergence Divergence*: **macd**
 * *Momentum*: **mom**
 * *Pretty Good Oscillator*: **pgo**
+* *Projection Oscillator*: **po**
 * *Percentage Price Oscillator*: **ppo**
 * *Psychological Line*: **psl**
 * *Percentage Volume Oscillator*: **pvo**
@@ -101,11 +104,13 @@ Momentum and oscillator indicators for measuring the speed of price changes:
 * *Stochastic RSI*: **stochrsi**
 * *TD Sequential*: **td_seq** (Excluded from ``df.ta.strategy()``)
 * *Trix*: **trix**
+* *TRIX Histogram*: **trixh**
 * *True strength index*: **tsi**
 * *Ultimate Oscillator*: **uo**
+* *Volume Weighted MACD*: **vwmacd**
 * *Williams %R*: **willr**
 
-Overlap (34)
+Overlap (36)
 ------------
 
 Moving averages and trend-following indicators:
@@ -124,11 +129,13 @@ Moving averages and trend-following indicators:
 * *Kaufman's Adaptive Moving Average*: **kama**
 * *Linear Regression*: **linreg**
 * *Moving Average*: **ma** (Generic moving average selector)
+* *Madrid Moving Average Ribbon*: **mmar**
 * *McGinley Dynamic*: **mcgd**
 * *Midpoint*: **midpoint**
 * *Midprice*: **midprice**
 * *Open-High-Low-Close Average*: **ohlc4**
 * *Pascal's Weighted Moving Average*: **pwma**
+* *Rainbow Moving Average*: **rainbow**
 * *WildeR's Moving Average*: **rma**
 * *Sine Weighted Moving Average*: **sinwma**
 * *Simple Moving Average*: **sma**
@@ -170,7 +177,7 @@ Statistical analysis functions:
 * *Variance*: **variance**
 * *Z Score*: **zscore**
 
-Trend (18)
+Trend (19)
 ----------
 
 Trend identification and direction indicators:
@@ -186,6 +193,7 @@ Trend identification and direction indicators:
 * *Increasing*: **increasing**
 * *Long Run*: **long_run**
 * *Parabolic Stop and Reverse*: **psar**
+* *Price Max*: **pmax**
 * *Q Stick*: **qstick**
 * *Short Run*: **short_run**
 * *Trend Signals*: **tsignals**
@@ -230,7 +238,7 @@ Volatility and range-based indicators:
 * *True Range*: **true_range**
 * *Ulcer Index*: **ui**
 
-Volume (15)
+Volume (16)
 -----------
 
 Volume analysis indicators:
@@ -249,4 +257,5 @@ Volume analysis indicators:
 * *Price-Volume*: **pvol**
 * *Price Volume Rank*: **pvr**
 * *Price Volume Trend*: **pvt**
+* *Volume Flow Indicator*: **vfi**
 * *Volume Profile*: **vp**

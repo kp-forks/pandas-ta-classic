@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Double Exponential Moving Average (DEMA)
 from .ema import ema
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series

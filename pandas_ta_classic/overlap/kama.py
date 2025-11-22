@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Kaufman Adaptive Moving Average (KAMA)
 import numpy as np
 from pandas import Series
 

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+# Archer Moving Averages Trends (AMAT)
 from pandas import DataFrame
 from .long_run import long_run
 from .short_run import short_run
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Momentum (MOM)
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 

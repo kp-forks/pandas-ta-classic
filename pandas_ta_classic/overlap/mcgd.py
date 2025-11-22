@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# McGinley Dynamic (MCGD)
 import pandas as pd
 from pandas_ta_classic.utils import get_offset, verify_series
 

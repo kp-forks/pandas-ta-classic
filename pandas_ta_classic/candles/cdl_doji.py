@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from pandas_ta_classic.overlap import sma
+# Candle Doji (CDL_DOJI)
+from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, high_low_range, is_percent
 from pandas_ta_classic.utils import real_body, verify_series
 

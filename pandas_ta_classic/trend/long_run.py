@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Long Run (LONG_RUN)
 from .decreasing import decreasing
 from .increasing import increasing
 from pandas_ta_classic.utils import get_offset, verify_series

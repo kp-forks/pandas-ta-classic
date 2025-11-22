@@ -223,3 +223,25 @@ class TestTrend(TestCase):
         result = pandas_ta.vortex(self.high, self.low, self.close)
         self.assertIsInstance(result, DataFrame)
         self.assertEqual(result.name, "VTX_14")
+
+    def test_pmax(self):
+        result = pandas_ta.pmax(self.high, self.low, self.close)
+        self.assertIsInstance(result, Series)
+        self.assertEqual(result.name, "PMAX_E_10_3.0")
+
+    def test_tsignals(self):
+        # Create a simple trend series for testing
+        trend = pandas_ta.sma(self.close, length=10) - pandas_ta.sma(
+            self.close, length=20
+        )
+        trend = (trend > 0).astype(int)
+        result = pandas_ta.tsignals(trend)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "TS")
+
+    def test_xsignals(self):
+        # Create simple signal series for testing
+        signal = pandas_ta.rsi(self.close)
+        result = pandas_ta.xsignals(signal, xa=70, xb=30)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "XS")

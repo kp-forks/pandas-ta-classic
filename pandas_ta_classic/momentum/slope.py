@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Slope (SLOPE)
 from numpy import arctan as npAtan
 from numpy import pi as npPi
 from pandas_ta_classic.utils import get_offset, verify_series

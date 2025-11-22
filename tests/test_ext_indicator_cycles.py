@@ -21,6 +21,11 @@ class TestCylesExtension(TestCase):
     def tearDown(self):
         pass
 
+    def test_dsp_ext(self):
+        self.data.ta.dsp(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        self.assertEqual(self.data.columns[-1], "DSP_14")
+
     def test_ebsw_ext(self):
         self.data.ta.ebsw(append=True)
         self.assertIsInstance(self.data, DataFrame)

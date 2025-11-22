@@ -546,7 +546,6 @@ class TestMomentum(TestCase):
             except Exception as ex:
                 error_analysis(result.iloc[:, 0], CORRELATION, ex, newline=False)
 
-    @skip
     def test_td_seq(self):
         """TS Sequential: Working but SLOW implementation"""
         result = pandas_ta.td_seq(self.close)
@@ -600,6 +599,26 @@ class TestMomentum(TestCase):
                 self.assertGreater(corr, CORRELATION_THRESHOLD)
             except Exception as ex:
                 error_analysis(result, CORRELATION, ex)
+
+    def test_lrsi(self):
+        result = pandas_ta.lrsi(self.close)
+        self.assertIsInstance(result, Series)
+        self.assertEqual(result.name, "LRSI_14")
+
+    def test_po(self):
+        result = pandas_ta.po(self.close)
+        self.assertIsInstance(result, Series)
+        self.assertEqual(result.name, "PO_14")
+
+    def test_trixh(self):
+        result = pandas_ta.trixh(self.close)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "TRIXH_18_9")
+
+    def test_vwmacd(self):
+        result = pandas_ta.vwmacd(self.close, self.volume)
+        self.assertIsInstance(result, DataFrame)
+        self.assertEqual(result.name, "VWMACD_12_26_9")
 
         result = pandas_ta.willr(self.high, self.low, self.close)
         self.assertIsInstance(result, Series)

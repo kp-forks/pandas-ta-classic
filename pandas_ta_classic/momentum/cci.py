@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+# Commodity Channel Index (CCI)
 from pandas_ta_classic import Imports
-from pandas_ta_classic.overlap import hlc3, sma
-from pandas_ta_classic.statistics.mad import mad
+from pandas_ta_classic.overlap.hlc3 import hlc3
+from pandas_ta_classic.overlap.sma import sma
+from pandas_ta_classic.statistics import mad, stdev
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

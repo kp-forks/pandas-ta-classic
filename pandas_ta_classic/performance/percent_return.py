@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Percent Return (PERCENT_RETURN)
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

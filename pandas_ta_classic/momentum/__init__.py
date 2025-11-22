@@ -17,9 +17,11 @@ from .fisher import fisher
 from .inertia import inertia
 from .kdj import kdj
 from .kst import kst
+from .lrsi import lrsi
 from .macd import macd
 from .mom import mom
 from .pgo import pgo
+from .po import po
 from .ppo import ppo
 from .psl import psl
 from .pvo import pvo
@@ -37,6 +39,8 @@ from .stoch import stoch
 from .stochrsi import stochrsi
 from .td_seq import td_seq
 from .trix import trix
+from .trixh import trixh
 from .tsi import tsi
 from .uo import uo
+from .vwmacd import vwmacd
 from .willr import willr

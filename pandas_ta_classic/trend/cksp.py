@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Chande Kroll Stop (CKSP)
 from pandas import DataFrame
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series

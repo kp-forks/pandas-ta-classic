@@ -85,13 +85,11 @@ class TestStrategyMethods(TestCase):
         self.data.ta.strategy(ordered=True, verbose=verbose, timed=strategy_timed)
         self.category = "All Ordered"  # Rename for Speed Table
 
-    @skipUnless(verbose, "verbose mode only")
     def test_all_strategy(self):
         self.data.ta.strategy(
             pandas_ta.AllStrategy, verbose=verbose, timed=strategy_timed
         )
 
-    @skipUnless(verbose, "verbose mode only")
     def test_all_name_strategy(self):
         self.category = "All"
         self.data.ta.strategy(self.category, verbose=verbose, timed=strategy_timed)

@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ## **[Unreleased]**
 
+### Added
+* **9 New Technical Indicators**: Added high-demand indicators from Issue #29 analysis:
+  - **LRSI** (Laguerre Relative Strength Index) - Momentum indicator with reduced lag using gamma parameter
+  - **PMAX** (Price Max) - Trend indicator combining moving average with ATR
+  - **VFI** (Volume Flow Indicator) - Money flow indicator analyzing volume direction
+  - **MMAR** (Madrid Moving Average Ribbon) - Multiple EMA ribbons for trend visualization
+  - **Rainbow** (Rainbow Charts) - Sequential SMA ribbons creating rainbow effect
+  - **PO** (Projection Oscillator) - Linear regression based momentum oscillator
+  - **DSP** (Detrended Synthetic Price) - Cycles indicator removing trend to reveal cycles
+  - **TRIXH** (TRIX Histogram) - Enhanced TRIX with signal line and histogram
+  - **VWMACD** (Volume Weighted MACD) - MACD variant using volume-weighted moving averages
+* **Full Indicator Name Comments**: All 150 indicator files now include full indicator names as comments on line 2 for improved code readability and documentation (format: `# Full Indicator Name (ABBREVIATION)`).
+
+### Changed
+* **Updated Indicator Counts**: Increased from 141 to 150 indicators (9 new additions), raising total count from 203 to 212 (150 indicators + 62 TA-Lib patterns).
+* **Enhanced RVGI**: Relative Vigor Index now includes histogram column (RVGI - Signal) in addition to RVGI and Signal columns.
+
 ### Fixed
 * **Code of Conduct Contact Information**: Updated enforcement contact from original maintainer's email to GitHub Issues link, making it maintainer-agnostic and easier to manage as the project evolves.
 * **PyPI Release Version**: Fixed CI/CD workflow to use exact release tag version by setting `SETUPTOOLS_SCM_PRETEND_VERSION` environment variable. This prevents development versions (`.dev0`) from being published when `pyproject.toml` is modified during the build process. Releases now correctly use the clean tag version (e.g., `0.3.35` instead of `0.3.36.dev0`).

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# KDJ (KDJ)
 from pandas import DataFrame
-from pandas_ta_classic.overlap import rma
+from pandas_ta_classic.overlap.rma import rma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 

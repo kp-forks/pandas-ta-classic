@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+# Keltner Channels (KC)
 from pandas import DataFrame
 from .true_range import true_range
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, high_low_range, verify_series
 
 

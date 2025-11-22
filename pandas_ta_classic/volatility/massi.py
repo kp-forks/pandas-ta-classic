@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from pandas_ta_classic.overlap import ema
+# Mass Index (MASSI)
+from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 

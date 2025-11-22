@@ -2,7 +2,8 @@
 # from numpy import sqrt as npsqrt
 from pandas import DataFrame
 from .atr import atr
-from pandas_ta_classic.overlap import hlc3, sma
+from pandas_ta_classic.overlap.hlc3 import hlc3
+from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 

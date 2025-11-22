@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Holt-Winter Channel (HWC)
 from numpy import sqrt as npSqrt
 from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Quantitative Qualitative Estimation (QQE)
 import numpy as np
 from numpy import maximum as npMaximum
 from numpy import minimum as npMinimum
@@ -7,7 +8,7 @@ from pandas import DataFrame, Series
 npNaN = np.nan
 
 from .rsi import rsi
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 

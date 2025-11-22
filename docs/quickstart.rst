@@ -304,7 +304,7 @@ Now that you've got the basics, explore more:
 
 1. **Tutorials** - Step-by-step guides in ``TUTORIALS.md``
 2. **Full Documentation** - Complete API reference at https://xgboosted.github.io/pandas-ta-classic/
-3. **Indicator Reference** - All 203 indicators
+3. **Indicator Reference** - All 212 indicators
 4. **Strategy Guide** - Advanced strategy system
 5. **Examples** - Jupyter notebooks with real examples
 

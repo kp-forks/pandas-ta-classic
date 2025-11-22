@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Linear Regression (LINREG)
 import numpy as np
 from numpy import array as npArray
 from numpy import arctan as npAtan

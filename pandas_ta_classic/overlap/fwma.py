@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Fibonacci Weighted Moving Average (FWMA)
 from pandas_ta_classic.utils import fibonacci, get_offset, verify_series, weights
 
 

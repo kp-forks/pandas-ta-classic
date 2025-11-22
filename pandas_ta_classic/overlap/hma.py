@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Hull Moving Average (HMA)
 from numpy import sqrt as npSqrt
 from .wma import wma
 from pandas_ta_classic.utils import get_offset, verify_series

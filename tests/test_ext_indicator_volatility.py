@@ -118,3 +118,10 @@ class TestVolatilityExtension(TestCase):
         self.data.ta.ui(append=True, everget=True)
         self.assertIsInstance(self.data, DataFrame)
         self.assertEqual(self.data.columns[-1], "UIe_14")
+
+    def test_hwc_ext(self):
+        self.data.ta.hwc(append=True)
+        self.assertIsInstance(self.data, DataFrame)
+        # HWC returns 3 columns: HWM, HWU, HWL
+        hwc_cols = [col for col in self.data.columns if col.startswith("HW")]
+        self.assertTrue(len(hwc_cols) >= 3)

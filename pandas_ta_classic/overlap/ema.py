@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Exponential Moving Average (EMA)
 import numpy as np
 from pandas_ta_classic import Imports
 

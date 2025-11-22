@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# Average Directional Movement Index (ADX)
 from pandas import DataFrame
-from pandas_ta_classic.overlap import ma
+from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, zero
 
