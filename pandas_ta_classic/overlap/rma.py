@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# WildeR Moving Average (RMA)
+# Wilder's Moving Average (RMA)
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
@@ -25,15 +25,10 @@ def rma(close, length=None, offset=None, **kwargs):
     if "fillna" in kwargs:
         rma.fillna(kwargs["fillna"], inplace=True)
     if "fill_method" in kwargs:
-        if "fill_method" in kwargs:
-
-            if kwargs["fill_method"] == "ffill":
-
-                rma.ffill(inplace=True)
-
-            elif kwargs["fill_method"] == "bfill":
-
-                rma.bfill(inplace=True)
+        if kwargs["fill_method"] == "ffill":
+            rma.ffill(inplace=True)
+        elif kwargs["fill_method"] == "bfill":
+            rma.bfill(inplace=True)
 
     # Name & Category
     rma.name = f"RMA_{length}"
@@ -42,9 +37,9 @@ def rma(close, length=None, offset=None, **kwargs):
     return rma
 
 
-rma.__doc__ = """wildeR's Moving Average (RMA)
+rma.__doc__ = """Wilder's Moving Average (RMA)
 
-The WildeR's Moving Average is simply an Exponential Moving Average (EMA) with
+Wilder's Moving Average is simply an Exponential Moving Average (EMA) with
 a modified alpha = 1 / length.
 
 Sources:
