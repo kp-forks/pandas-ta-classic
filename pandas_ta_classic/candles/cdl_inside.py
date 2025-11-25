@@ -5,7 +5,7 @@ from pandas_ta_classic.utils import verify_series
 
 
 def cdl_inside(open_, high, low, close, asbool=False, offset=None, **kwargs):
-    """Candle Type: Inside Bar"""
+    """Indicator: Candle Type - Inside Bar"""
     # Validate arguments
     open_ = verify_series(open_)
     high = verify_series(high)

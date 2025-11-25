@@ -55,3 +55,40 @@ def midprice(high, low, length=None, talib=None, offset=None, **kwargs):
     midprice.category = "overlap"
 
     return midprice
+
+
+midprice.__doc__ = """Midpoint Price Over Period (MIDPRICE)
+
+MIDPRICE calculates the midpoint between the highest high and lowest low 
+over a specified period. Similar to MIDPOINT but uses high and low prices 
+instead of close prices. This provides a measure of the center of the 
+price range and is useful for identifying equilibrium levels.
+
+Sources:
+    https://www.tradingview.com/support/solutions/43000594684-midprice/
+    https://ta-lib.org/function.html?name=MIDPRICE
+
+Calculation:
+    Default Inputs:
+        length=2
+    
+    LOWEST_LOW = MIN(low, length)
+    HIGHEST_HIGH = MAX(high, length)
+    MIDPRICE = (LOWEST_LOW + HIGHEST_HIGH) / 2
+
+Args:
+    high (pd.Series): Series of 'high's
+    low (pd.Series): Series of 'low's
+    length (int): It's period. Default: 2
+    talib (bool): If TA Lib is installed and talib is True, Returns the TA Lib
+        version. Default: True
+    offset (int): How many periods to offset the result. Default: 0
+
+Kwargs:
+    min_periods (int, optional): Minimum number of observations required. Default: length
+    fillna (value, optional): pd.DataFrame.fillna(value)
+    fill_method (value, optional): Type of fill method
+
+Returns:
+    pd.Series: New feature generated.
+"""

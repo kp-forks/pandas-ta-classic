@@ -84,7 +84,7 @@ def cdl_pattern(
     offset=None,
     **kwargs,
 ) -> DataFrame:
-    """Candle Pattern"""
+    """Indicator: Candle Pattern"""
     # Validate Arguments
     open_ = verify_series(open_)
     high = verify_series(high)

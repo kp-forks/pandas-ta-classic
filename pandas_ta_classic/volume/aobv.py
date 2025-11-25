@@ -129,3 +129,45 @@ def aobv(
     aobvdf.category = "volume"
 
     return aobvdf
+
+
+aobv.__doc__ = """Archer On Balance Volume (AOBV)
+
+Archer On Balance Volume enhances the traditional OBV indicator by applying moving
+averages and detecting long/short run trends. It provides multiple signals including
+OBV with min/max bounds, fast/slow moving averages of OBV, and trend direction signals.
+
+Sources:
+    Derived from OBV (On Balance Volume)
+    https://www.investopedia.com/terms/o/onbalancevolume.asp
+
+Calculation:
+    Default Inputs:
+        fast=4, slow=12, max_lookback=2, min_lookback=2, mamode="ema", run_length=2
+    
+    OBV = On Balance Volume(close, volume)
+    OBV_MIN = ROLLING_MIN(OBV, min_lookback)
+    OBV_MAX = ROLLING_MAX(OBV, max_lookback)
+    FAST_MA = MA(OBV, fast, mamode)
+    SLOW_MA = MA(OBV, slow, mamode)
+    AOBV_LR = LONG_RUN(FAST_MA, SLOW_MA, run_length)
+    AOBV_SR = SHORT_RUN(FAST_MA, SLOW_MA, run_length)
+
+Args:
+    close (pd.Series): Series of 'close's
+    volume (pd.Series): Series of 'volume's
+    fast (int): Fast MA period. Default: 4
+    slow (int): Slow MA period. Default: 12
+    max_lookback (int): Max lookback period. Default: 2
+    min_lookback (int): Min lookback period. Default: 2
+    mamode (str): See ```help(ta.ma)```. Default: 'ema'
+    offset (int): How many periods to offset the result. Default: 0
+
+Kwargs:
+    run_length (int, optional): Lookback for long/short run. Default: 2
+    fillna (value, optional): pd.DataFrame.fillna(value)
+    fill_method (value, optional): Type of fill method
+
+Returns:
+    pd.DataFrame: OBV, OBV_min, OBV_max, fast MA, slow MA, AOBV_LR, AOBV_SR columns.
+"""
