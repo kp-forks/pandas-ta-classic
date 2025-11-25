@@ -79,7 +79,7 @@ Calculation:
 Args:
     high (pd.Series): Series of 'high's
     low (pd.Series): Series of 'low's
-    length (int): It's period. Default: 2
+    length (int): Its period. Default: 2
     talib (bool): If TA Lib is installed and talib is True, Returns the TA Lib
         version. Default: True
     offset (int): How many periods to offset the result. Default: 0
