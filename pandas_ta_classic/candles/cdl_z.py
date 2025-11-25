@@ -8,7 +8,7 @@ from pandas_ta_classic.utils import get_offset, verify_series
 def cdl_z(
     open_, high, low, close, length=None, full=None, ddof=None, offset=None, **kwargs
 ):
-    """Candle Type: Z Score"""
+    """Indicator: Candle Type - Z Score"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 30
     ddof = int(ddof) if ddof and ddof >= 0 and ddof < length else 1

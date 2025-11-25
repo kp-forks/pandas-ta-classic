@@ -74,3 +74,39 @@ def amat(
     amatdf.category = "trend"
 
     return amatdf
+
+
+amat.__doc__ = """Archer Moving Averages Trends (AMAT)
+
+The Archer Moving Averages Trends indicator identifies trend direction by comparing
+fast and slow moving averages. It generates long and short run signals based on the
+relationship between the two moving averages over a lookback period.
+
+Sources:
+    https://www.tradingview.com/script/nhQe8QJ0-Archer-Moving-Averages-Trends/
+
+Calculation:
+    Default Inputs:
+        fast=8, slow=21, lookback=2, mamode="ema"
+    
+    FAST_MA = MA(close, fast, mamode)
+    SLOW_MA = MA(close, slow, mamode)
+    
+    AMAT_LR = LONG_RUN(FAST_MA, SLOW_MA, lookback)
+    AMAT_SR = SHORT_RUN(FAST_MA, SLOW_MA, lookback)
+
+Args:
+    close (pd.Series): Series of 'close's
+    fast (int): Fast MA period. Default: 8
+    slow (int): Slow MA period. Default: 21
+    lookback (int): Lookback period for trend detection. Default: 2
+    mamode (str): See ```help(ta.ma)```. Default: 'ema'
+    offset (int): How many periods to offset the result. Default: 0
+
+Kwargs:
+    fillna (value, optional): pd.DataFrame.fillna(value)
+    fill_method (value, optional): Type of fill method
+
+Returns:
+    pd.DataFrame: AMAT_LR and AMAT_SR columns.
+"""

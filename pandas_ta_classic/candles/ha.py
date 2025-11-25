@@ -5,7 +5,7 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def ha(open_, high, low, close, offset=None, **kwargs):
-    """Candle Type: Heikin Ashi"""
+    """Indicator: Candle Type - Heikin Ashi"""
     # Validate Arguments
     open_ = verify_series(open_)
     high = verify_series(high)

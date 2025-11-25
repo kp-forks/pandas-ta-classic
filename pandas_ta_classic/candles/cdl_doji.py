@@ -17,7 +17,7 @@ def cdl_doji(
     offset=None,
     **kwargs,
 ):
-    """Candle Type: Doji"""
+    """Indicator: Candle Type - Doji"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
     factor = float(factor) if is_percent(factor) else 10
