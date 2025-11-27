@@ -28,8 +28,8 @@ This is the **classic/community maintained version** of the popular pandas-ta li
 
 **Get started quickly with our comprehensive guides:**
 
-- **[🚀 Quickstart Guide](https://github.com/xgboosted/pandas-ta-classic/blob/main/QUICKSTART.md)** - Installation, your first indicators, and common workflows
-- **[📚 Tutorials](https://github.com/xgboosted/pandas-ta-classic/blob/main/TUTORIALS.md)** - Step-by-step tutorials for real-world use cases:
+- 🚀 **[Quickstart Guide](https://github.com/xgboosted/pandas-ta-classic/blob/main/QUICKSTART.md)** - Installation, your first indicators, and common workflows
+- 📚 **[Tutorials](https://github.com/xgboosted/pandas-ta-classic/blob/main/TUTORIALS.md)** - Step-by-step tutorials for real-world use cases:
   - Moving Average Crossover Strategy
   - Building Custom Indicator Strategies  
   - Backtesting with Performance Metrics
@@ -38,7 +38,7 @@ This is the **classic/community maintained version** of the popular pandas-ta li
   - Creating Custom Indicators
   - Candlestick Pattern Recognition
 
-**Complete documentation:** 🔗 **[https://xgboosted.github.io/pandas-ta-classic/](https://xgboosted.github.io/pandas-ta-classic/)**
+**Complete documentation:** 🔗 [**https://xgboosted.github.io/pandas-ta-classic/**](https://xgboosted.github.io/pandas-ta-classic/)
 
 ### 🎯 Key Features
 
@@ -144,14 +144,14 @@ df.ta.strategy("CommonStrategy")         # Runs commonly used indicators
 
 ## 📚 Documentation
 
-**Complete documentation is available at:** 🔗 **[https://xgboosted.github.io/pandas-ta-classic/](https://xgboosted.github.io/pandas-ta-classic/)**
+**Complete documentation is available at:** 🔗 [**https://xgboosted.github.io/pandas-ta-classic/**](https://xgboosted.github.io/pandas-ta-classic/)
 
 ### 📖 Learning Resources
 
 **Start Here:**
-- 🚀 **[Quickstart Guide](https://github.com/xgboosted/pandas-ta-classic/blob/main/QUICKSTART.md)** - Get up and running in minutes
-- 📚 **[Tutorials](https://github.com/xgboosted/pandas-ta-classic/blob/main/TUTORIALS.md)** - Step-by-step guides for common workflows
-- 📓 **[Examples](https://github.com/xgboosted/pandas-ta-classic/tree/main/examples)** - Jupyter notebooks with real examples
+- 🚀 [**Quickstart Guide**](https://github.com/xgboosted/pandas-ta-classic/blob/main/QUICKSTART.md) - Get up and running in minutes
+- 📚 [**Tutorials**](https://github.com/xgboosted/pandas-ta-classic/blob/main/TUTORIALS.md) - Step-by-step guides for common workflows
+- 📓 [**Examples**](https://github.com/xgboosted/pandas-ta-classic/tree/main/examples) - Jupyter notebooks with real examples
 
 **Reference Documentation:**
 - 📖 [**Usage Guide**](https://xgboosted.github.io/pandas-ta-classic/usage.html) - Programming conventions and basic usage
