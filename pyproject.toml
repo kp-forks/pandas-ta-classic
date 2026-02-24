@@ -65,7 +65,6 @@ dev = [
     
     # Type checking and linting
     "mypy>=1.0.0",
-    "pandas-stubs>=2.0.0",
     "black>=23.0.0",
     "flake8>=6.0.0", 
     "isort>=5.0.0",
