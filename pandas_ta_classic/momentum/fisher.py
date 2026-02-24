@@ -33,7 +33,7 @@ def fisher(high: Series, low: Series, length: Optional[int] = None, signal: Opti
 
     position = ((hl2_ - lowest_hl2) / hlr) - 0.5
 
-    v = 0
+    v: float = 0
     m = high.size
     result = [npNaN for _ in range(0, length - 1)] + [0]
     for i in range(length, m):

@@ -87,7 +87,7 @@ def fibonacci(n: int = 2, **kwargs: Any) -> npNdArray:
 
     weighted = kwargs.pop("weighted", False)
     if weighted:
-        fib_sum = npSum(result)
+        fib_sum: float = npSum(result)
         if fib_sum > 0:
             return result / fib_sum
         else:
@@ -152,7 +152,7 @@ def pascals_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[npNdArr
 
     # Calculation
     triangle = npArray([combination(n=n, r=i) for i in range(0, n + 1)])
-    triangle_sum = npSum(triangle)
+    triangle_sum: float = npSum(triangle)
     triangle_weights = triangle / triangle_sum
     inverse_weights = 1 - triangle_weights
 
@@ -168,7 +168,7 @@ def pascals_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[npNdArr
     return triangle
 
 
-def symmetric_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[List[int]]:
+def symmetric_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[Union[List[int], npNdArray]]:
     """Symmetric Triangle with n >= 2
 
     Returns a numpy array of the nth row of Symmetric Triangle.
@@ -192,8 +192,8 @@ def symmetric_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[List[
             triangle += front[::-1]
 
     if kwargs.pop("weighted", False) and isinstance(triangle, list):
-        triangle_sum = npSum(triangle)
-        triangle_weights = triangle / triangle_sum
+        triangle_sum: float = npSum(triangle)
+        triangle_weights: Any = triangle / triangle_sum
         return triangle_weights
 
     return triangle

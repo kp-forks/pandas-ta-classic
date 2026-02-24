@@ -20,12 +20,34 @@ def rsx(close: Series, length: Optional[int] = None, drift: Optional[int] = None
         return None
 
     # variables
-    vC, v1C = 0, 0
-    v4, v8, v10, v14, v18, v20 = 0, 0, 0, 0, 0, 0
+    vC: float = 0
+    v1C: float = 0
+    v4: float = 0
+    v8: float = 0
+    v10: float = 0
+    v14: float = 0
+    v18: float = 0
+    v20: float = 0
 
-    f0, f8, f10, f18, f20, f28, f30, f38 = 0, 0, 0, 0, 0, 0, 0, 0
-    f40, f48, f50, f58, f60, f68, f70, f78 = 0, 0, 0, 0, 0, 0, 0, 0
-    f80, f88, f90 = 0, 0, 0
+    f0: float = 0
+    f8: float = 0
+    f10: float = 0
+    f18: float = 0
+    f20: float = 0
+    f28: float = 0
+    f30: float = 0
+    f38: float = 0
+    f40: float = 0
+    f48: float = 0
+    f50: float = 0
+    f58: float = 0
+    f60: float = 0
+    f68: float = 0
+    f70: float = 0
+    f78: float = 0
+    f80: float = 0
+    f88: float = 0
+    f90: float = 0
 
     # Calculate Result
     m = close.size

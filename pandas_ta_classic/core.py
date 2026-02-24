@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from multiprocessing import cpu_count, Pool
 from pathlib import Path
 from time import perf_counter
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 from warnings import simplefilter
 
 import pandas as pd
@@ -56,7 +56,7 @@ class Strategy:
     # Helpful. More descriptive version or notes or w/e.
     description: str = "TA Description"
     # Optional. Gets Exchange Time and Local Time execution time
-    created: str = get_time(to_string=True)
+    created: Optional[str] = get_time(to_string=True)
 
     def __post_init__(self):
         has_name = True
@@ -267,7 +267,7 @@ class AnalysisIndicators(BasePandasObject):
 
     # DataFrame Behavioral Methods
     def __call__(
-        self, kind: str = None, timed: bool = False, version: bool = False, **kwargs
+        self, kind: Optional[str] = None, timed: bool = False, version: bool = False, **kwargs
     ):
         if version:
             print(f"Pandas TA - Technical Analysis Indicators - v{self.version}")
@@ -729,7 +729,7 @@ class AnalysisIndicators(BasePandasObject):
                 print(f"[i] Excluded[{len(excluded)}]: {excluded_str}")
 
         timed = kwargs.pop("timed", False)
-        results = []
+        results: Any = []
         use_multiprocessing = True if self.cores > 0 else False
         has_col_names = False
 
@@ -790,7 +790,7 @@ class AnalysisIndicators(BasePandasObject):
                     # May fix this to cpus if Chaining/Composition if it remains
                     results = pool.imap(self._mp_worker, custom_ta, _chunksize)
                 else:
-                    default_ta = [(ind, tuple(), kwargs) for ind in ta]
+                    default_ta: list = [(ind, tuple(), kwargs) for ind in ta]
                     # All and Categorical multiprocessing pool.
                     if all_ordered:
                         if Imports["tqdm"]:
