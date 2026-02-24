@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Hull Moving Average (HMA)
+from typing import Any, Optional
 from numpy import sqrt as npSqrt
+from pandas import Series
 from .wma import wma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def hma(close, length=None, offset=None, **kwargs):
+def hma(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Hull Moving Average (HMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -13,7 +15,7 @@ def hma(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     half_length = int(length / 2)

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # Pascal Weighted Moving Average (PWMA)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, pascals_triangle, verify_series, weights
 
 
-def pwma(close, length=None, asc=None, offset=None, **kwargs):
+def pwma(close: Series, length: Optional[int] = None, asc=None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Pascals Weighted Moving Average (PWMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -12,7 +14,7 @@ def pwma(close, length=None, asc=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     triangle = pascals_triangle(n=length - 1, weighted=True)

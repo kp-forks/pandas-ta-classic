@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # BRAR (Bull and Bear Ratio)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_drift, get_offset, non_zero_range, verify_series
 
 
 def brar(
-    open_, high, low, close, length=None, scalar=None, drift=None, offset=None, **kwargs
-):
+    open_: Series, high: Series, low: Series, close: Series, length: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+) -> Optional[DataFrame]:
     """Indicator: BRAR (BRAR)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 26
@@ -21,7 +22,7 @@ def brar(
     offset = get_offset(offset)
 
     if open_ is None or high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     hcy = non_zero_range(high, close.shift(drift))

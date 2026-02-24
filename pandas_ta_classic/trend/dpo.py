@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 # Detrend Price Oscillator (DPO)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def dpo(close, length=None, centered=True, offset=None, **kwargs):
+def dpo(
+    close: Series,
+    length: Optional[int] = None,
+    centered: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Detrend Price Oscillator (DPO)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 20
@@ -14,7 +22,7 @@ def dpo(close, length=None, centered=True, offset=None, **kwargs):
         centered = False
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     t = int(0.5 * length) + 1

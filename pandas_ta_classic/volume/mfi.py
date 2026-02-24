@@ -1,14 +1,23 @@
 # -*- coding: utf-8 -*-
 # Money Flow Index (MFI)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.hlc3 import hlc3
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def mfi(
-    high, low, close, volume, length=None, talib=None, drift=None, offset=None, **kwargs
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    volume: Series,
+    length: Optional[int] = None,
+    talib: Optional[bool] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Money Flow Index (MFI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -21,7 +30,7 @@ def mfi(
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if high is None or low is None or close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

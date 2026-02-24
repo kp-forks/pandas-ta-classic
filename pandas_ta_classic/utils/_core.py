@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from typing import Any, List, Optional, Tuple, Union
+
 import re as re_
 from pathlib import Path
 from sys import float_info as sflt
@@ -9,12 +11,12 @@ from pandas.api.types import is_datetime64_any_dtype
 from pandas_ta_classic import Imports
 
 
-def _camelCase2Title(x: str):
+def _camelCase2Title(x: str) -> str:
     """https://stackoverflow.com/questions/5020906/python-convert-camel-case-to-space-delimited-using-regex-and-taking-acronyms-in"""
     return re_.sub("([a-z])([A-Z])", r"\g<1> \g<2>", x).title()
 
 
-def category_files(category: str) -> list:
+def category_files(category: str) -> List[str]:
     """Helper function to return all filenames in the category directory."""
     files = [
         x.stem
@@ -24,17 +26,17 @@ def category_files(category: str) -> list:
     return files
 
 
-def get_drift(x: int) -> int:
+def get_drift(x: Optional[int]) -> int:
     """Returns an int if not zero, otherwise defaults to one."""
     return int(x) if isinstance(x, int) and x != 0 else 1
 
 
-def get_offset(x: int) -> int:
+def get_offset(x: Optional[int]) -> int:
     """Returns an int, otherwise defaults to zero."""
     return int(x) if isinstance(x, int) else 0
 
 
-def is_datetime_ordered(df: DataFrame or Series) -> bool:
+def is_datetime_ordered(df: Union[DataFrame, Series]) -> bool:
     """Returns True if the index is a datetime and ordered."""
     index_is_datetime = is_datetime64_any_dtype(df.index)
     try:
@@ -45,7 +47,7 @@ def is_datetime_ordered(df: DataFrame or Series) -> bool:
         return True if index_is_datetime and ordered else False
 
 
-def is_percent(x: int or float) -> bool:
+def is_percent(x: Optional[Union[int, float]]) -> bool:
     if isinstance(x, (int, float)):
         return x is not None and x >= 0 and x <= 100
     return False
@@ -59,15 +61,15 @@ def non_zero_range(high: Series, low: Series) -> Series:
     return diff
 
 
-def recent_maximum_index(x):
+def recent_maximum_index(x: Series) -> int:
     return int(argmax(x[::-1]))
 
 
-def recent_minimum_index(x):
+def recent_minimum_index(x: Series) -> int:
     return int(argmin(x[::-1]))
 
 
-def signed_series(series: Series, initial: int = None) -> Series:
+def signed_series(series: Series, initial: Optional[int] = None) -> Series:
     """Returns a Signed Series with or without an initial value
 
     Default Example:
@@ -83,7 +85,7 @@ def signed_series(series: Series, initial: int = None) -> Series:
     return sign
 
 
-def tal_ma(name: str) -> int:
+def tal_ma(name: str) -> Any:
     """Helper Function that returns the Enum value for TA Lib's MA Type"""
     if Imports["talib"] and isinstance(name, str) and len(name) > 1:
         from talib import MA_Type
@@ -110,7 +112,7 @@ def tal_ma(name: str) -> int:
     return 0  # Default: SMA -> 0
 
 
-def unsigned_differences(series: Series, amount: int = None, **kwargs) -> Series:
+def unsigned_differences(series: Series, amount: Optional[int] = None, **kwargs: Any) -> Tuple[Series, Series]:
     """Unsigned Differences
     Returns two Series, an unsigned positive and unsigned negative series based
     on the differences of the original series. The positive series are only the
@@ -139,8 +141,9 @@ def unsigned_differences(series: Series, amount: int = None, **kwargs) -> Series
     return positive, negative
 
 
-def verify_series(series: Series, min_length: int = None) -> Series:
+def verify_series(series: Series, min_length: Optional[Union[int, float]] = None) -> Optional[Series]:
     """If a Pandas Series and it meets the min_length of the indicator return it."""
     has_length = min_length is not None and isinstance(min_length, int)
     if series is not None and isinstance(series, Series):
         return None if has_length and series.size < min_length else series
+    return None

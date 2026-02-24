@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # Squeeze Pro (SQUEEZE_PRO)
+from typing import Any, Optional
 import numpy as np
-from pandas import DataFrame
+from pandas import DataFrame, Series
 
 npNaN = np.nan
 from pandas_ta_classic.momentum import mom
@@ -14,22 +15,22 @@ from pandas_ta_classic.utils import unsigned_differences, verify_series
 
 
 def squeeze_pro(
-    high,
-    low,
-    close,
-    bb_length=None,
-    bb_std=None,
-    kc_length=None,
-    kc_scalar_wide=None,
-    kc_scalar_normal=None,
-    kc_scalar_narrow=None,
-    mom_length=None,
-    mom_smooth=None,
+    high: Series,
+    low: Series,
+    close: Series,
+    bb_length: Optional[int] = None,
+    bb_std: Optional[float] = None,
+    kc_length: Optional[int] = None,
+    kc_scalar_wide: Optional[float] = None,
+    kc_scalar_normal: Optional[float] = None,
+    kc_scalar_narrow: Optional[float] = None,
+    mom_length: Optional[int] = None,
+    mom_smooth: Optional[int] = None,
     use_tr=None,
-    mamode=None,
-    offset=None,
-    **kwargs,
-):
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Squeeze Momentum (SQZ) PRO"""
     # Validate arguments
     bb_length = int(bb_length) if bb_length and bb_length > 0 else 20
@@ -58,9 +59,9 @@ def squeeze_pro(
     )
 
     if not valid_kc_scaler:
-        return
+        return None
     if high is None or low is None or close is None:
-        return
+        return None
 
     use_tr = kwargs.setdefault("tr", True)
     asint = kwargs.pop("asint", True)

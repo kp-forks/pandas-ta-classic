@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 # Q Stick (QSTICK)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap import dema, ema, hma, rma, sma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def qstick(open_, close, length=None, offset=None, **kwargs):
+def qstick(
+    open_: Series,
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Q Stick"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -14,7 +22,7 @@ def qstick(open_, close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if open_ is None or close is None:
-        return
+        return None
 
     # Calculate Result
     diff = non_zero_range(close, open_)

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # Efficiency Ratio (ER)
-from pandas import DataFrame, concat
+from typing import Any, Optional, Union
+from pandas import DataFrame, concat, Series
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, signals
 
 
-def er(close, length=None, drift=None, offset=None, **kwargs):
+def er(close: Series, length: Optional[int] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Union[Series, DataFrame]]:
     """Indicator: Efficiency Ratio (ER)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 10
@@ -13,7 +14,7 @@ def er(close, length=None, drift=None, offset=None, **kwargs):
     drift = get_drift(drift)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     abs_diff = close.diff(length).abs()

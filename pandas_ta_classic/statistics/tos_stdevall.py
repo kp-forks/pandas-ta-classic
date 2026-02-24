@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # TOS Standard Deviation All (TOS_STDEVALL)
+from typing import Any, List, Optional
 from numpy import array as npArray
 from numpy import arange as npArange
 from numpy import polyfit as npPolyfit
@@ -9,12 +10,12 @@ from .stdev import stdev as stdev
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def tos_stdevall(close, length=None, stds=None, ddof=None, offset=None, **kwargs):
+def tos_stdevall(close: Series, length: Optional[int] = None, stds: Optional[List[int]] = None, ddof: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
     """Indicator: TD Ameritrade's Think or Swim Standard Deviation All"""
     # Validate Arguments
     stds = stds if isinstance(stds, list) and len(stds) > 0 else [1, 2, 3]
     if min(stds) <= 0:
-        return
+        return None
     if not all(i < j for i, j in zip(stds, stds[1:])):
         stds = stds[::-1]
     ddof = int(ddof) if ddof and ddof >= 0 and ddof < length else 1
@@ -31,7 +32,7 @@ def tos_stdevall(close, length=None, stds=None, ddof=None, offset=None, **kwargs
     close = verify_series(close, length)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     X = src_index = close.index

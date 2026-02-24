@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
 # Average Directional Movement Index (ADX)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, zero
 
 
 def adx(
-    high,
-    low,
-    close,
-    length=None,
-    lensig=None,
-    scalar=None,
-    mamode=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    lensig: Optional[int] = None,
+    scalar: Optional[float] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: ADX"""
     # Validate Arguments
     length = length if length and length > 0 else 14
@@ -31,7 +32,7 @@ def adx(
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     atr_ = atr(high=high, low=low, close=close, length=length)

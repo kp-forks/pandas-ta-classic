@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Projection Oscillator (PO)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.linreg import linreg
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def po(close, length=None, offset=None, **kwargs):
+def po(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Projection Oscillator (PO)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -12,7 +14,7 @@ def po(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     # Linear regression

@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 # Holt-Winter Channel (HWC)
+from typing import Any, Optional
 from numpy import sqrt as npSqrt
 from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def hwc(
-    close,
-    na=None,
-    nb=None,
-    nc=None,
-    nd=None,
-    scalar=None,
-    channel_eval=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    na: Optional[float] = None,
+    nb: Optional[float] = None,
+    nc: Optional[float] = None,
+    nd: Optional[float] = None,
+    scalar: Optional[float] = None,
+    channel_eval: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Holt-Winter Channel"""
     # Validate Arguments
     na = float(na) if na and na > 0 else 0.2

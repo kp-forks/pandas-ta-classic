@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 # KDJ (KDJ)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.rma import rma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def kdj(
-    high=None, low=None, close=None, length=None, signal=None, offset=None, **kwargs
-):
+    high: Optional[Series] = None, low: Optional[Series] = None, close: Optional[Series] = None, length: Optional[int] = None, signal: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+) -> Optional[DataFrame]:
     """Indicator: KDJ (KDJ)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 9
@@ -19,7 +20,7 @@ def kdj(
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     highest_high = high.rolling(length).max()

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Psychological Line (PSL)
+from typing import Any, Optional
 from numpy import sign as npSign
+from pandas import Series
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def psl(close, open_=None, length=None, scalar=None, drift=None, offset=None, **kwargs):
+def psl(close: Series, open_: Optional[Series] = None, length: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Psychological Line (PSL)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 12
@@ -14,7 +16,7 @@ def psl(close, open_=None, length=None, scalar=None, drift=None, offset=None, **
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if open_ is not None:

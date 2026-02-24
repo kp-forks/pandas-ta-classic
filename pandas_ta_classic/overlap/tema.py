@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Triple Exponential Moving Average (TEMA)
+from typing import Any, Optional
+from pandas import Series
 from .ema import ema
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def tema(close, length=None, talib=None, offset=None, **kwargs):
+def tema(close: Series, length: Optional[int] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Triple Exponential Moving Average (TEMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -14,7 +16,7 @@ def tema(close, length=None, talib=None, offset=None, **kwargs):
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

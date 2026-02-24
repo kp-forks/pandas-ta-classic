@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 # Increasing (INCREASING)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_drift, get_offset, is_percent, verify_series
 
 
 def increasing(
-    close,
-    length=None,
-    strict=None,
-    asint=None,
-    percent=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    length: Optional[int] = None,
+    strict: Optional[bool] = None,
+    asint: Optional[bool] = None,
+    percent: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Increasing"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 1
@@ -24,7 +26,7 @@ def increasing(
     percent = float(percent) if is_percent(percent) else False
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     close_ = (1 + 0.01 * percent) * close if percent else close

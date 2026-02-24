@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Moving Average (MA)
+from typing import Any, Optional
 from pandas import Series
 
 from .dema import dema
@@ -21,7 +22,7 @@ from .wma import wma
 from .zlma import zlma
 
 
-def ma(name: str = None, source: Series = None, **kwargs) -> Series:
+def ma(name: Optional[str] = None, source: Optional[Series] = None, **kwargs: Any) -> Optional[Series]:
     """Simple MA Utility for easier MA selection
 
     Available MAs:

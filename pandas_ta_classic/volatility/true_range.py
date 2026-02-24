@@ -1,14 +1,23 @@
 # -*- coding: utf-8 -*-
 # True Range (TRUE_RANGE)
+from typing import Any, Optional
 import numpy as np
-from pandas import concat
+from pandas import concat, Series
 
 npNaN = np.nan
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_drift, get_offset, non_zero_range, verify_series
 
 
-def true_range(high, low, close, talib=None, drift=None, offset=None, **kwargs):
+def true_range(
+    high: Series,
+    low: Series,
+    close: Series,
+    talib: Optional[bool] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: True Range"""
     # Validate arguments
     high = verify_series(high)

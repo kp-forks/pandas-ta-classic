@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from typing import Tuple
+from typing import Any, Dict, Optional, Tuple, Union
 
 import numpy as np
 from numpy import log as npLog
@@ -107,7 +107,7 @@ def log_max_drawdown(close: Series) -> float:
     return log_return - max_drawdown(close, method="log")
 
 
-def max_drawdown(close: Series, method: str = None, all: bool = False) -> float:
+def max_drawdown(close: Series, method: Optional[str] = None, all: bool = False) -> Union[float, Dict[str, float]]:
     """Maximum Drawdown from close. Default: 'dollar'.
 
     Args:
@@ -138,10 +138,10 @@ def max_drawdown(close: Series, method: str = None, all: bool = False) -> float:
 def optimal_leverage(
     close: Series,
     benchmark_rate: float = 0.0,
-    period: Tuple[float, int] = RATE["TRADING_DAYS_PER_YEAR"],
+    period: Union[float, int] = RATE["TRADING_DAYS_PER_YEAR"],
     log: bool = False,
     capital: float = 1.0,
-    **kwargs,
+    **kwargs: Any,
 ) -> float:
     """Optimal Leverage of a series. NOTE: Incomplete. Do NOT use.
 
@@ -173,7 +173,7 @@ def optimal_leverage(
     return amount
 
 
-def pure_profit_score(close: Series) -> Tuple[float, int]:
+def pure_profit_score(close: Series) -> Union[float, int]:
     """Pure Profit Score of a series.
 
     Args:
@@ -195,7 +195,7 @@ def sharpe_ratio(
     benchmark_rate: float = 0.0,
     log: bool = False,
     use_cagr: bool = False,
-    period: int = RATE["TRADING_DAYS_PER_YEAR"],
+    period: Union[float, int] = RATE["TRADING_DAYS_PER_YEAR"],
 ) -> float:
     """Sharpe Ratio of a series.
 
@@ -244,7 +244,7 @@ def sortino_ratio(
 
 
 def volatility(
-    close: Series, tf: str = "years", returns: bool = False, log: bool = False, **kwargs
+    close: Series, tf: str = "years", returns: bool = False, log: bool = False, **kwargs: Any
 ) -> float:
     """Volatility of a series. Default: 'years'
 

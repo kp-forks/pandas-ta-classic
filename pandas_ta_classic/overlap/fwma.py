@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # Fibonacci Weighted Moving Average (FWMA)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import fibonacci, get_offset, verify_series, weights
 
 
-def fwma(close, length=None, asc=None, offset=None, **kwargs):
+def fwma(close: Series, length: Optional[int] = None, asc=None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Fibonacci's Weighted Moving Average (FWMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -12,7 +14,7 @@ def fwma(close, length=None, asc=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     fibs = fibonacci(n=length, weighted=True)

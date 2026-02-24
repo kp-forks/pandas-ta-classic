@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # Standard Deviation (STDEV)
+from typing import Any, Optional
 from numpy import sqrt as npsqrt
+from pandas import Series
 from .variance import variance
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def stdev(close, length=None, ddof=None, talib=None, offset=None, **kwargs):
+def stdev(close: Series, length: Optional[int] = None, ddof: Optional[int] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Standard Deviation"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 30
@@ -16,7 +18,7 @@ def stdev(close, length=None, ddof=None, talib=None, offset=None, **kwargs):
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

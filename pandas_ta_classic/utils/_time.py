@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from time import localtime, perf_counter
-from typing import Tuple
+from typing import Optional, Tuple, Union
 
 from pandas import DataFrame, Timestamp
 
 from pandas_ta_classic._meta import EXCHANGE_TZ, RATE
 
 
-def df_dates(df: DataFrame, dates: Tuple[str, list] = None) -> DataFrame:
+def df_dates(df: DataFrame, dates: Optional[Union[str, list]] = None) -> Optional[DataFrame]:
     """Yields the DataFrame with the given dates"""
     if dates is None:
         return None
@@ -53,7 +53,7 @@ def final_time(stime: float) -> str:
 
 def get_time(
     exchange: str = "NYSE", full: bool = True, to_string: bool = False
-) -> Tuple[None, str]:
+) -> Optional[str]:
     """Returns Current Time, Day of the Year and Percentage, and the current
     time of the selected Exchange."""
     tz = EXCHANGE_TZ["NYSE"]  # Default is NYSE (Eastern Time Zone)

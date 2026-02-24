@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 # Volume Flow Indicator (VFI)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def vfi(
-    close,
-    volume,
-    length=None,
-    coef=None,
-    vcoef=None,
-    mamode=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    volume: Series,
+    length: Optional[int] = None,
+    coef: Optional[float] = None,
+    vcoef: Optional[float] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Volume Flow Indicator (VFI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 130
@@ -26,7 +28,7 @@ def vfi(
     offset = get_offset(offset)
 
     if close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     # Typical price

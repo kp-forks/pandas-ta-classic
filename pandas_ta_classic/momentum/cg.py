@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # Center of Gravity (CG)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series, weights
 
 
-def cg(close, length=None, offset=None, **kwargs):
+def cg(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Center of Gravity (CG)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -11,7 +13,7 @@ def cg(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     coefficients = [length - i for i in range(0, length)]

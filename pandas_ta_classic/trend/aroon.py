@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 # Aroon (AROON)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 from pandas_ta_classic.utils import recent_maximum_index, recent_minimum_index
 
 
-def aroon(high, low, length=None, scalar=None, talib=None, offset=None, **kwargs):
+def aroon(
+    high: Series,
+    low: Series,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Aroon & Aroon Oscillator"""
     # Validate Arguments
     length = length if length and length > 0 else 14
@@ -17,7 +26,7 @@ def aroon(high, low, length=None, scalar=None, talib=None, offset=None, **kwargs
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if high is None or low is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

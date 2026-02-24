@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Linear Regression (LINREG)
+from typing import Any, Optional
 import numpy as np
 from numpy import array as npArray
 from numpy import arctan as npAtan
@@ -11,7 +12,7 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def linreg(close, length=None, offset=None, **kwargs):
+def linreg(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Linear Regression"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -25,7 +26,7 @@ def linreg(close, length=None, offset=None, **kwargs):
     tsf = kwargs.pop("tsf", False)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     x = range(1, length + 1)  # [1, 2, ..., n] from 1 to n keeps Sum(xy) low

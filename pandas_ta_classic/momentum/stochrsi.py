@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 # Stochastic RSI (STOCHRSI)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from .rsi import rsi
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def stochrsi(
-    close,
-    length=None,
-    rsi_length=None,
-    k=None,
-    d=None,
-    mamode=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    length: Optional[int] = None,
+    rsi_length: Optional[int] = None,
+    k: Optional[int] = None,
+    d: Optional[int] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Stochastic RSI Oscillator (STOCHRSI)"""
     # Validate arguments
     length = length if length and length > 0 else 14
@@ -27,7 +28,7 @@ def stochrsi(
     mamode = mamode if isinstance(mamode, str) else "sma"
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     rsi_ = rsi(close, length=rsi_length)

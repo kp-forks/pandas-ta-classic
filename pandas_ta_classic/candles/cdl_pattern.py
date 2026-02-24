@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Candle Pattern (CDL_PATTERN)
-from typing import Sequence, Union
+from typing import Any, Optional, Sequence, Union
 from pandas import Series, DataFrame
 
 from . import cdl_doji, cdl_inside
@@ -75,15 +75,15 @@ ALL_PATTERNS = [
 
 
 def cdl_pattern(
-    open_,
-    high,
-    low,
-    close,
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
     name: Union[str, Sequence[str]] = "all",
-    scalar=None,
-    offset=None,
-    **kwargs,
-) -> DataFrame:
+    scalar: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Candle Pattern"""
     # Validate Arguments
     open_ = verify_series(open_)
@@ -150,7 +150,7 @@ def cdl_pattern(
             result[f"CDL_{n.upper()}"] = pattern_result
 
     if len(result) == 0:
-        return
+        return None
 
     # Prepare DataFrame to return
     df = DataFrame(result)

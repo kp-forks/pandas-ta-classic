@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # Volume Weighted Moving Average Convergence Divergence (Volume Weighted MACD)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.vwma import vwma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def vwmacd(close, volume, fast=None, slow=None, signal=None, offset=None, **kwargs):
+def vwmacd(close: Series, volume: Series, fast: Optional[int] = None, slow: Optional[int] = None, signal: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
     """Indicator: Volume Weighted MACD (VWMACD)"""
     # Validate arguments
     fast = int(fast) if fast and fast > 0 else 12
@@ -18,7 +19,7 @@ def vwmacd(close, volume, fast=None, slow=None, signal=None, offset=None, **kwar
     offset = get_offset(offset)
 
     if close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     # Volume weighted moving averages

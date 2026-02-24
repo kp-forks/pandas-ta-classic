@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 # Choppiness Index (CHOP)
+from typing import Any, Optional
 from numpy import log10 as npLog10
 from numpy import log as npLn
+from pandas import Series
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def chop(
-    high,
-    low,
-    close,
-    length=None,
-    atr_length=None,
-    ln=None,
-    scalar=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    atr_length: Optional[int] = None,
+    ln: Optional[bool] = None,
+    scalar: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Choppiness Index (CHOP)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14
@@ -31,7 +33,7 @@ def chop(
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     diff = high.rolling(length).max() - low.rolling(length).min()

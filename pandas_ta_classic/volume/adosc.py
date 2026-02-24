@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # Accumulation/Distribution Oscillator (ADOSC)
+from typing import Any, Optional
+from pandas import Series
 from .ad import ad
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.ema import ema
@@ -7,17 +9,17 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def adosc(
-    high,
-    low,
-    close,
-    volume,
-    open_=None,
-    fast=None,
-    slow=None,
-    talib=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    volume: Series,
+    open_: Optional[Series] = None,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Accumulation/Distribution Oscillator"""
     # Validate Arguments
     fast = int(fast) if fast and fast > 0 else 3
@@ -33,7 +35,7 @@ def adosc(
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if high is None or low is None or close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

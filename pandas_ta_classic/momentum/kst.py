@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
 # Know Sure Thing (KST)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from .roc import roc
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def kst(
-    close,
-    roc1=None,
-    roc2=None,
-    roc3=None,
-    roc4=None,
-    sma1=None,
-    sma2=None,
-    sma3=None,
-    sma4=None,
-    signal=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    roc1: Optional[int] = None,
+    roc2: Optional[int] = None,
+    roc3: Optional[int] = None,
+    roc4: Optional[int] = None,
+    sma1: Optional[int] = None,
+    sma2: Optional[int] = None,
+    sma3: Optional[int] = None,
+    sma4: Optional[int] = None,
+    signal: Optional[int] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: 'Know Sure Thing' (KST)"""
     # Validate arguments
     roc1 = int(roc1) if roc1 and roc1 > 0 else 10
@@ -39,7 +40,7 @@ def kst(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     rocma1 = roc(close, roc1).rolling(sma1).mean()

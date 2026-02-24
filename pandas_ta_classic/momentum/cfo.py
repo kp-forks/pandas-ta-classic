@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Chande Forecast Oscillator (CFO)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.linreg import linreg
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def cfo(close, length=None, scalar=None, drift=None, offset=None, **kwargs):
+def cfo(close: Series, length: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Chande Forcast Oscillator (CFO)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 9
@@ -14,7 +16,7 @@ def cfo(close, length=None, scalar=None, drift=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Finding linear regression of Series
     cfo = scalar * (close - linreg(close, length=length, tsf=True))

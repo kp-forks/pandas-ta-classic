@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Entropy (ENTROPY)
+from typing import Any, Optional
 from numpy import log as npLog
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def entropy(close, length=None, base=None, offset=None, **kwargs):
+def entropy(close: Series, length: Optional[int] = None, base: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Entropy (ENTP)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -13,7 +15,7 @@ def entropy(close, length=None, base=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     p = close / close.rolling(length).sum()

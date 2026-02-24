@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Detrended Synthetic Price (DSP)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def dsp(close, length=None, offset=None, **kwargs):
+def dsp(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Detrended Synthetic Price (DSP)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -12,7 +14,7 @@ def dsp(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     # Calculate EMA

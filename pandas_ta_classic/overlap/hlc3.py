@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # HLC3 (HLC3)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def hlc3(high, low, close, talib=None, offset=None, **kwargs):
+def hlc3(high: Series, low: Series, close: Series, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: HLC3"""
     # Validate Arguments
     high = verify_series(high)

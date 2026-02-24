@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 # Candle Doji (CDL_DOJI)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, high_low_range, is_percent
 from pandas_ta_classic.utils import real_body, verify_series
 
 
 def cdl_doji(
-    open_,
-    high,
-    low,
-    close,
-    length=None,
-    factor=None,
-    scalar=None,
-    asint=True,
-    offset=None,
-    **kwargs,
-):
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    factor: Optional[float] = None,
+    scalar: Optional[float] = None,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Candle Type - Doji"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -30,7 +32,7 @@ def cdl_doji(
     naive = kwargs.pop("naive", False)
 
     if open_ is None or high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     body = real_body(open_, close).abs()

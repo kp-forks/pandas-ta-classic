@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 # Elder Thermometer (THERMO)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, verify_series, get_drift
 
 
 def thermo(
-    high,
-    low,
-    length=None,
-    long=None,
-    short=None,
-    mamode=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    length: Optional[int] = None,
+    long: Optional[float] = None,
+    short: Optional[float] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Elders Thermometer (THERMO)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 20
@@ -29,7 +30,7 @@ def thermo(
     asint = kwargs.pop("asint", True)
 
     if high is None or low is None:
-        return
+        return None
 
     # Calculate Result
     thermoL = (low.shift(drift) - low).abs()

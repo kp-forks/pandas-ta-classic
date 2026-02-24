@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Drawdown (DRAWDOWN)
+from typing import Any, Optional
 from numpy import log as nplog
 from numpy import seterr
-from pandas import DataFrame
+from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def drawdown(close, offset=None, **kwargs) -> DataFrame:
+def drawdown(close: Series, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
     """Indicator: Drawdown (DD)"""
     # Validate Arguments
     close = verify_series(close)

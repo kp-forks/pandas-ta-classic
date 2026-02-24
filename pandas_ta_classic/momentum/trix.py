@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 # TRIX (TRIX)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def trix(
-    close, length=None, signal=None, scalar=None, drift=None, offset=None, **kwargs
-):
+    close: Series, length: Optional[int] = None, signal: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+) -> Optional[DataFrame]:
     """Indicator: Trix (TRIX)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 30
@@ -18,7 +19,7 @@ def trix(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     ema1 = ema(close=close, length=length, **kwargs)

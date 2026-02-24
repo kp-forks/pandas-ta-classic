@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # Mean Absolute Deviation (MAD)
+from typing import Any, Optional
 from numpy import fabs as npfabs
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def mad(close, length=None, offset=None, **kwargs):
+def mad(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Mean Absolute Deviation"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 30
@@ -17,7 +19,7 @@ def mad(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     def mad_(series):

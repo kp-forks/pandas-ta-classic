@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 # Mass Index (MASSI)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def massi(high, low, fast=None, slow=None, offset=None, **kwargs):
+def massi(
+    high: Series,
+    low: Series,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Mass Index (MASSI)"""
     # Validate arguments
     fast = int(fast) if fast and fast > 0 else 9
@@ -19,7 +28,7 @@ def massi(high, low, fast=None, slow=None, offset=None, **kwargs):
         kwargs.pop("length")
 
     if high is None or low is None:
-        return
+        return None
 
     # Calculate Result
     high_low_range = non_zero_range(high, low)

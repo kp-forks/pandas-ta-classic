@@ -1,9 +1,19 @@
 # -*- coding: utf-8 -*-
 # Price Distance (PDIST)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_drift, get_offset, non_zero_range, verify_series
 
 
-def pdist(open_, high, low, close, drift=None, offset=None, **kwargs):
+def pdist(
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Price Distance (PDIST)"""
     # Validate Arguments
     open_ = verify_series(open_)

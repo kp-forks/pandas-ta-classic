@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Parabolic SAR (PSAR)
+from typing import Any, Optional
 import numpy as np
 from pandas import DataFrame, Series
 
@@ -7,7 +8,16 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_offset, verify_series, zero
 
 
-def psar(high, low, close=None, af0=None, af=None, max_af=None, offset=None, **kwargs):
+def psar(
+    high: Series,
+    low: Series,
+    close: Optional[Series] = None,
+    af0: Optional[float] = None,
+    af: Optional[float] = None,
+    max_af: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Parabolic Stop and Reverse (PSAR)"""
     # Validate Arguments
     high = verify_series(high)

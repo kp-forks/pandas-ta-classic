@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from multiprocessing import cpu_count, Pool
 from pathlib import Path
 from time import perf_counter
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 from warnings import simplefilter
 
 import pandas as pd
@@ -298,7 +298,7 @@ class AnalysisIndicators(BasePandasObject):
 
     # Public Get/Set DataFrame Properties
     @property
-    def adjusted(self) -> str:
+    def adjusted(self) -> Optional[str]:
         """property: df.ta.adjusted"""
         return self._adjusted
 
@@ -311,7 +311,7 @@ class AnalysisIndicators(BasePandasObject):
             self._adjusted = None
 
     @property
-    def cores(self) -> str:
+    def cores(self) -> int:
         """Returns the categories."""
         return self._cores
 
@@ -336,13 +336,13 @@ class AnalysisIndicators(BasePandasObject):
             self._exchange = value
 
     @property
-    def last_run(self) -> str:
+    def last_run(self) -> Optional[str]:
         """Returns the time when the DataFrame was last run."""
         return self._last_run
 
     # Public Get DataFrame Properties
     @property
-    def categories(self) -> str:
+    def categories(self) -> List[str]:
         """Returns the categories."""
         return list(Category.keys())
 

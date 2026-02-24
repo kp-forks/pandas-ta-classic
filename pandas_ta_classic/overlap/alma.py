@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Arnaud Legoux Moving Average (ALMA)
+from typing import Any, Optional
 import numpy as np
 from numpy import exp as npExp
 from pandas import Series
@@ -9,8 +10,8 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def alma(
-    close, length=None, sigma=None, distribution_offset=None, offset=None, **kwargs
-):
+    close: Series, length: Optional[int] = None, sigma: Optional[float] = None, distribution_offset: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any
+) -> Optional[Series]:
     """Indicator: Arnaud Legoux Moving Average (ALMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -24,7 +25,7 @@ def alma(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Pre-Calculations
     m = distribution_offset * (length - 1)

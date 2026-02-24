@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Relative Strength Xtra (RSX)
+from typing import Any, Optional, Union
 import numpy as np
 from pandas import concat, DataFrame, Series
 
@@ -7,7 +8,7 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, signals
 
 
-def rsx(close, length=None, drift=None, offset=None, **kwargs):
+def rsx(close: Series, length: Optional[int] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Union[Series, DataFrame]]:
     """Indicator: Relative Strength Xtra (inspired by Jurik RSX)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -16,7 +17,7 @@ def rsx(close, length=None, drift=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # variables
     vC, v1C = 0, 0

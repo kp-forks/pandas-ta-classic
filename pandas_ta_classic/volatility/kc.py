@@ -1,12 +1,22 @@
 # -*- coding: utf-8 -*-
 # Keltner Channels (KC)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from .true_range import true_range
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, high_low_range, verify_series
 
 
-def kc(high, low, close, length=None, scalar=None, mamode=None, offset=None, **kwargs):
+def kc(
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Keltner Channels (KC)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 20
@@ -18,7 +28,7 @@ def kc(high, low, close, length=None, scalar=None, mamode=None, offset=None, **k
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     use_tr = kwargs.pop("tr", True)

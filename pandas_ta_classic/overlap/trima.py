@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Triangular Moving Average (TRIMA)
+from typing import Any, Optional
+from pandas import Series
 from .sma import sma
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def trima(close, length=None, talib=None, offset=None, **kwargs):
+def trima(close: Series, length: Optional[int] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Triangular Moving Average (TRIMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -14,7 +16,7 @@ def trima(close, length=None, talib=None, offset=None, **kwargs):
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

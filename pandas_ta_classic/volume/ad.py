@@ -1,10 +1,21 @@
 # -*- coding: utf-8 -*-
 # Accumulation/Distribution (AD)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def ad(high, low, close, volume, open_=None, talib=None, offset=None, **kwargs):
+def ad(
+    high: Series,
+    low: Series,
+    close: Series,
+    volume: Series,
+    open_: Optional[Series] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Accumulation/Distribution (AD)"""
     # Validate Arguments
     high = verify_series(high)

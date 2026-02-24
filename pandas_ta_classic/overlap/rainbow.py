@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # Rainbow Charts
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def rainbow(close, length=None, offset=None, **kwargs):
+def rainbow(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
     """Indicator: Rainbow Charts"""
     # Validate arguments
     length = int(length) if length and length > 0 else 2
@@ -14,7 +15,7 @@ def rainbow(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     # Create rainbow of SMAs

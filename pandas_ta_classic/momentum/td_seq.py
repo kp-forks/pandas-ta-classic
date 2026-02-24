@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # import numpy as np
+from typing import Any, Optional
 from numpy import where as npWhere
 from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def td_seq(close, asint=None, offset=None, **kwargs):
+def td_seq(close: Series, asint: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
     """Indicator: Tom Demark Sequential (TD_SEQ)"""
     # Validate arguments
     close = verify_series(close)

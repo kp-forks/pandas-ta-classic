@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Variable Index Dynamic Average (VIDYA)
+from typing import Any, Optional
 import numpy as np
 from pandas import Series
 
@@ -7,7 +8,7 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def vidya(close, length=None, drift=None, offset=None, **kwargs):
+def vidya(close: Series, length: Optional[int] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Variable Index Dynamic Average (VIDYA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14
@@ -16,7 +17,7 @@ def vidya(close, length=None, drift=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     def _cmo(source: Series, n: int, d: int):
         """Chande Momentum Oscillator (CMO) - Inlined to avoid circular import

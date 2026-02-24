@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Relative Strength Index (RSI)
-from pandas import DataFrame, concat
+from typing import Any, Optional, Union
+from pandas import DataFrame, Series, concat
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.rma import rma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, signals
 
 
-def rsi(close, length=None, scalar=None, talib=None, drift=None, offset=None, **kwargs):
+def rsi(close: Series, length: Optional[int] = None, scalar: Optional[float] = None, talib: Optional[bool] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Union[Series, DataFrame]]:
     """Indicator: Relative Strength Index (RSI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -17,7 +18,7 @@ def rsi(close, length=None, scalar=None, talib=None, drift=None, offset=None, **
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

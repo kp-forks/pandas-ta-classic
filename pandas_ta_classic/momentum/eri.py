@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # Elder Ray Index (ERI)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def eri(high, low, close, length=None, offset=None, **kwargs):
+def eri(high: Series, low: Series, close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
     """Indicator: Elder Ray Index (ERI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 13
@@ -15,7 +16,7 @@ def eri(high, low, close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     ema_ = ema(close, length)

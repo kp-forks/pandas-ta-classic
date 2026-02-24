@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Jurik Moving Average (JMA)
+from typing import Any, Optional
 import numpy as np
 from numpy import average as npAverage
 from numpy import log as npLog
@@ -12,7 +13,7 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def jma(close, length=None, phase=None, offset=None, **kwargs):
+def jma(close: Series, length: Optional[int] = None, phase: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Jurik Moving Average (JMA)"""
     # Validate Arguments
     _length = int(length) if length and length > 0 else 7
@@ -20,7 +21,7 @@ def jma(close, length=None, phase=None, offset=None, **kwargs):
     close = verify_series(close, _length)
     offset = get_offset(offset)
     if close is None:
-        return
+        return None
 
     # Define base variables
     jma = npZeroslike(close)

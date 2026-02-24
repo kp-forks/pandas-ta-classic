@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Price Volume Rank (PVR)
+from typing import Optional
 from pandas_ta_classic.utils import verify_series
 import numpy as np
 from pandas import Series
@@ -7,7 +8,7 @@ from pandas import Series
 npNaN = np.nan
 
 
-def pvr(close, volume):
+def pvr(close: Series, volume: Series) -> Optional[Series]:
     """Indicator: Price Volume Rank"""
     # Validate arguments
     close = verify_series(close)

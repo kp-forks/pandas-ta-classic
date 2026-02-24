@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 # Stochastic Oscillator (STOCH)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def stoch(
-    high, low, close, k=None, d=None, smooth_k=None, mamode=None, offset=None, **kwargs
-):
+    high: Series, low: Series, close: Series, k: Optional[int] = None, d: Optional[int] = None, smooth_k: Optional[int] = None, mamode: Optional[str] = None, offset: Optional[int] = None, **kwargs: Any
+) -> Optional[DataFrame]:
     """Indicator: Stochastic Oscillator (STOCH)"""
     # Validate arguments
     k = k if k and k > 0 else 14
@@ -21,7 +22,7 @@ def stoch(
     mamode = mamode if isinstance(mamode, str) else "sma"
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     lowest_low = low.rolling(k).min()

@@ -65,6 +65,7 @@ dev = [
     
     # Type checking and linting
     "mypy>=1.0.0",
+    "pandas-stubs>=2.0.0",
     "black>=23.0.0",
     "flake8>=6.0.0", 
     "isort>=5.0.0",
@@ -147,3 +148,13 @@ write_to = "pandas_ta_classic/_version.py"
 # Default scheme: gives clean version on tags, next minor .devN after tags
 local_scheme = "no-local-version"  # Omit local version for clean releases
 fallback_version = "0.0.0"  # Fallback if not in a git repository
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = false
+warn_unused_configs = true
+ignore_missing_imports = true
+disallow_untyped_defs = false
+check_untyped_defs = true
+no_implicit_optional = true
+strict_optional = true

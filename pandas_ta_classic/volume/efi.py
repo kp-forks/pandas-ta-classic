@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
 # Elder Force Index (EFI)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def efi(close, volume, length=None, mamode=None, drift=None, offset=None, **kwargs):
+def efi(
+    close: Series,
+    volume: Series,
+    length: Optional[int] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Elder's Force Index (EFI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 13
@@ -15,7 +25,7 @@ def efi(close, volume, length=None, mamode=None, drift=None, offset=None, **kwar
     offset = get_offset(offset)
 
     if close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     pv_diff = close.diff(drift) * volume

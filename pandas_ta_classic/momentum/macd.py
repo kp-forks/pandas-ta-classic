@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Moving Average Convergence Divergence (MACD)
-from pandas import concat, DataFrame
+from typing import Any, Optional
+from pandas import concat, DataFrame, Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, verify_series, signals
 
 
-def macd(close, fast=None, slow=None, signal=None, talib=None, offset=None, **kwargs):
+def macd(close: Series, fast: Optional[int] = None, slow: Optional[int] = None, signal: Optional[int] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
     """Indicator: Moving Average, Convergence/Divergence (MACD)"""
     # Validate arguments
     fast = int(fast) if fast and fast > 0 else 12
@@ -19,7 +20,7 @@ def macd(close, fast=None, slow=None, signal=None, talib=None, offset=None, **kw
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     as_mode = kwargs.setdefault("asmode", False)
 

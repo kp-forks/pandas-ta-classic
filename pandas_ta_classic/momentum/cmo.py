@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Chande Momentum Oscillator (CMO)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.rma import rma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def cmo(close, length=None, scalar=None, talib=None, drift=None, offset=None, **kwargs):
+def cmo(close: Series, length: Optional[int] = None, scalar: Optional[float] = None, talib: Optional[bool] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
     """Indicator: Chande Momentum Oscillator (CMO)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14
@@ -16,7 +18,7 @@ def cmo(close, length=None, scalar=None, talib=None, drift=None, offset=None, **
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:
