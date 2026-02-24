@@ -5,7 +5,14 @@ from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def hwma(close: Series, na: Optional[float] = None, nb: Optional[float] = None, nc: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def hwma(
+    close: Series,
+    na: Optional[float] = None,
+    nb: Optional[float] = None,
+    nc: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Holt-Winter Moving Average"""
     # Validate Arguments
     na = float(na) if na and na > 0 and na < 1 else 0.2

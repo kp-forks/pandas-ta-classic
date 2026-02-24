@@ -6,7 +6,13 @@ from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def bias(close: Series, length: Optional[int] = None, mamode: Optional[str] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def bias(
+    close: Series,
+    length: Optional[int] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Bias (BIAS)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 26

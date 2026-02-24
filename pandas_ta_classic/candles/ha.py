@@ -5,7 +5,14 @@ from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def ha(open_: Series, high: Series, low: Series, close: Series, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def ha(
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Candle Type - Heikin Ashi"""
     # Validate Arguments
     open_ = verify_series(open_)

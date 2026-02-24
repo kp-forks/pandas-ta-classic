@@ -6,7 +6,14 @@ from pandas_ta_classic.overlap.linreg import linreg
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def cfo(close: Series, length: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def cfo(
+    close: Series,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Chande Forcast Oscillator (CFO)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 9

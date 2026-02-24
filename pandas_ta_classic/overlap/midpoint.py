@@ -6,7 +6,13 @@ from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def midpoint(close: Series, length: Optional[int] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def midpoint(
+    close: Series,
+    length: Optional[int] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Midpoint"""
     # Validate arguments
     length = int(length) if length and length > 0 else 2

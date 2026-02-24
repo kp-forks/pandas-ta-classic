@@ -7,7 +7,15 @@ from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def stoch(
-    high: Series, low: Series, close: Series, k: Optional[int] = None, d: Optional[int] = None, smooth_k: Optional[int] = None, mamode: Optional[str] = None, offset: Optional[int] = None, **kwargs: Any
+    high: Series,
+    low: Series,
+    close: Series,
+    k: Optional[int] = None,
+    d: Optional[int] = None,
+    smooth_k: Optional[int] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[DataFrame]:
     """Indicator: Stochastic Oscillator (STOCH)"""
     # Validate arguments

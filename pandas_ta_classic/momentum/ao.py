@@ -6,7 +6,14 @@ from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def ao(high: Series, low: Series, fast: Optional[int] = None, slow: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def ao(
+    high: Series,
+    low: Series,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Awesome Oscillator (AO)"""
     # Validate Arguments
     fast = int(fast) if fast and fast > 0 else 5

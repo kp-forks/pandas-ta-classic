@@ -7,7 +7,15 @@ from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def smi(close: Series, fast: Optional[int] = None, slow: Optional[int] = None, signal: Optional[int] = None, scalar: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def smi(
+    close: Series,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    signal: Optional[int] = None,
+    scalar: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: SMI Ergodic Indicator (SMIIO)"""
     # Validate arguments
     fast = int(fast) if fast and fast > 0 else 5

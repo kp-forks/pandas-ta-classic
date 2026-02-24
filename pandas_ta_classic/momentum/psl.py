@@ -6,7 +6,15 @@ from pandas import Series
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def psl(close: Series, open_: Optional[Series] = None, length: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def psl(
+    close: Series,
+    open_: Optional[Series] = None,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Psychological Line (PSL)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 12

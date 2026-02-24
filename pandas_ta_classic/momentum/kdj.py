@@ -7,7 +7,13 @@ from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
 def kdj(
-    high: Optional[Series] = None, low: Optional[Series] = None, close: Optional[Series] = None, length: Optional[int] = None, signal: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+    high: Optional[Series] = None,
+    low: Optional[Series] = None,
+    close: Optional[Series] = None,
+    length: Optional[int] = None,
+    signal: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[DataFrame]:
     """Indicator: KDJ (KDJ)"""
     # Validate Arguments

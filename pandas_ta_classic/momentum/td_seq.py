@@ -6,7 +6,12 @@ from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def td_seq(close: Series, asint: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def td_seq(
+    close: Series,
+    asint: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Tom Demark Sequential (TD_SEQ)"""
     # Validate arguments
     close = verify_series(close)

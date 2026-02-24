@@ -6,7 +6,15 @@ from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def stc(close: Series, tclength: Optional[int] = None, fast: Optional[int] = None, slow: Optional[int] = None, factor: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def stc(
+    close: Series,
+    tclength: Optional[int] = None,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    factor: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Schaff Trend Cycle (STC)"""
     # Validate arguments
     tclength = int(tclength) if tclength and tclength > 0 else 10

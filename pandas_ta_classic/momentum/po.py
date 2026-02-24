@@ -6,7 +6,12 @@ from pandas_ta_classic.overlap.linreg import linreg
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def po(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def po(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Projection Oscillator (PO)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14

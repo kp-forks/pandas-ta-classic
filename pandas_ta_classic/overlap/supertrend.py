@@ -10,7 +10,15 @@ from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def supertrend(high: Series, low: Series, close: Series, length: Optional[int] = None, multiplier: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def supertrend(
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    multiplier: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Supertrend"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 7

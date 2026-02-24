@@ -7,7 +7,14 @@ from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def t3(close: Series, length: Optional[int] = None, a: Optional[float] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def t3(
+    close: Series,
+    length: Optional[int] = None,
+    a: Optional[float] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: T3"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

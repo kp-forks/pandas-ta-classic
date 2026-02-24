@@ -5,7 +5,9 @@ from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def hl2(high: Series, low: Series, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def hl2(
+    high: Series, low: Series, offset: Optional[int] = None, **kwargs: Any
+) -> Optional[Series]:
     """Indicator: HL2"""
     # Validate Arguments
     high = verify_series(high)

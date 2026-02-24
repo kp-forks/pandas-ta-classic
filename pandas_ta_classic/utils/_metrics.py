@@ -107,7 +107,9 @@ def log_max_drawdown(close: Series) -> float:
     return log_return - max_drawdown(close, method="log")
 
 
-def max_drawdown(close: Series, method: Optional[str] = None, all: bool = False) -> Union[float, Dict[str, float]]:
+def max_drawdown(
+    close: Series, method: Optional[str] = None, all: bool = False
+) -> Union[float, Dict[str, float]]:
     """Maximum Drawdown from close. Default: 'dollar'.
 
     Args:
@@ -244,7 +246,11 @@ def sortino_ratio(
 
 
 def volatility(
-    close: Series, tf: str = "years", returns: bool = False, log: bool = False, **kwargs: Any
+    close: Series,
+    tf: str = "years",
+    returns: bool = False,
+    log: bool = False,
+    **kwargs: Any,
 ) -> float:
     """Volatility of a series. Default: 'years'
 

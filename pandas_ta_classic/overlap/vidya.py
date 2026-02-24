@@ -8,7 +8,13 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def vidya(close: Series, length: Optional[int] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def vidya(
+    close: Series,
+    length: Optional[int] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Variable Index Dynamic Average (VIDYA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14

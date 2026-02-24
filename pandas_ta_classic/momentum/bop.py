@@ -6,7 +6,16 @@ from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def bop(open_: Series, high: Series, low: Series, close: Series, scalar: Optional[float] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def bop(
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    scalar: Optional[float] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Balance of Power (BOP)"""
     # Validate Arguments
     open_ = verify_series(open_)

@@ -6,7 +6,13 @@ from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def log_return(close: Series, length: Optional[int] = None, cumulative: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def log_return(
+    close: Series,
+    length: Optional[int] = None,
+    cumulative: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Log Return"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 1

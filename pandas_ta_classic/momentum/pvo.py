@@ -6,7 +6,15 @@ from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def pvo(volume: Series, fast: Optional[int] = None, slow: Optional[int] = None, signal: Optional[int] = None, scalar: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def pvo(
+    volume: Series,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    signal: Optional[int] = None,
+    scalar: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Percentage Volume Oscillator (PVO)"""
     # Validate Arguments
     fast = int(fast) if fast and fast > 0 else 12

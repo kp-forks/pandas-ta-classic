@@ -5,7 +5,13 @@ from pandas import DataFrame, concat, Series
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, signals
 
 
-def er(close: Series, length: Optional[int] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Union[Series, DataFrame]]:
+def er(
+    close: Series,
+    length: Optional[int] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Union[Series, DataFrame]]:
     """Indicator: Efficiency Ratio (ER)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 10

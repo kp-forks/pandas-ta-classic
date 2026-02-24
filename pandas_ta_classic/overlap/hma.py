@@ -7,7 +7,12 @@ from .wma import wma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def hma(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def hma(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Hull Moving Average (HMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

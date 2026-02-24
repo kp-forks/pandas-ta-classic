@@ -8,7 +8,14 @@ from pandas_ta_classic.utils import get_offset, verify_series, get_drift, zero
 
 
 def dm(
-    high: Series, low: Series, length: Optional[int] = None, mamode: Optional[str] = None, talib: Optional[bool] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+    high: Series,
+    low: Series,
+    length: Optional[int] = None,
+    mamode: Optional[str] = None,
+    talib: Optional[bool] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[DataFrame]:
     """Indicator: DM"""
     # Validate Arguments

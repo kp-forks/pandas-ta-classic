@@ -10,7 +10,12 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def alma(
-    close: Series, length: Optional[int] = None, sigma: Optional[float] = None, distribution_offset: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any
+    close: Series,
+    length: Optional[int] = None,
+    sigma: Optional[float] = None,
+    distribution_offset: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[Series]:
     """Indicator: Arnaud Legoux Moving Average (ALMA)"""
     # Validate Arguments

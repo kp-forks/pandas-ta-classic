@@ -8,7 +8,14 @@ from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def pgo(high: Series, low: Series, close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def pgo(
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Pretty Good Oscillator (PGO)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14

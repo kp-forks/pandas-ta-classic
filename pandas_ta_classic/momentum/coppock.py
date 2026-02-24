@@ -7,7 +7,14 @@ from pandas_ta_classic.overlap.wma import wma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def coppock(close: Series, length: Optional[int] = None, fast: Optional[int] = None, slow: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def coppock(
+    close: Series,
+    length: Optional[int] = None,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Coppock Curve (COPC)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

@@ -8,7 +8,13 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series, signals
 
 
-def rsx(close: Series, length: Optional[int] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Union[Series, DataFrame]]:
+def rsx(
+    close: Series,
+    length: Optional[int] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Union[Series, DataFrame]]:
     """Indicator: Relative Strength Xtra (inspired by Jurik RSX)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14

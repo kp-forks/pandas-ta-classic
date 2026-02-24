@@ -7,7 +7,13 @@ from .stdev import stdev
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def zscore(close: Series, length: Optional[int] = None, std: Optional[float] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def zscore(
+    close: Series,
+    length: Optional[int] = None,
+    std: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Z Score"""
     # Validate Arguments
     length = int(length) if length and length > 1 else 30

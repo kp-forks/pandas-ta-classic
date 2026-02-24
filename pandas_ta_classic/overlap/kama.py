@@ -8,7 +8,15 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_drift, get_offset, non_zero_range, verify_series
 
 
-def kama(close: Series, length: Optional[int] = None, fast: Optional[int] = None, slow: Optional[int] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def kama(
+    close: Series,
+    length: Optional[int] = None,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Kaufman's Adaptive Moving Average (KAMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

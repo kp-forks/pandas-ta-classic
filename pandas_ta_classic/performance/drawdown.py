@@ -7,7 +7,9 @@ from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def drawdown(close: Series, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def drawdown(
+    close: Series, offset: Optional[int] = None, **kwargs: Any
+) -> Optional[DataFrame]:
     """Indicator: Drawdown (DD)"""
     # Validate Arguments
     close = verify_series(close)

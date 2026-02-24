@@ -9,7 +9,13 @@ from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def ssf(close: Series, length: Optional[int] = None, poles: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def ssf(
+    close: Series,
+    length: Optional[int] = None,
+    poles: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Ehler's Super Smoother Filter (SSF)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

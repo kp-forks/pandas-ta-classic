@@ -7,7 +7,15 @@ from pandas_ta_classic.overlap.rma import rma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def cmo(close: Series, length: Optional[int] = None, scalar: Optional[float] = None, talib: Optional[bool] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def cmo(
+    close: Series,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    talib: Optional[bool] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Chande Momentum Oscillator (CMO)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14

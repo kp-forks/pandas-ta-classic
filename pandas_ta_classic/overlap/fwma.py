@@ -5,7 +5,13 @@ from pandas import Series
 from pandas_ta_classic.utils import fibonacci, get_offset, verify_series, weights
 
 
-def fwma(close: Series, length: Optional[int] = None, asc=None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def fwma(
+    close: Series,
+    length: Optional[int] = None,
+    asc=None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Fibonacci's Weighted Moving Average (FWMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

@@ -6,7 +6,15 @@ from pandas_ta_classic.utils import get_drift, get_offset, non_zero_range, verif
 
 
 def brar(
-    open_: Series, high: Series, low: Series, close: Series, length: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[DataFrame]:
     """Indicator: BRAR (BRAR)"""
     # Validate Arguments

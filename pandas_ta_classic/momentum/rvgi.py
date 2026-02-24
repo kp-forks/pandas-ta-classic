@@ -6,7 +6,16 @@ from pandas_ta_classic.overlap.swma import swma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def rvgi(open_: Series, high: Series, low: Series, close: Series, length: Optional[int] = None, swma_length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def rvgi(
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    swma_length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Relative Vigor Index (RVGI)"""
     # Validate Arguments
     high_low_range = non_zero_range(high, low)

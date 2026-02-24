@@ -7,7 +7,6 @@ from . import cdl_doji, cdl_inside
 from pandas_ta_classic.utils import get_offset, verify_series
 from pandas_ta_classic import Imports
 
-
 ALL_PATTERNS = [
     "2crows",
     "3blackcrows",

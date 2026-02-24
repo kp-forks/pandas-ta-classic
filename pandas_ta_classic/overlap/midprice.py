@@ -6,7 +6,14 @@ from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def midprice(high: Series, low: Series, length: Optional[int] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def midprice(
+    high: Series,
+    low: Series,
+    length: Optional[int] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Midprice"""
     # Validate arguments
     length = int(length) if length and length > 0 else 2

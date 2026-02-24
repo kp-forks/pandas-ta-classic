@@ -7,7 +7,12 @@ from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series, weights
 
 
-def sinwma(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def sinwma(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Sine Weighted Moving Average (SINWMA) by Everget of TradingView"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14

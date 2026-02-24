@@ -5,7 +5,12 @@ from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def skew(close: Series, length: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def skew(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Skew"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 30

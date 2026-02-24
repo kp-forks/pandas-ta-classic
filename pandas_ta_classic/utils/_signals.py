@@ -43,7 +43,11 @@ def _above_below(
 
 
 def above(
-    series_a: Series, series_b: Series, asint: bool = True, offset: Optional[int] = None, **kwargs: Any
+    series_a: Series,
+    series_b: Series,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Series:
     return _above_below(
         series_a, series_b, above=True, asint=asint, offset=offset, **kwargs
@@ -51,7 +55,11 @@ def above(
 
 
 def above_value(
-    series_a: Series, value: float, asint: bool = True, offset: Optional[int] = None, **kwargs: Any
+    series_a: Series,
+    value: float,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[Series]:
     if not isinstance(value, (int, float, complex)):
         print("[X] value is not a number")
@@ -64,7 +72,11 @@ def above_value(
 
 
 def below(
-    series_a: Series, series_b: Series, asint: bool = True, offset: Optional[int] = None, **kwargs: Any
+    series_a: Series,
+    series_b: Series,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Series:
     return _above_below(
         series_a, series_b, above=False, asint=asint, offset=offset, **kwargs
@@ -72,7 +84,11 @@ def below(
 
 
 def below_value(
-    series_a: Series, value: float, asint: bool = True, offset: Optional[int] = None, **kwargs: Any
+    series_a: Series,
+    value: float,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[Series]:
     if not isinstance(value, (int, float, complex)):
         print("[X] value is not a number")

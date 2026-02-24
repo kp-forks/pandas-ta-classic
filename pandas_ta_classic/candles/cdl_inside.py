@@ -6,7 +6,15 @@ from pandas_ta_classic.utils import candle_color, get_offset
 from pandas_ta_classic.utils import verify_series
 
 
-def cdl_inside(open_: Series, high: Series, low: Series, close: Series, asbool: bool = False, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def cdl_inside(
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    asbool: bool = False,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Candle Type - Inside Bar"""
     # Validate arguments
     open_ = verify_series(open_)

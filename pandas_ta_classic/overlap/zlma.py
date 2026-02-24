@@ -6,7 +6,13 @@ from . import dema, ema, hma, linreg, rma, sma, swma, t3, tema, trima, vidya, wm
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def zlma(close: Series, length: Optional[int] = None, mamode: Optional[str] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def zlma(
+    close: Series,
+    length: Optional[int] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Zero Lag Moving Average (ZLMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

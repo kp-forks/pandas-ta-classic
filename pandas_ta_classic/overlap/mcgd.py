@@ -6,7 +6,13 @@ from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def mcgd(close: Series, length: Optional[int] = None, offset: Optional[int] = None, c: Optional[float] = None, **kwargs: Any) -> Optional[Series]:
+def mcgd(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    c: Optional[float] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: McGinley Dynamic Indicator"""
     # Validate arguments
     length = int(length) if length and length > 0 else 10

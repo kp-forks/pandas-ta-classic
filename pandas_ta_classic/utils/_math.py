@@ -168,7 +168,9 @@ def pascals_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[npNdArr
     return triangle
 
 
-def symmetric_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[Union[List[int], npNdArray]]:
+def symmetric_triangle(
+    n: Optional[int] = None, **kwargs: Any
+) -> Optional[Union[List[int], npNdArray]]:
     """Symmetric Triangle with n >= 2
 
     Returns a numpy array of the nth row of Symmetric Triangle.

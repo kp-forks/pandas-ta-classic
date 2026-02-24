@@ -10,7 +10,13 @@ from pandas_ta_classic.utils import (
 )
 
 
-def swma(close: Series, length: Optional[int] = None, asc=None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def swma(
+    close: Series,
+    length: Optional[int] = None,
+    asc=None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Symmetric Weighted Moving Average (SWMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10

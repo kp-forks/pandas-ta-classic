@@ -6,7 +6,14 @@ from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def variance(close: Series, length: Optional[int] = None, ddof: Optional[int] = None, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def variance(
+    close: Series,
+    length: Optional[int] = None,
+    ddof: Optional[int] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Variance"""
     # Validate Arguments
     length = int(length) if length and length > 1 else 30

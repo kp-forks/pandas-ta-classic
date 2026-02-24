@@ -10,7 +10,14 @@ from .stdev import stdev as stdev
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def tos_stdevall(close: Series, length: Optional[int] = None, stds: Optional[List[int]] = None, ddof: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def tos_stdevall(
+    close: Series,
+    length: Optional[int] = None,
+    stds: Optional[List[int]] = None,
+    ddof: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: TD Ameritrade's Think or Swim Standard Deviation All"""
     # Validate Arguments
     stds = stds if isinstance(stds, list) and len(stds) > 0 else [1, 2, 3]

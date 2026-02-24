@@ -8,7 +8,9 @@ from pandas import DataFrame, Timestamp
 from pandas_ta_classic._meta import EXCHANGE_TZ, RATE
 
 
-def df_dates(df: DataFrame, dates: Optional[Union[str, list]] = None) -> Optional[DataFrame]:
+def df_dates(
+    df: DataFrame, dates: Optional[Union[str, list]] = None
+) -> Optional[DataFrame]:
     """Yields the DataFrame with the given dates"""
     if dates is None:
         return None

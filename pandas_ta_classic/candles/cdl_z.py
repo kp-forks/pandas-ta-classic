@@ -7,7 +7,15 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def cdl_z(
-    open_: Series, high: Series, low: Series, close: Series, length: Optional[int] = None, full: Optional[bool] = None, ddof: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    full: Optional[bool] = None,
+    ddof: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[DataFrame]:
     """Indicator: Candle Type - Z Score"""
     # Validate Arguments

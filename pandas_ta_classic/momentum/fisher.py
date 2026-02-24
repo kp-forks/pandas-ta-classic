@@ -10,7 +10,14 @@ from pandas_ta_classic.overlap.hl2 import hl2
 from pandas_ta_classic.utils import get_offset, high_low_range, verify_series
 
 
-def fisher(high: Series, low: Series, length: Optional[int] = None, signal: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[DataFrame]:
+def fisher(
+    high: Series,
+    low: Series,
+    length: Optional[int] = None,
+    signal: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Fisher Transform (FISHT)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 9

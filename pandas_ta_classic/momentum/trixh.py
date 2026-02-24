@@ -7,7 +7,13 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def trixh(
-    close: Series, length: Optional[int] = None, signal: Optional[int] = None, scalar: Optional[float] = None, drift: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
+    close: Series,
+    length: Optional[int] = None,
+    signal: Optional[int] = None,
+    scalar: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
 ) -> Optional[DataFrame]:
     """Indicator: TRIX Histogram (TRIXH)"""
     # Validate arguments

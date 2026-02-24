@@ -6,7 +6,14 @@ from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def hlc3(high: Series, low: Series, close: Series, talib: Optional[bool] = None, offset: Optional[int] = None, **kwargs: Any) -> Optional[Series]:
+def hlc3(
+    high: Series,
+    low: Series,
+    close: Series,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: HLC3"""
     # Validate Arguments
     high = verify_series(high)

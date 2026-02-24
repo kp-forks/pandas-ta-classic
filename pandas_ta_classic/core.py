@@ -24,7 +24,6 @@ from pandas_ta_classic.volatility import *
 from pandas_ta_classic.volume import *
 from pandas_ta_classic.utils import *
 
-
 df = pd.DataFrame()
 
 
@@ -267,7 +266,11 @@ class AnalysisIndicators(BasePandasObject):
 
     # DataFrame Behavioral Methods
     def __call__(
-        self, kind: Optional[str] = None, timed: bool = False, version: bool = False, **kwargs
+        self,
+        kind: Optional[str] = None,
+        timed: bool = False,
+        version: bool = False,
+        **kwargs,
     ):
         if version:
             print(f"Pandas TA - Technical Analysis Indicators - v{self.version}")
