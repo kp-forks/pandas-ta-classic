@@ -15,7 +15,6 @@ def get_sample_data():
         "data/SPY_D.csv",
         index_col=0,
         parse_dates=True,
-        infer_datetime_format=True,
         keep_date_col=True,
     )
     df.set_index(DatetimeIndex(df["date"]), inplace=True, drop=True)
