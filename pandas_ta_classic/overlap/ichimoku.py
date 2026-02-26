@@ -120,7 +120,7 @@ def ichimoku(
         _span_a.index = _span_b.index = ext_index
     else:
         df_freq = close.index.value_counts().mode()[0]
-        tdelta = Timedelta(df_freq, unit="d")
+        tdelta = Timedelta(df_freq, unit="D")
         new_dt = date_range(start=last + tdelta, periods=kijun, freq="B")
         spandf = DataFrame(index=new_dt, columns=[span_a.name, span_b.name])
         _span_a.index = _span_b.index = new_dt

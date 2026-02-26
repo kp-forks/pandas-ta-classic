@@ -43,7 +43,7 @@ def vidya(
     m = close.size
     alpha = 2 / (length + 1)
     abs_cmo = _cmo(close, length, drift).abs()
-    vidya = Series(0, index=close.index)
+    vidya = Series(0.0, index=close.index)
     for i in range(length, m):
         vidya.iloc[i] = alpha * abs_cmo.iloc[i] * close.iloc[i] + vidya.iloc[i - 1] * (
             1 - alpha * abs_cmo.iloc[i]

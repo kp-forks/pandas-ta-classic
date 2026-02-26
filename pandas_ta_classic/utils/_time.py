@@ -3,7 +3,7 @@ from datetime import datetime
 from time import localtime, perf_counter
 from typing import Optional, Tuple, Union
 
-from pandas import DataFrame, Timestamp
+from pandas import DataFrame, Timestamp, to_datetime
 
 from pandas_ta_classic._meta import EXCHANGE_TZ, RATE
 
@@ -16,7 +16,7 @@ def df_dates(
         return None
     if not isinstance(dates, list):
         dates = [dates]
-    return df[df.index.isin(dates)]
+    return df[df.index.isin(to_datetime(dates))]
 
 
 def df_month_to_date(df: DataFrame) -> DataFrame:

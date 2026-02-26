@@ -43,9 +43,9 @@ def pmax(
     pmax_down = ma_value + (multiplier * atr_value)
 
     # Convert to numpy arrays for faster iteration
-    close_arr = close.values
-    pmax_up_arr = pmax_up.values
-    pmax_down_arr = pmax_down.values
+    close_arr = close.to_numpy()
+    pmax_up_arr = pmax_up.to_numpy(copy=True)
+    pmax_down_arr = pmax_down.to_numpy(copy=True)
 
     # Initialize arrays
     n = len(close)

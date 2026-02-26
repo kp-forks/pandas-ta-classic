@@ -32,8 +32,12 @@ def ha(
         }
     )
 
+    ha_open_col = df.columns.get_loc("HA_open")
+    ha_close_col = df.columns.get_loc("HA_close")
     for i in range(1, m):
-        df["HA_open"][i] = 0.5 * (df["HA_open"][i - 1] + df["HA_close"][i - 1])
+        df.iat[i, ha_open_col] = 0.5 * (
+            df.iat[i - 1, ha_open_col] + df.iat[i - 1, ha_close_col]
+        )
 
     df["HA_high"] = df[["HA_open", "HA_high", "HA_close"]].max(axis=1)
     df["HA_low"] = df[["HA_open", "HA_low", "HA_close"]].min(axis=1)

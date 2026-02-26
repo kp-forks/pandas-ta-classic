@@ -181,12 +181,12 @@ module = "pandas_ta_classic.core"
 #   Callable by mypy due to _meta.py import pattern.
 disable_error_code = ["assignment", "arg-type", "return-value"]
 
+
 [[tool.mypy.overrides]]
 module = "pandas_ta_classic._meta"
 # _meta.py re-assigns `version` from importlib.metadata.version (Callable)
 # to a str — pre-existing structural pattern.
 disable_error_code = ["assignment"]
-
 
 [[tool.mypy.overrides]]
 module = [
