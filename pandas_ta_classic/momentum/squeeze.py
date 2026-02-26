@@ -25,7 +25,7 @@ def squeeze(
     kc_scalar: Optional[float] = None,
     mom_length: Optional[int] = None,
     mom_smooth: Optional[int] = None,
-    use_tr=None,
+    use_tr: Optional[bool] = None,
     mamode: Optional[str] = None,
     offset: Optional[int] = None,
     **kwargs: Any,

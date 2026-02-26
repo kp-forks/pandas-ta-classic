@@ -13,7 +13,7 @@ from pandas_ta_classic.utils import (
 def swma(
     close: Series,
     length: Optional[int] = None,
-    asc=None,
+    asc: Optional[bool] = None,
     offset: Optional[int] = None,
     **kwargs: Any,
 ) -> Optional[Series]:

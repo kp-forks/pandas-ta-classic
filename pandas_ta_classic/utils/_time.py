@@ -55,9 +55,10 @@ def final_time(stime: float) -> str:
 
 def get_time(
     exchange: str = "NYSE", full: bool = True, to_string: bool = False
-) -> Optional[str]:
+) -> str:
     """Returns Current Time, Day of the Year and Percentage, and the current
-    time of the selected Exchange."""
+    time of the selected Exchange. Always returns the formatted time string.
+    When to_string=False (default), also prints to stdout."""
     tz = EXCHANGE_TZ["NYSE"]  # Default is NYSE (Eastern Time Zone)
     if isinstance(exchange, str):
         exchange = exchange.upper()
@@ -82,7 +83,9 @@ def get_time(
     else:
         s = f"{date}, {exchange}: {exchange_time}"
 
-    return s if to_string else print(s)
+    if not to_string:
+        print(s)
+    return s
 
 
 def total_time(df: DataFrame, tf: str = "years") -> float:

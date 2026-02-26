@@ -12,8 +12,8 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 def xsignals(
     signal: Series,
-    xa,
-    xb,
+    xa: float,
+    xb: float,
     above: bool = True,
     long: bool = True,
     asbool: Optional[bool] = None,

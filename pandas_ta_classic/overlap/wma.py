@@ -9,7 +9,7 @@ from pandas_ta_classic.utils import get_offset, verify_series
 def wma(
     close: Series,
     length: Optional[int] = None,
-    asc=None,
+    asc: Optional[bool] = None,
     talib: Optional[bool] = None,
     offset: Optional[int] = None,
     **kwargs: Any,

@@ -10,9 +10,9 @@ from pandas_ta_classic.utils import get_offset, verify_series
 def slope(
     close: Series,
     length: Optional[int] = None,
-    as_angle=None,
-    to_degrees=None,
-    vertical=None,
+    as_angle: Optional[bool] = None,
+    to_degrees: Optional[bool] = None,
+    vertical: Optional[bool] = None,
     offset: Optional[int] = None,
     **kwargs: Any,
 ) -> Optional[Series]:

@@ -8,7 +8,7 @@ from pandas_ta_classic.utils import get_offset, pascals_triangle, verify_series,
 def pwma(
     close: Series,
     length: Optional[int] = None,
-    asc=None,
+    asc: Optional[bool] = None,
     offset: Optional[int] = None,
     **kwargs: Any,
 ) -> Optional[Series]:
