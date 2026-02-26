@@ -1,5 +1,5 @@
 import os
-from pandas import DatetimeIndex, read_csv
+from pandas import read_csv
 
 VERBOSE = True
 
@@ -13,12 +13,10 @@ CORRELATION_THRESHOLD = 0.99  # Less than 0.99 is undesirable
 def get_sample_data():
     df = read_csv(
         "data/SPY_D.csv",
-        index_col=0,
+        index_col="date",
         parse_dates=True,
-        keep_date_col=True,
     )
-    df.set_index(DatetimeIndex(df["date"]), inplace=True, drop=True)
-    df.drop("date", axis=1, inplace=True)
+    df.drop(columns=["Unnamed: 0"], inplace=True, errors="ignore")
     return df
 
 
