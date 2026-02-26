@@ -174,10 +174,12 @@ disable_error_code = ["union-attr", "operator", "no-redef", "index", "attr-defin
 # (not annotation-only) to fix properly.
 [[tool.mypy.overrides]]
 module = "pandas_ta_classic.core"
-# core.py uses multiprocessing.pool.imap() assigned to a list-typed var,
-# list.remove() return value, and wildcard import name conflicts — all
-# pre-existing structural issues unrelated to our annotation work.
-disable_error_code = ["assignment", "return-value", "func-returns-value", "arg-type"]
+# assignment: wildcard imports (from .performance import *) shadow module names
+#   with function names — same __init__.py re-export pattern as no-redef.
+# arg-type: Strategy(ta=None) — None is intentional sentinel for "all indicators".
+# return-value: version property returns importlib version string, typed as
+#   Callable by mypy due to _meta.py import pattern.
+disable_error_code = ["assignment", "arg-type", "return-value"]
 
 [[tool.mypy.overrides]]
 module = "pandas_ta_classic._meta"

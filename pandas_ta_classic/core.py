@@ -474,7 +474,7 @@ class AnalysisIndicators(BasePandasObject):
                 NOT_FOUND = f"[X] Ooops!!! It's {series not in df.columns}, the series '{series}' was not found in {cols}"
                 return df.iloc[:, match[0]] if len(match) else print(NOT_FOUND)
 
-    def _indicators_by_category(self, name: str) -> list:
+    def _indicators_by_category(self, name: str) -> Optional[list]:
         """Returns indicators by Categorical name."""
         return Category[name] if name in self.categories else None
 
@@ -624,7 +624,8 @@ class AnalysisIndicators(BasePandasObject):
             removed += user_excluded
 
         # Remove the unwanted indicators
-        [ta_indicators.remove(x) for x in removed]
+        for x in removed:
+            ta_indicators.remove(x)
 
         # If as a list, immediately return
         if as_list:
@@ -701,7 +702,9 @@ class AnalysisIndicators(BasePandasObject):
         # Collect the indicators, remove excluded or include kwarg["append"]
         if mode["category"]:
             ta = self._indicators_by_category(name.lower())
-            [ta.remove(x) for x in excluded if x in ta]
+            for x in excluded:
+                if x in ta:
+                    ta.remove(x)
         elif mode["custom"]:
             ta = args[0].ta
             for kwds in ta:
@@ -722,7 +725,8 @@ class AnalysisIndicators(BasePandasObject):
             if _:
                 removal.append(kwds)
         if len(removal) > 0:
-            [ta.remove(x) for x in removal]
+            for x in removal:
+                ta.remove(x)
 
         verbose = kwargs.pop("verbose", False)
         if verbose:
