@@ -217,7 +217,7 @@ def sharpe_ratio(
     returns = percent_return(close=close) if not log else log_return(close=close)
 
     if use_cagr:
-        return cagr(close) / volatility(close, returns, log=log)
+        return cagr(close) / volatility(close, log=log)
     else:
         period_mu = period * returns.mean()
         period_std = npSqrt(period) * returns.std()
@@ -268,14 +268,13 @@ def volatility(
     """
     close = verify_series(close)
 
+    _returns: Series
     if not returns:
-        returns = percent_return(close=close) if not log else log_return(close=close)
+        _returns = percent_return(close=close) if not log else log_return(close=close)
     else:
-        returns = close
+        _returns = close
 
-    returns = log_geometric_mean(returns).std()
-    # factor = returns.shape[0] / total_time(returns, tf)
-    # if kwargs.pop("nearest_day", False) and tf.lower() == "years":
-    # factor = int(factor + 1)
-    # return npSqrt(factor) * returns.std()
-    return returns
+    factor = _returns.shape[0] / total_time(_returns, tf)
+    if kwargs.pop("nearest_day", False) and tf.lower() == "years":
+        factor = int(factor + 1)
+    return float(npSqrt(factor) * _returns.std())

@@ -103,9 +103,21 @@ class TestUtilityMetrics(TestCase):
         self.assertGreaterEqual(result, 0)
 
     def test_sharpe_ratio(self):
+        import math
+
         result = pandas_ta.sharpe_ratio(self.close)
         self.assertIsInstance(result, float)
         self.assertGreaterEqual(result, 0)
+
+        result_cagr = pandas_ta.sharpe_ratio(self.close, use_cagr=True)
+        self.assertIsInstance(result_cagr, float)
+        self.assertGreaterEqual(result_cagr, 0)
+        self.assertTrue(math.isfinite(result_cagr))
+
+        result_log = pandas_ta.sharpe_ratio(self.close, use_cagr=True, log=True)
+        self.assertIsInstance(result_log, float)
+        self.assertGreaterEqual(result_log, 0)
+        self.assertTrue(math.isfinite(result_log))
 
     def test_sortino_ratio(self):
         result = pandas_ta.sortino_ratio(self.close)
