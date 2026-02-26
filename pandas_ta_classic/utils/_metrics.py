@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, Optional, Tuple, Union, cast
 
 import numpy as np
 from numpy import log as npLog
@@ -48,7 +48,7 @@ def calmar_ratio(close: Series, method: str = "percent", years: int = 3) -> floa
     n_years_ago = close.index[-1] - Timedelta(days=365.25 * years)
     close = close[close.index > n_years_ago]
 
-    return cagr(close) / max_drawdown(close, method=method)
+    return cagr(close) / cast(float, max_drawdown(close, method=method))
 
 
 def downside_deviation(

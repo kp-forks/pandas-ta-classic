@@ -194,8 +194,9 @@ def symmetric_triangle(
             triangle += front[::-1]
 
     if kwargs.pop("weighted", False) and isinstance(triangle, list):
-        triangle_sum: float = npSum(triangle)
-        triangle_weights: Any = triangle / triangle_sum
+        triangle_arr: npNdArray = np.array(triangle)
+        triangle_sum: float = float(npSum(triangle_arr))
+        triangle_weights: npNdArray = triangle_arr / triangle_sum
         return triangle_weights
 
     return triangle
