@@ -165,8 +165,9 @@ strict_optional = true
 # - attr-defined: under numpy 2.0 + Python 3.9, numpy stubs type some results
 #   as ndarray[...] instead of Optional[Any], causing false positives for pandas
 #   Series methods (.shift(), .name, etc.) on the same patterns.
-# - no-redef: suppresses duplicate import names where a function and its parent
-#   module share the same identifier (e.g. `from ..momentum import roc`).
+# - no-redef: each category __init__.py re-exports functions by name
+#   (e.g. `from .roc import roc`), which shadows the submodule of the same
+#   name. mypy sees this as a redefinition, but it works correctly at runtime.
 disable_error_code = ["union-attr", "operator", "no-redef", "index", "attr-defined"]
 
 # Per-module overrides for pre-existing code issues that require logic changes

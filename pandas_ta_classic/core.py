@@ -2202,31 +2202,6 @@ class AnalysisIndicators(BasePandasObject):
             )
             return self._post_process(result, **kwargs)
 
-    def supertrend(
-        self,
-        period=None,
-        multiplier=None,
-        mamode=None,
-        drift=None,
-        offset=None,
-        **kwargs,
-    ):
-        high = self._get_column(kwargs.pop("high", "high"))
-        low = self._get_column(kwargs.pop("low", "low"))
-        close = self._get_column(kwargs.pop("close", "close"))
-        result = supertrend(
-            high=high,
-            low=low,
-            close=close,
-            period=period,
-            multiplier=multiplier,
-            mamode=mamode,
-            drift=drift,
-            offset=offset,
-            **kwargs,
-        )
-        return self._post_process(result, **kwargs)
-
     def tsignals(
         self,
         trend=None,
