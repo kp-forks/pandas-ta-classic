@@ -53,7 +53,7 @@ def squeeze(
     lazybear = kwargs.pop("lazybear", False)
     mamode = mamode if isinstance(mamode, str) else "sma"
 
-    def simplify_columns(df, n=3):
+    def simplify_columns(df: DataFrame, n: int = 3) -> list:
         df.columns = df.columns.str.lower()
         return [c.split("_")[0][n - 1 : n] for c in df.columns]
 

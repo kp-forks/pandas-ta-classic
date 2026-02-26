@@ -27,7 +27,7 @@ def psar(
     max_af = float(max_af) if max_af and max_af > 0 else 0.2
     offset = get_offset(offset)
 
-    def _falling(high, low, drift: int = 1):
+    def _falling(high: Series, low: Series, drift: int = 1) -> bool:
         """Returns the last -DM value"""
         # Not to be confused with ta.falling()
         up = high - high.shift(drift)

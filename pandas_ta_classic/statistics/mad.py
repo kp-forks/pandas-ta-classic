@@ -27,7 +27,7 @@ def mad(
         return None
 
     # Calculate Result
-    def mad_(series):
+    def mad_(series: Any) -> float:
         """Mean Absolute Deviation"""
         return npfabs(series - series.mean()).mean()
 

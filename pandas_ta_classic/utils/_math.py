@@ -204,7 +204,7 @@ def symmetric_triangle(
 def weights(w: Any) -> Callable[[Any], Any]:
     """Calculates the dot product of weights with values x"""
 
-    def _dot(x):
+    def _dot(x: Any) -> Any:
         return npDot(w, x)
 
     return _dot

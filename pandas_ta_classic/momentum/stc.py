@@ -181,7 +181,7 @@ Returns:
 """
 
 
-def schaff_tc(close, xmacd, tclength, factor):
+def schaff_tc(close: Series, xmacd: Series, tclength: int, factor: float) -> list:
     # ACTUAL Calculation part, which is shared between operation modes
     # 1St : Stochastic of MACD
     lowest_xmacd = xmacd.rolling(tclength).min()  # min value in interval tclen

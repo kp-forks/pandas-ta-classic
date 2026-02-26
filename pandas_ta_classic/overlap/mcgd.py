@@ -26,7 +26,7 @@ def mcgd(
     # Calculate Result
     close = close.copy()
 
-    def mcg_(series):
+    def mcg_(series: Series) -> float:
         denom = c * length * (series.iloc[1] / series.iloc[0]) ** 4
         series.iloc[1] = series.iloc[0] + ((series.iloc[1] - series.iloc[0]) / denom)
         return series.iloc[1]

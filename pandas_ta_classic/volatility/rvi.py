@@ -40,7 +40,9 @@ def rvi(
         low = verify_series(low)
 
     # Calculate Result
-    def _rvi(source, length, scalar, mode, drift):
+    def _rvi(
+        source: Series, length: int, scalar: float, mode: str, drift: int
+    ) -> Series:
         """RVI"""
         std = stdev(source, length)
         pos, neg = unsigned_differences(source, amount=drift)

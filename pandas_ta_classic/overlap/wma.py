@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Weighted Moving Average (WMA)
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
@@ -38,8 +38,8 @@ def wma(
         weights_ = Series(npArange(1, length + 1))
         weights = weights_ if asc else weights_[::-1]
 
-        def linear(w):
-            def _compute(x):
+        def linear(w: Any) -> Callable:
+            def _compute(x: Any) -> float:
                 return npDot(x, w) / total_weight
 
             return _compute

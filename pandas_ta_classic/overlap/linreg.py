@@ -39,7 +39,7 @@ def linreg(
     x2_sum = x_sum * (2 * length + 1) / 3
     divisor = length * x2_sum - x_sum * x_sum
 
-    def linear_regression(series):
+    def linear_regression(series: Any) -> Any:
         y_sum = series.sum()
         xy_sum = (x * series).sum()
 
@@ -64,7 +64,7 @@ def linreg(
 
         return m * length + b if tsf else m * (length - 1) + b
 
-    def rolling_window(array, length):
+    def rolling_window(array: Any, length: int) -> Any:
         """https://github.com/twopirllc/pandas-ta/issues/285"""
         strides = array.strides + (array.strides[-1],)
         shape = array.shape[:-1] + (array.shape[-1] - length + 1, length)
