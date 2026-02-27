@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 # Laguerre Relative Strength Index (Laguerre RSI)
+from typing import Any, Optional
 from numpy import maximum, where, zeros
 from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def lrsi(close, length=None, gamma=None, offset=None, **kwargs):
+def lrsi(
+    close: Series,
+    length: Optional[int] = None,
+    gamma: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Laguerre RSI (LRSI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -14,7 +21,7 @@ def lrsi(close, length=None, gamma=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     # Convert to numpy arrays for faster iteration

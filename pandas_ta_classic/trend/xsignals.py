@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # Cross Signals (XSIGNALS)
+from typing import Any, Optional
 import numpy as np
-from pandas import DataFrame
+from pandas import DataFrame, Series
 
 npNaN = np.nan
 from .tsignals import tsignals
@@ -10,17 +11,17 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def xsignals(
-    signal,
-    xa,
-    xb,
+    signal: Series,
+    xa: float,
+    xb: float,
     above: bool = True,
     long: bool = True,
-    asbool: bool = None,
+    asbool: Optional[bool] = None,
     trend_reset: int = 0,
-    trade_offset: int = None,
-    offset: int = None,
-    **kwargs,
-):
+    trade_offset: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Cross Signals"""
     # Validate Arguments
     signal = verify_series(signal)
@@ -37,7 +38,7 @@ def xsignals(
 
     # Modify trades to fill gaps for trends
     trades.replace({0: npNaN}, inplace=True)
-    trades.interpolate(method="pad", inplace=True)
+    trades.ffill(inplace=True)
     trades.fillna(0, inplace=True)
 
     trends = (trades > 0).astype(int)

@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 # Skew (SKEW)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def skew(close, length=None, offset=None, **kwargs):
+def skew(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Skew"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 30
@@ -16,7 +23,7 @@ def skew(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     skew = close.rolling(length, min_periods=min_periods).skew()

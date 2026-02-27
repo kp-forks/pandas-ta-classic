@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 # Slope (SLOPE)
+from typing import Any, Optional
 from numpy import arctan as npAtan
 from numpy import pi as npPi
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def slope(
-    close,
-    length=None,
-    as_angle=None,
-    to_degrees=None,
-    vertical=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    length: Optional[int] = None,
+    as_angle: Optional[bool] = None,
+    to_degrees: Optional[bool] = None,
+    vertical: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Slope"""
     # Validate arguments
     length = int(length) if length and length > 0 else 1
@@ -23,7 +25,7 @@ def slope(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     slope = close.diff(length) / length

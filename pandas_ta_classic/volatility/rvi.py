@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # Relative Volatility Index (RVI)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.statistics import stdev
 from pandas_ta_classic.utils import get_drift, get_offset
@@ -7,18 +9,18 @@ from pandas_ta_classic.utils import unsigned_differences, verify_series
 
 
 def rvi(
-    close,
-    high=None,
-    low=None,
-    length=None,
-    scalar=None,
-    refined=None,
-    thirds=None,
-    mamode=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    high: Optional[Series] = None,
+    low: Optional[Series] = None,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    refined: Optional[bool] = None,
+    thirds: Optional[bool] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Relative Volatility Index (RVI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -31,14 +33,16 @@ def rvi(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     if refined or thirds:
         high = verify_series(high)
         low = verify_series(low)
 
     # Calculate Result
-    def _rvi(source, length, scalar, mode, drift):
+    def _rvi(
+        source: Series, length: int, scalar: float, mode: str, drift: int
+    ) -> Series:
         """RVI"""
         std = stdev(source, length)
         pos, neg = unsigned_differences(source, amount=drift)

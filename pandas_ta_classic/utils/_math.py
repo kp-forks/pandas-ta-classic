@@ -3,7 +3,7 @@ from functools import reduce
 from math import floor as mfloor
 from operator import mul
 from sys import float_info as sflt
-from typing import List, Optional, Tuple
+from typing import Any, Callable, List, Optional, Tuple, Union
 
 import numpy as np
 from numpy import ones, triu
@@ -28,7 +28,7 @@ from pandas_ta_classic import Imports
 from ._core import verify_series
 
 
-def combination(**kwargs: dict) -> int:
+def combination(**kwargs: Any) -> int:
     """https://stackoverflow.com/questions/4941753/is-there-a-math-ncr-function-in-python"""
     n = int(npFabs(kwargs.pop("n", 1)))
     r = int(npFabs(kwargs.pop("r", 0)))
@@ -46,7 +46,7 @@ def combination(**kwargs: dict) -> int:
     return numerator // denominator
 
 
-def erf(x):
+def erf(x: float) -> float:
     """Error Function erf(x)
     The algorithm comes from Handbook of Mathematical Functions, formula 7.1.26.
     Source: https://stackoverflow.com/questions/457408/is-there-an-easily-available-implementation-of-erf-for-python
@@ -69,7 +69,7 @@ def erf(x):
     return sign * y  # erf(-x) = -erf(x)
 
 
-def fibonacci(n: int = 2, **kwargs: dict) -> npNdArray:
+def fibonacci(n: int = 2, **kwargs: Any) -> npNdArray:
     """Fibonacci Sequence as a numpy array"""
     n = int(npFabs(n)) if n >= 0 else 2
 
@@ -87,7 +87,7 @@ def fibonacci(n: int = 2, **kwargs: dict) -> npNdArray:
 
     weighted = kwargs.pop("weighted", False)
     if weighted:
-        fib_sum = npSum(result)
+        fib_sum: float = npSum(result)
         if fib_sum > 0:
             return result / fib_sum
         else:
@@ -140,7 +140,7 @@ def log_geometric_mean(series: Series) -> float:
         return 0
 
 
-def pascals_triangle(n: int = None, **kwargs: dict) -> npNdArray:
+def pascals_triangle(n: Optional[int] = None, **kwargs: Any) -> Optional[npNdArray]:
     """Pascal's Triangle
 
     Returns a numpy array of the nth row of Pascal's Triangle.
@@ -152,7 +152,7 @@ def pascals_triangle(n: int = None, **kwargs: dict) -> npNdArray:
 
     # Calculation
     triangle = npArray([combination(n=n, r=i) for i in range(0, n + 1)])
-    triangle_sum = npSum(triangle)
+    triangle_sum: float = npSum(triangle)
     triangle_weights = triangle / triangle_sum
     inverse_weights = 1 - triangle_weights
 
@@ -168,7 +168,9 @@ def pascals_triangle(n: int = None, **kwargs: dict) -> npNdArray:
     return triangle
 
 
-def symmetric_triangle(n: int = None, **kwargs: dict) -> Optional[List[int]]:
+def symmetric_triangle(
+    n: Optional[int] = None, **kwargs: Any
+) -> Optional[Union[List[int], npNdArray]]:
     """Symmetric Triangle with n >= 2
 
     Returns a numpy array of the nth row of Symmetric Triangle.
@@ -192,23 +194,24 @@ def symmetric_triangle(n: int = None, **kwargs: dict) -> Optional[List[int]]:
             triangle += front[::-1]
 
     if kwargs.pop("weighted", False) and isinstance(triangle, list):
-        triangle_sum = npSum(triangle)
-        triangle_weights = triangle / triangle_sum
+        triangle_arr: npNdArray = np.array(triangle)
+        triangle_sum: float = float(npSum(triangle_arr))
+        triangle_weights: npNdArray = triangle_arr / triangle_sum
         return triangle_weights
 
     return triangle
 
 
-def weights(w: npNdArray):
+def weights(w: Any) -> Callable[[Any], Any]:
     """Calculates the dot product of weights with values x"""
 
-    def _dot(x):
+    def _dot(x: Any) -> Any:
         return npDot(w, x)
 
     return _dot
 
 
-def zero(x: Tuple[int, float]) -> Tuple[int, float]:
+def zero(x: Union[int, float]) -> Union[int, float]:
     """If the value is close to zero, then return zero. Otherwise return itself."""
     return 0 if abs(x) < sflt.epsilon else x
 
@@ -216,7 +219,7 @@ def zero(x: Tuple[int, float]) -> Tuple[int, float]:
 # TESTING
 
 
-def df_error_analysis(dfA: DataFrame, dfB: DataFrame, **kwargs: dict) -> DataFrame:
+def df_error_analysis(dfA: DataFrame, dfB: DataFrame, **kwargs: Any) -> DataFrame:
     """DataFrame Correlation Analysis helper"""
     corr_method = kwargs.pop("corr_method", "pearson")
 

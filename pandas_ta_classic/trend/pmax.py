@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Price Max (PMAX)
+from typing import Any, Optional
 from numpy import maximum, minimum
 from pandas import Series
 from pandas_ta_classic.overlap.ma import ma
@@ -8,8 +9,15 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def pmax(
-    high, low, close, length=None, multiplier=None, mamode=None, offset=None, **kwargs
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    multiplier: Optional[float] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: PMAX (Price Max)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 10
@@ -21,7 +29,7 @@ def pmax(
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     # Calculate ATR
@@ -35,9 +43,9 @@ def pmax(
     pmax_down = ma_value + (multiplier * atr_value)
 
     # Convert to numpy arrays for faster iteration
-    close_arr = close.values
-    pmax_up_arr = pmax_up.values
-    pmax_down_arr = pmax_down.values
+    close_arr = close.to_numpy()
+    pmax_up_arr = pmax_up.to_numpy(copy=True)
+    pmax_down_arr = pmax_down.to_numpy(copy=True)
 
     # Initialize arrays
     n = len(close)

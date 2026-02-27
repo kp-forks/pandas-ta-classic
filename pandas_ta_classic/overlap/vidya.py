@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Variable Index Dynamic Average (VIDYA)
+from typing import Any, Optional
 import numpy as np
 from pandas import Series
 
@@ -7,7 +8,13 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
-def vidya(close, length=None, drift=None, offset=None, **kwargs):
+def vidya(
+    close: Series,
+    length: Optional[int] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Variable Index Dynamic Average (VIDYA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14
@@ -16,9 +23,9 @@ def vidya(close, length=None, drift=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
-    def _cmo(source: Series, n: int, d: int):
+    def _cmo(source: Series, n: int, d: int) -> Series:
         """Chande Momentum Oscillator (CMO) - Inlined to avoid circular import
 
         Note: This is inlined rather than imported from pandas_ta_classic.momentum.cmo
@@ -36,7 +43,7 @@ def vidya(close, length=None, drift=None, offset=None, **kwargs):
     m = close.size
     alpha = 2 / (length + 1)
     abs_cmo = _cmo(close, length, drift).abs()
-    vidya = Series(0, index=close.index)
+    vidya = Series(0.0, index=close.index)
     for i in range(length, m):
         vidya.iloc[i] = alpha * abs_cmo.iloc[i] * close.iloc[i] + vidya.iloc[i - 1] * (
             1 - alpha * abs_cmo.iloc[i]

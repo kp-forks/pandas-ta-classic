@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 # Sine Weighted Moving Average (SINWMA)
+from typing import Any, Optional
 from numpy import pi as npPi
 from numpy import sin as npSin
 from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series, weights
 
 
-def sinwma(close, length=None, offset=None, **kwargs):
+def sinwma(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Sine Weighted Moving Average (SINWMA) by Everget of TradingView"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14
@@ -14,7 +20,7 @@ def sinwma(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     sines = Series([npSin((i + 1) * npPi / (length + 1)) for i in range(0, length)])

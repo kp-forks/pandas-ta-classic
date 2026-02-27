@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
 # Ease of Movement (EOM)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.hl2 import hl2
 from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_drift, get_offset, non_zero_range, verify_series
 
 
 def eom(
-    high,
-    low,
-    close,
-    volume,
-    length=None,
-    divisor=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    volume: Series,
+    length: Optional[int] = None,
+    divisor: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Ease of Movement (EOM)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -28,7 +30,7 @@ def eom(
     offset = get_offset(offset)
 
     if high is None or low is None or close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     high_low_range = non_zero_range(high, low)

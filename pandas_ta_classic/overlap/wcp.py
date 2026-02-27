@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 # Weighted Close Price (WCP)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def wcp(high, low, close, talib=None, offset=None, **kwargs):
+def wcp(
+    high: Series,
+    low: Series,
+    close: Series,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Weighted Closing Price (WCP)"""
     # Validate Arguments
     high = verify_series(high)

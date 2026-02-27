@@ -1,11 +1,20 @@
 # -*- coding: utf-8 -*-
 # Schaff Trend Cycle (STC)
+from typing import Any, Optional
 from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def stc(close, tclength=None, fast=None, slow=None, factor=None, offset=None, **kwargs):
+def stc(
+    close: Series,
+    tclength: Optional[int] = None,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    factor: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Schaff Trend Cycle (STC)"""
     # Validate arguments
     tclength = int(tclength) if tclength and tclength > 0 else 10
@@ -19,7 +28,7 @@ def stc(close, tclength=None, fast=None, slow=None, factor=None, offset=None, **
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # kwargs allows for three more series (ma1, ma2 and osc) which can be passed
     # here ma1 and ma2 input negate internal ema calculations, osc substitutes
@@ -34,7 +43,7 @@ def stc(close, tclength=None, fast=None, slow=None, factor=None, offset=None, **
         ma2 = verify_series(ma2, _length)
 
         if ma1 is None or ma2 is None:
-            return
+            return None
         # Calculate Result based on external feeded series
         xmacd = ma1 - ma2
         # invoke shared calculation
@@ -43,7 +52,7 @@ def stc(close, tclength=None, fast=None, slow=None, factor=None, offset=None, **
     elif isinstance(osc, Series):
         osc = verify_series(osc, _length)
         if osc is None:
-            return
+            return None
         # Calculate Result based on feeded oscillator
         # (should be ranging around 0 x-axis)
         xmacd = osc
@@ -172,7 +181,7 @@ Returns:
 """
 
 
-def schaff_tc(close, xmacd, tclength, factor):
+def schaff_tc(close: Series, xmacd: Series, tclength: int, factor: float) -> list:
     # ACTUAL Calculation part, which is shared between operation modes
     # 1St : Stochastic of MACD
     lowest_xmacd = xmacd.rolling(tclength).min()  # min value in interval tclen
@@ -183,8 +192,10 @@ def schaff_tc(close, xmacd, tclength, factor):
     stoch1, pf = list(xmacd), list(xmacd)
     stoch1[0], pf[0] = 0, 0
     for i in range(1, m):
-        if lowest_xmacd[i] > 0:
-            stoch1[i] = 100 * ((xmacd[i] - lowest_xmacd[i]) / xmacd_range[i])
+        if lowest_xmacd.iloc[i] > 0:
+            stoch1[i] = 100 * (
+                (xmacd.iloc[i] - lowest_xmacd.iloc[i]) / xmacd_range.iloc[i]
+            )
         else:
             stoch1[i] = stoch1[i - 1]
         # Smoothed Calculation for % Fast D of MACD
@@ -200,8 +211,8 @@ def schaff_tc(close, xmacd, tclength, factor):
     stoch2, pff = list(xmacd), list(xmacd)
     stoch2[0], pff[0] = 0, 0
     for i in range(1, m):
-        if pf_range[i] > 0:
-            stoch2[i] = 100 * ((pf[i] - lowest_pf[i]) / pf_range[i])
+        if pf_range.iloc[i] > 0:
+            stoch2[i] = 100 * ((pf.iloc[i] - lowest_pf.iloc[i]) / pf_range.iloc[i])
         else:
             stoch2[i] = stoch2[i - 1]
         # Smoothed Calculation for % Fast D of PF

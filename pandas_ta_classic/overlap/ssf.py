@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
 # Super Smoother Filter (SSF)
+from typing import Any, Optional
 from numpy import cos as npCos
 from numpy import exp as npExp
 from numpy import pi as npPi
 from numpy import sqrt as npSqrt
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def ssf(close, length=None, poles=None, offset=None, **kwargs):
+def ssf(
+    close: Series,
+    length: Optional[int] = None,
+    poles: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Ehler's Super Smoother Filter (SSF)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -16,7 +24,7 @@ def ssf(close, length=None, poles=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     m = close.size

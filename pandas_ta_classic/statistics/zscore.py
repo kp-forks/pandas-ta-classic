@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 # Z Score (ZSCORE)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.sma import sma
 from .stdev import stdev
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def zscore(close, length=None, std=None, offset=None, **kwargs):
+def zscore(
+    close: Series,
+    length: Optional[int] = None,
+    std: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Z Score"""
     # Validate Arguments
     length = int(length) if length and length > 1 else 30
@@ -14,7 +22,7 @@ def zscore(close, length=None, std=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     std *= stdev(close=close, length=length, **kwargs)

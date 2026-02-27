@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Jurik Moving Average (JMA)
+from typing import Any, Optional, Union
 import numpy as np
 from numpy import average as npAverage
 from numpy import log as npLog
@@ -12,7 +13,13 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def jma(close, length=None, phase=None, offset=None, **kwargs):
+def jma(
+    close: Series,
+    length: Optional[Union[int, float]] = None,
+    phase: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Jurik Moving Average (JMA)"""
     # Validate Arguments
     _length = int(length) if length and length > 0 else 7
@@ -20,7 +27,7 @@ def jma(close, length=None, phase=None, offset=None, **kwargs):
     close = verify_series(close, _length)
     offset = get_offset(offset)
     if close is None:
-        return
+        return None
 
     # Define base variables
     jma = npZeroslike(close)
@@ -28,7 +35,7 @@ def jma(close, length=None, phase=None, offset=None, **kwargs):
     v_sum = npZeroslike(close)
 
     kv = det0 = det1 = ma2 = 0.0
-    jma[0] = ma1 = uBand = lBand = close[0]
+    jma[0] = ma1 = uBand = lBand = close.iloc[0]
 
     # Static variables
     sum_length = 10
@@ -42,7 +49,7 @@ def jma(close, length=None, phase=None, offset=None, **kwargs):
 
     m = close.shape[0]
     for i in range(1, m):
-        price = close[i]
+        price = close.iloc[i]
 
         # Price volatility
         del1 = price - uBand

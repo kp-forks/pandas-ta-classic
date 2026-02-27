@@ -80,7 +80,7 @@ def yf(ticker: str, **kwargs):
 
     if not Imports["yfinance"]:
         print(f"[X] Please install yfinance to use this method. (pip install yfinance)")
-        return
+        return None
     if Imports["yfinance"] and ticker is not None:
         import yfinance as yfra
 
@@ -99,17 +99,17 @@ def yf(ticker: str, **kwargs):
                 print(
                     f"[!] https://github.com/ranaroussi/yfinance/issues/760#issuecomment-877355832"
                 )
-                return
+                return None
 
         if df.empty:
-            return
+            return None
         df.name = ticker
 
         try:
             ticker_info = yfd.info
         except KeyError as ke:
             print(f"[X] Ticker '{ticker}' not found.")
-            return
+            return None
 
         filtered = {k: v for k, v in ticker_info.items() if v is not None}
         # print(f"\n{type(ticker_info)}\n{ticker_info}\n{ticker_info.items()}")

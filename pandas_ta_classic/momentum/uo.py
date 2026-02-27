@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
 # Ultimate Oscillator (UO)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def uo(
-    high,
-    low,
-    close,
-    fast=None,
-    medium=None,
-    slow=None,
-    fast_w=None,
-    medium_w=None,
-    slow_w=None,
-    talib=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    fast: Optional[int] = None,
+    medium: Optional[int] = None,
+    slow: Optional[int] = None,
+    fast_w: Optional[float] = None,
+    medium_w: Optional[float] = None,
+    slow_w: Optional[float] = None,
+    talib: Optional[bool] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Ultimate Oscillator (UO)"""
     # Validate arguments
     fast = int(fast) if fast and fast > 0 else 7
@@ -37,7 +38,7 @@ def uo(
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

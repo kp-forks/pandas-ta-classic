@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 # Kurtosis (KURTOSIS)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def kurtosis(close, length=None, offset=None, **kwargs):
+def kurtosis(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Kurtosis"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 30
@@ -16,7 +23,7 @@ def kurtosis(close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     kurtosis = close.rolling(length, min_periods=min_periods).kurt()

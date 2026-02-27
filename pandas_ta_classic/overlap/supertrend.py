@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # SuperTrend (SUPERTREND)
+from typing import Any, Optional
 import numpy as np
-from pandas import DataFrame
+from pandas import DataFrame, Series
 
 npNaN = np.nan
 from pandas_ta_classic.overlap.hl2 import hl2
@@ -9,7 +10,15 @@ from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def supertrend(high, low, close, length=None, multiplier=None, offset=None, **kwargs):
+def supertrend(
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    multiplier: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Supertrend"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 7
@@ -20,7 +29,7 @@ def supertrend(high, low, close, length=None, multiplier=None, offset=None, **kw
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Results
     m = close.size

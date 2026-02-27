@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 # True Strength Index (TSI)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def tsi(
-    close,
-    fast=None,
-    slow=None,
-    signal=None,
-    scalar=None,
-    mamode=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    signal: Optional[int] = None,
+    scalar: Optional[float] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: True Strength Index (TSI)"""
     # Validate Arguments
     fast = int(fast) if fast and fast > 0 else 13
@@ -33,7 +34,7 @@ def tsi(
         kwargs.pop("length")
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     diff = close.diff(drift)

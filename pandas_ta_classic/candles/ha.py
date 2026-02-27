@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 # Heikin Ashi (HA)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def ha(open_, high, low, close, offset=None, **kwargs):
+def ha(
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Candle Type - Heikin Ashi"""
     # Validate Arguments
     open_ = verify_series(open_)
@@ -24,8 +32,12 @@ def ha(open_, high, low, close, offset=None, **kwargs):
         }
     )
 
+    ha_open_col = df.columns.get_loc("HA_open")
+    ha_close_col = df.columns.get_loc("HA_close")
     for i in range(1, m):
-        df["HA_open"][i] = 0.5 * (df["HA_open"][i - 1] + df["HA_close"][i - 1])
+        df.iat[i, ha_open_col] = 0.5 * (
+            df.iat[i - 1, ha_open_col] + df.iat[i - 1, ha_close_col]
+        )
 
     df["HA_high"] = df[["HA_open", "HA_high", "HA_close"]].max(axis=1)
     df["HA_low"] = df[["HA_open", "HA_low", "HA_close"]].min(axis=1)

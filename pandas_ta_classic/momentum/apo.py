@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 # Absolute Price Oscillator (APO)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, tal_ma, verify_series
 
 
-def apo(close, fast=None, slow=None, mamode=None, talib=None, offset=None, **kwargs):
+def apo(
+    close: Series,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    mamode: Optional[str] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Absolute Price Oscillator (APO)"""
     # Validate Arguments
     fast = int(fast) if fast and fast > 0 else 12
@@ -18,7 +28,7 @@ def apo(close, fast=None, slow=None, mamode=None, talib=None, offset=None, **kwa
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

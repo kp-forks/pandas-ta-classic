@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 # Ulcer Index (UI)
+from typing import Any, Optional
 from numpy import sqrt as npsqrt
+from pandas import Series
 from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def ui(close, length=None, scalar=None, offset=None, **kwargs):
+def ui(
+    close: Series,
+    length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Ulcer Index (UI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -14,7 +22,7 @@ def ui(close, length=None, scalar=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     highest_close = close.rolling(length).max()

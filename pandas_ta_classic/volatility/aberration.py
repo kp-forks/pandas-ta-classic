@@ -1,13 +1,22 @@
 # -*- coding: utf-8 -*-
 # from numpy import sqrt as npsqrt
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from .atr import atr
 from pandas_ta_classic.overlap.hlc3 import hlc3
 from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def aberration(high, low, close, length=None, atr_length=None, offset=None, **kwargs):
+def aberration(
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    atr_length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Aberration (ABER)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 5
@@ -19,7 +28,7 @@ def aberration(high, low, close, length=None, atr_length=None, offset=None, **kw
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     atr_ = atr(high=high, low=low, close=close, length=atr_length)

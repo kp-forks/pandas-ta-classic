@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Even Better Sine Wave (EBSW)
+from typing import Any, Optional
 import numpy as np
 from numpy import cos as npCos
 from numpy import exp as npExp
@@ -12,7 +13,13 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def ebsw(close, length=None, bars=None, offset=None, **kwargs):
+def ebsw(
+    close: Series,
+    length: Optional[int] = None,
+    bars: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Even Better SineWave (EBSW)"""
     # Validate arguments
     length = int(length) if length and length > 38 else 40
@@ -21,7 +28,7 @@ def ebsw(close, length=None, bars=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # variables
     alpha1 = HP = 0  # alpha and HighPass
@@ -37,7 +44,7 @@ def ebsw(close, length=None, bars=None, offset=None, **kwargs):
     for i in range(length, m):
         # HighPass filter cyclic components whose periods are shorter than Duration input
         alpha1 = (1 - npSin(360 / length)) / npCos(360 / length)
-        HP = 0.5 * (1 + alpha1) * (close[i] - lastClose) + alpha1 * lastHP
+        HP = 0.5 * (1 + alpha1) * (close.iloc[i] - lastClose) + alpha1 * lastHP
 
         # Smooth with a Super Smoother Filter from equation 3-3
         a1 = npExp(-npSqrt(2) * npPi / bars)
@@ -61,7 +68,7 @@ def ebsw(close, length=None, bars=None, offset=None, **kwargs):
         FilterHist.append(Filt)  # append new Filt value
         FilterHist.pop(0)  # remove first element of list (left) -> updating/trim
         lastHP = HP
-        lastClose = close[i]
+        lastClose = close.iloc[i]
         result.append(Wave)
 
     ebsw = Series(result, index=close.index)

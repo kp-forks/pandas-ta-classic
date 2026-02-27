@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 # Negative Volume Index (NVI)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.momentum import roc
 from pandas_ta_classic.utils import get_offset, signed_series, verify_series
 
 
-def nvi(close, volume, length=None, initial=None, offset=None, **kwargs):
+def nvi(
+    close: Series,
+    volume: Series,
+    length: Optional[int] = None,
+    initial: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Negative Volume Index (NVI)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 1
@@ -15,7 +24,7 @@ def nvi(close, volume, length=None, initial=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     roc_ = roc(close=close, length=length)

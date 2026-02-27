@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # Commodity Channel Index (CCI)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.hlc3 import hlc3
 from pandas_ta_classic.overlap.sma import sma
@@ -7,7 +9,16 @@ from pandas_ta_classic.statistics import mad, stdev
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def cci(high, low, close, length=None, c=None, talib=None, offset=None, **kwargs):
+def cci(
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    c: Optional[float] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Commodity Channel Index (CCI)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14
@@ -19,7 +30,7 @@ def cci(high, low, close, length=None, c=None, talib=None, offset=None, **kwargs
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:

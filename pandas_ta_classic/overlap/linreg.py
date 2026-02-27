@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Linear Regression (LINREG)
+from typing import Any, Optional
 import numpy as np
 from numpy import array as npArray
 from numpy import arctan as npAtan
@@ -11,7 +12,12 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def linreg(close, length=None, offset=None, **kwargs):
+def linreg(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Linear Regression"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -25,7 +31,7 @@ def linreg(close, length=None, offset=None, **kwargs):
     tsf = kwargs.pop("tsf", False)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     x = range(1, length + 1)  # [1, 2, ..., n] from 1 to n keeps Sum(xy) low
@@ -33,7 +39,7 @@ def linreg(close, length=None, offset=None, **kwargs):
     x2_sum = x_sum * (2 * length + 1) / 3
     divisor = length * x2_sum - x_sum * x_sum
 
-    def linear_regression(series):
+    def linear_regression(series: Any) -> Any:
         y_sum = series.sum()
         xy_sum = (x * series).sum()
 
@@ -58,7 +64,7 @@ def linreg(close, length=None, offset=None, **kwargs):
 
         return m * length + b if tsf else m * (length - 1) + b
 
-    def rolling_window(array, length):
+    def rolling_window(array: Any, length: int) -> Any:
         """https://github.com/twopirllc/pandas-ta/issues/285"""
         strides = array.strides + (array.strides[-1],)
         shape = array.shape[:-1] + (array.shape[-1] - length + 1, length)

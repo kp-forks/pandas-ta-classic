@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 # Relative Vigor Index (RVGI)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.swma import swma
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def rvgi(open_, high, low, close, length=None, swma_length=None, offset=None, **kwargs):
+def rvgi(
+    open_: Series,
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    swma_length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Relative Vigor Index (RVGI)"""
     # Validate Arguments
     high_low_range = non_zero_range(high, low)
@@ -20,7 +30,7 @@ def rvgi(open_, high, low, close, length=None, swma_length=None, offset=None, **
     offset = get_offset(offset)
 
     if open_ is None or high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     numerator = swma(close_open_range, length=swma_length).rolling(length).sum()

@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 # Percent Return (PERCENT_RETURN)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def percent_return(close, length=None, cumulative=None, offset=None, **kwargs):
+def percent_return(
+    close: Series,
+    length: Optional[int] = None,
+    cumulative: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Percent Return"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 1
@@ -12,7 +20,7 @@ def percent_return(close, length=None, cumulative=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if cumulative:

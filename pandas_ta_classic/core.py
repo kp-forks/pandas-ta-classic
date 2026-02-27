@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from multiprocessing import cpu_count, Pool
 from pathlib import Path
 from time import perf_counter
-from typing import List, Tuple
+from typing import Any, List, Optional, Tuple
 from warnings import simplefilter
 
 import pandas as pd
@@ -23,7 +23,6 @@ from pandas_ta_classic.trend import *
 from pandas_ta_classic.volatility import *
 from pandas_ta_classic.volume import *
 from pandas_ta_classic.utils import *
-
 
 df = pd.DataFrame()
 
@@ -56,7 +55,7 @@ class Strategy:
     # Helpful. More descriptive version or notes or w/e.
     description: str = "TA Description"
     # Optional. Gets Exchange Time and Local Time execution time
-    created: str = get_time(to_string=True)
+    created: Optional[str] = get_time(to_string=True)
 
     def __post_init__(self):
         has_name = True
@@ -267,7 +266,11 @@ class AnalysisIndicators(BasePandasObject):
 
     # DataFrame Behavioral Methods
     def __call__(
-        self, kind: str = None, timed: bool = False, version: bool = False, **kwargs
+        self,
+        kind: Optional[str] = None,
+        timed: bool = False,
+        version: bool = False,
+        **kwargs,
     ):
         if version:
             print(f"Pandas TA - Technical Analysis Indicators - v{self.version}")
@@ -298,7 +301,7 @@ class AnalysisIndicators(BasePandasObject):
 
     # Public Get/Set DataFrame Properties
     @property
-    def adjusted(self) -> str:
+    def adjusted(self) -> Optional[str]:
         """property: df.ta.adjusted"""
         return self._adjusted
 
@@ -311,7 +314,7 @@ class AnalysisIndicators(BasePandasObject):
             self._adjusted = None
 
     @property
-    def cores(self) -> str:
+    def cores(self) -> int:
         """Returns the categories."""
         return self._cores
 
@@ -336,13 +339,13 @@ class AnalysisIndicators(BasePandasObject):
             self._exchange = value
 
     @property
-    def last_run(self) -> str:
+    def last_run(self) -> Optional[str]:
         """Returns the time when the DataFrame was last run."""
         return self._last_run
 
     # Public Get DataFrame Properties
     @property
-    def categories(self) -> str:
+    def categories(self) -> List[str]:
         """Returns the categories."""
         return list(Category.keys())
 
@@ -471,7 +474,7 @@ class AnalysisIndicators(BasePandasObject):
                 NOT_FOUND = f"[X] Ooops!!! It's {series not in df.columns}, the series '{series}' was not found in {cols}"
                 return df.iloc[:, match[0]] if len(match) else print(NOT_FOUND)
 
-    def _indicators_by_category(self, name: str) -> list:
+    def _indicators_by_category(self, name: str) -> Optional[list]:
         """Returns indicators by Categorical name."""
         return Category[name] if name in self.categories else None
 
@@ -621,7 +624,8 @@ class AnalysisIndicators(BasePandasObject):
             removed += user_excluded
 
         # Remove the unwanted indicators
-        [ta_indicators.remove(x) for x in removed]
+        for x in removed:
+            ta_indicators.remove(x)
 
         # If as a list, immediately return
         if as_list:
@@ -698,7 +702,9 @@ class AnalysisIndicators(BasePandasObject):
         # Collect the indicators, remove excluded or include kwarg["append"]
         if mode["category"]:
             ta = self._indicators_by_category(name.lower())
-            [ta.remove(x) for x in excluded if x in ta]
+            for x in excluded:
+                if x in ta:
+                    ta.remove(x)
         elif mode["custom"]:
             ta = args[0].ta
             for kwds in ta:
@@ -719,7 +725,8 @@ class AnalysisIndicators(BasePandasObject):
             if _:
                 removal.append(kwds)
         if len(removal) > 0:
-            [ta.remove(x) for x in removal]
+            for x in removal:
+                ta.remove(x)
 
         verbose = kwargs.pop("verbose", False)
         if verbose:
@@ -729,7 +736,7 @@ class AnalysisIndicators(BasePandasObject):
                 print(f"[i] Excluded[{len(excluded)}]: {excluded_str}")
 
         timed = kwargs.pop("timed", False)
-        results = []
+        results: Any = []
         use_multiprocessing = True if self.cores > 0 else False
         has_col_names = False
 
@@ -790,7 +797,7 @@ class AnalysisIndicators(BasePandasObject):
                     # May fix this to cpus if Chaining/Composition if it remains
                     results = pool.imap(self._mp_worker, custom_ta, _chunksize)
                 else:
-                    default_ta = [(ind, tuple(), kwargs) for ind in ta]
+                    default_ta: list = [(ind, tuple(), kwargs) for ind in ta]
                     # All and Categorical multiprocessing pool.
                     if all_ordered:
                         if Imports["tqdm"]:
@@ -2198,31 +2205,6 @@ class AnalysisIndicators(BasePandasObject):
                 fast=fast, slow=slow, length=length, offset=offset, **kwargs
             )
             return self._post_process(result, **kwargs)
-
-    def supertrend(
-        self,
-        period=None,
-        multiplier=None,
-        mamode=None,
-        drift=None,
-        offset=None,
-        **kwargs,
-    ):
-        high = self._get_column(kwargs.pop("high", "high"))
-        low = self._get_column(kwargs.pop("low", "low"))
-        close = self._get_column(kwargs.pop("close", "close"))
-        result = supertrend(
-            high=high,
-            low=low,
-            close=close,
-            period=period,
-            multiplier=multiplier,
-            mamode=mamode,
-            drift=drift,
-            offset=offset,
-            **kwargs,
-        )
-        return self._post_process(result, **kwargs)
 
     def tsignals(
         self,

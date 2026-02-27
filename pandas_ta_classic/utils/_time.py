@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from time import localtime, perf_counter
-from typing import Tuple
+from typing import Optional, Tuple, Union
 
-from pandas import DataFrame, Timestamp
+from pandas import DataFrame, Timestamp, to_datetime
 
 from pandas_ta_classic._meta import EXCHANGE_TZ, RATE
 
 
-def df_dates(df: DataFrame, dates: Tuple[str, list] = None) -> DataFrame:
+def df_dates(
+    df: DataFrame, dates: Optional[Union[str, list]] = None
+) -> Optional[DataFrame]:
     """Yields the DataFrame with the given dates"""
     if dates is None:
         return None
     if not isinstance(dates, list):
         dates = [dates]
-    return df[df.index.isin(dates)]
+    return df[df.index.isin(to_datetime(dates))]
 
 
 def df_month_to_date(df: DataFrame) -> DataFrame:
@@ -51,11 +53,10 @@ def final_time(stime: float) -> str:
     return f"{time_diff * 1000:2.4f} ms ({time_diff:2.4f} s)"
 
 
-def get_time(
-    exchange: str = "NYSE", full: bool = True, to_string: bool = False
-) -> Tuple[None, str]:
+def get_time(exchange: str = "NYSE", full: bool = True, to_string: bool = False) -> str:
     """Returns Current Time, Day of the Year and Percentage, and the current
-    time of the selected Exchange."""
+    time of the selected Exchange. Always returns the formatted time string.
+    When to_string=False (default), also prints to stdout."""
     tz = EXCHANGE_TZ["NYSE"]  # Default is NYSE (Eastern Time Zone)
     if isinstance(exchange, str):
         exchange = exchange.upper()
@@ -80,7 +81,9 @@ def get_time(
     else:
         s = f"{date}, {exchange}: {exchange_time}"
 
-    return s if to_string else print(s)
+    if not to_string:
+        print(s)
+    return s
 
 
 def total_time(df: DataFrame, tf: str = "years") -> float:

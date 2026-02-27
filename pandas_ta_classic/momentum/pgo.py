@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 # Pretty Good Oscillator (PGO)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.ema import ema
 from pandas_ta_classic.overlap.sma import sma
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def pgo(high, low, close, length=None, offset=None, **kwargs):
+def pgo(
+    high: Series,
+    low: Series,
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Pretty Good Oscillator (PGO)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -16,7 +25,7 @@ def pgo(high, low, close, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     pgo = close - sma(close, length)

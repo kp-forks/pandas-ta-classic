@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # Symmetric Weighted Moving Average (SWMA)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import (
     get_offset,
     symmetric_triangle,
@@ -8,7 +10,13 @@ from pandas_ta_classic.utils import (
 )
 
 
-def swma(close, length=None, asc=None, offset=None, **kwargs):
+def swma(
+    close: Series,
+    length: Optional[int] = None,
+    asc: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Symmetric Weighted Moving Average (SWMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -18,7 +26,7 @@ def swma(close, length=None, asc=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     triangle = symmetric_triangle(length, weighted=True)

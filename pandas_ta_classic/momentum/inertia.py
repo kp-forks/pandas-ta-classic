@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 # Inertia (INERTIA)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.overlap.linreg import linreg
 from pandas_ta_classic.volatility import rvi
 from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def inertia(
-    close=None,
-    high=None,
-    low=None,
-    length=None,
-    rvi_length=None,
-    scalar=None,
-    refined=None,
-    thirds=None,
-    mamode=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    close: Optional[Series] = None,
+    high: Optional[Series] = None,
+    low: Optional[Series] = None,
+    length: Optional[int] = None,
+    rvi_length: Optional[int] = None,
+    scalar: Optional[float] = None,
+    refined: Optional[bool] = None,
+    thirds: Optional[bool] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Inertia (INERTIA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 20
@@ -33,13 +35,13 @@ def inertia(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     if refined or thirds:
         high = verify_series(high, _length)
         low = verify_series(low, _length)
         if high is None or low is None:
-            return
+            return None
 
     # Calculate Result
     if refined:

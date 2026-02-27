@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 # Short Run (SHORT_RUN)
+from typing import Any, Optional
+from pandas import Series
 from .decreasing import decreasing
 from .increasing import increasing
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def short_run(fast, slow, length=None, offset=None, **kwargs):
+def short_run(
+    fast: Series,
+    slow: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Short Run"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 2
@@ -14,7 +22,7 @@ def short_run(fast, slow, length=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if fast is None or slow is None:
-        return
+        return None
 
     # Calculate Result
     pt = decreasing(fast, length) & increasing(slow, length)  # potential top or top

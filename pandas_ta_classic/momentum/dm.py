@@ -1,14 +1,22 @@
 # -*- coding: utf-8 -*-
 # Directional Movement (DM)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_offset, verify_series, get_drift, zero
 
 
 def dm(
-    high, low, length=None, mamode=None, talib=None, drift=None, offset=None, **kwargs
-):
+    high: Series,
+    low: Series,
+    length: Optional[int] = None,
+    mamode: Optional[str] = None,
+    talib: Optional[bool] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: DM"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 14
@@ -20,7 +28,7 @@ def dm(
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if high is None or low is None:
-        return
+        return None
 
     if Imports["talib"] and mode_tal:
         from talib import MINUS_DM, PLUS_DM

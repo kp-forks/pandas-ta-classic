@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 # Price Volume (PVOL)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, signed_series, verify_series
 
 
-def pvol(close, volume, offset=None, **kwargs):
+def pvol(
+    close: Series,
+    volume: Series,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Price-Volume (PVOL)"""
     # Validate arguments
     close = verify_series(close)

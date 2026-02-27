@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
 # TRIX Histogram (TRIXH)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.momentum import trix
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def trixh(
-    close, length=None, signal=None, scalar=None, drift=None, offset=None, **kwargs
-):
+    close: Series,
+    length: Optional[int] = None,
+    signal: Optional[int] = None,
+    scalar: Optional[float] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: TRIX Histogram (TRIXH)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 18
@@ -17,14 +24,14 @@ def trixh(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     # Calculate TRIX (returns DataFrame with TRIX and signal)
     trix_df = trix(close, length=length, signal=signal, scalar=scalar, drift=drift)
 
     if trix_df is None:
-        return
+        return None
 
     # Extract TRIX line and signal
     trix_col = f"TRIX_{length}_{signal}"

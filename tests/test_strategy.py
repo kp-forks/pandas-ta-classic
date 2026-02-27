@@ -29,7 +29,11 @@ class TestStrategyMethods(TestCase):
     def tearDownClass(cls):
         cls.speed_test = cls.speed_test.T
         cls.speed_test.index.name = "Test"
-        cls.speed_test.columns = ["Columns", "Seconds"]
+        if cls.speed_test.shape[1] == 2:
+            cls.speed_test.columns = ["Columns", "Seconds"]
+        else:
+            # Avoid masking real test failures with a secondary teardown error
+            return
         if cumulative:
             cls.speed_test["Cum. Seconds"] = cls.speed_test["Seconds"].cumsum()
         if speed_table:
@@ -71,7 +75,7 @@ class TestStrategyMethods(TestCase):
 
         self.result = self.data[self.data.columns[-self.added_cols :]]
         self.assertIsInstance(self.result, DataFrame)
-        self.data.drop(columns=self.result.columns, axis=1, inplace=True)
+        self.data.drop(columns=self.result.columns, inplace=True)
 
         self.speed_test[self.category] = [self.added_cols, self.time_diff]
 

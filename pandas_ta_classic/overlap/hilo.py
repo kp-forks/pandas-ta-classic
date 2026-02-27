@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Gann High-Low Activator (HILO)
+from typing import Any, Optional
 import numpy as np
 from pandas import DataFrame, Series
 
@@ -9,15 +10,15 @@ from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def hilo(
-    high,
-    low,
-    close,
-    high_length=None,
-    low_length=None,
-    mamode=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    high_length: Optional[int] = None,
+    low_length: Optional[int] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Gann HiLo (HiLo)"""
     # Validate Arguments
     high_length = int(high_length) if high_length and high_length > 0 else 13
@@ -30,7 +31,7 @@ def hilo(
     offset = get_offset(offset)
 
     if high is None or low is None or close is None:
-        return
+        return None
 
     # Calculate Result
     m = close.size

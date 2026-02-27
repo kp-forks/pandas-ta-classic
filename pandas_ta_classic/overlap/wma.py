@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 # Weighted Moving Average (WMA)
+from typing import Any, Callable, Optional
 from pandas import Series
 from pandas_ta_classic import Imports
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def wma(close, length=None, asc=None, talib=None, offset=None, **kwargs):
+def wma(
+    close: Series,
+    length: Optional[int] = None,
+    asc: Optional[bool] = None,
+    talib: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Weighted Moving Average (WMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -15,7 +23,7 @@ def wma(close, length=None, asc=None, talib=None, offset=None, **kwargs):
     mode_tal = bool(talib) if isinstance(talib, bool) else True
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     if Imports["talib"] and mode_tal:
@@ -30,8 +38,8 @@ def wma(close, length=None, asc=None, talib=None, offset=None, **kwargs):
         weights_ = Series(npArange(1, length + 1))
         weights = weights_ if asc else weights_[::-1]
 
-        def linear(w):
-            def _compute(x):
+        def linear(w: Any) -> Callable:
+            def _compute(x: Any) -> float:
                 return npDot(x, w) / total_weight
 
             return _compute

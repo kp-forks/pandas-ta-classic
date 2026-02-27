@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Fisher Transform (FISHER)
+from typing import Any, Optional
 import numpy as np
 from numpy import log as nplog
 from pandas import DataFrame, Series
@@ -9,7 +10,14 @@ from pandas_ta_classic.overlap.hl2 import hl2
 from pandas_ta_classic.utils import get_offset, high_low_range, verify_series
 
 
-def fisher(high, low, length=None, signal=None, offset=None, **kwargs):
+def fisher(
+    high: Series,
+    low: Series,
+    length: Optional[int] = None,
+    signal: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Fisher Transform (FISHT)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 9
@@ -20,7 +28,7 @@ def fisher(high, low, length=None, signal=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if high is None or low is None:
-        return
+        return None
 
     # Calculate Result
     hl2_ = hl2(high, low)
@@ -32,7 +40,7 @@ def fisher(high, low, length=None, signal=None, offset=None, **kwargs):
 
     position = ((hl2_ - lowest_hl2) / hlr) - 0.5
 
-    v = 0
+    v: float = 0
     m = high.size
     result = [npNaN for _ in range(0, length - 1)] + [0]
     for i in range(length, m):

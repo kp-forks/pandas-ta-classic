@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 # Zero Lag Moving Average (ZLMA)
+from typing import Any, Optional
+from pandas import Series
 from . import dema, ema, hma, linreg, rma, sma, swma, t3, tema, trima, vidya, wma
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def zlma(close, length=None, mamode=None, offset=None, **kwargs):
+def zlma(
+    close: Series,
+    length: Optional[int] = None,
+    mamode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Zero Lag Moving Average (ZLMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -13,7 +21,7 @@ def zlma(close, length=None, mamode=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     lag = int(0.5 * (length - 1))

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from typing import Any, Optional
+
 from pandas import DataFrame, Series
 
 from ._core import get_offset, verify_series
@@ -10,9 +12,9 @@ def _above_below(
     series_b: Series,
     above: bool = True,
     asint: bool = True,
-    offset: int = None,
-    **kwargs,
-):
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Series:
     series_a = verify_series(series_a)
     series_b = verify_series(series_b)
     offset = get_offset(offset)
@@ -41,19 +43,27 @@ def _above_below(
 
 
 def above(
-    series_a: Series, series_b: Series, asint: bool = True, offset: int = None, **kwargs
-):
+    series_a: Series,
+    series_b: Series,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Series:
     return _above_below(
         series_a, series_b, above=True, asint=asint, offset=offset, **kwargs
     )
 
 
 def above_value(
-    series_a: Series, value: float, asint: bool = True, offset: int = None, **kwargs
-):
+    series_a: Series,
+    value: float,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     if not isinstance(value, (int, float, complex)):
         print("[X] value is not a number")
-        return
+        return None
     series_b = Series(value, index=series_a.index, name=f"{value}".replace(".", "_"))
 
     return _above_below(
@@ -62,19 +72,27 @@ def above_value(
 
 
 def below(
-    series_a: Series, series_b: Series, asint: bool = True, offset: int = None, **kwargs
-):
+    series_a: Series,
+    series_b: Series,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Series:
     return _above_below(
         series_a, series_b, above=False, asint=asint, offset=offset, **kwargs
     )
 
 
 def below_value(
-    series_a: Series, value: float, asint: bool = True, offset: int = None, **kwargs
-):
+    series_a: Series,
+    value: float,
+    asint: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     if not isinstance(value, (int, float, complex)):
         print("[X] value is not a number")
-        return
+        return None
     series_b = Series(value, index=series_a.index, name=f"{value}".replace(".", "_"))
     return _above_below(
         series_a, series_b, above=False, asint=asint, offset=offset, **kwargs
@@ -86,9 +104,9 @@ def cross_value(
     value: float,
     above: bool = True,
     asint: bool = True,
-    offset: int = None,
-    **kwargs,
-):
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Series:
     series_b = Series(value, index=series_a.index, name=f"{value}".replace(".", "_"))
 
     return cross(series_a, series_b, above, asint, offset, **kwargs)
@@ -99,9 +117,9 @@ def cross(
     series_b: Series,
     above: bool = True,
     asint: bool = True,
-    offset: int = None,
-    **kwargs,
-):
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Series:
     series_a = verify_series(series_a)
     series_b = verify_series(series_b)
     offset = get_offset(offset)
@@ -130,7 +148,15 @@ def cross(
 
 
 def signals(
-    indicator, xa, xb, cross_values, xserie, xserie_a, xserie_b, cross_series, offset
+    indicator: Series,
+    xa: Optional[float],
+    xb: Optional[float],
+    cross_values: bool,
+    xserie: Optional[Series],
+    xserie_a: Optional[Series],
+    xserie_b: Optional[Series],
+    cross_series: bool,
+    offset: Optional[int],
 ) -> DataFrame:
     df = DataFrame()
     if xa is not None and isinstance(xa, (int, float)):

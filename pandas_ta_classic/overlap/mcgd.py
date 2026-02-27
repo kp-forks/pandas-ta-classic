@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 # McGinley Dynamic (MCGD)
+from typing import Any, Optional
 import pandas as pd
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def mcgd(close, length=None, offset=None, c=None, **kwargs):
+def mcgd(
+    close: Series,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    c: Optional[float] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: McGinley Dynamic Indicator"""
     # Validate arguments
     length = int(length) if length and length > 0 else 10
@@ -13,12 +21,12 @@ def mcgd(close, length=None, offset=None, c=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     close = close.copy()
 
-    def mcg_(series):
+    def mcg_(series: Series) -> float:
         denom = c * length * (series.iloc[1] / series.iloc[0]) ** 4
         series.iloc[1] = series.iloc[0] + ((series.iloc[1] - series.iloc[0]) / denom)
         return series.iloc[1]

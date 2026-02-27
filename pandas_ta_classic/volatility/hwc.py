@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 # Holt-Winter Channel (HWC)
+from typing import Any, Optional
 from numpy import sqrt as npSqrt
 from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def hwc(
-    close,
-    na=None,
-    nb=None,
-    nc=None,
-    nd=None,
-    scalar=None,
-    channel_eval=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    na: Optional[float] = None,
+    nb: Optional[float] = None,
+    nc: Optional[float] = None,
+    nd: Optional[float] = None,
+    scalar: Optional[float] = None,
+    channel_eval: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Holt-Winter Channel"""
     # Validate Arguments
     na = float(na) if na and na > 0 else 0.2
@@ -29,13 +30,13 @@ def hwc(
 
     # Calculate Result
     last_a = last_v = last_var = 0
-    last_f = last_price = last_result = close[0]
+    last_f = last_price = last_result = close.iloc[0]
     lower, result, upper = [], [], []
     chan_pct_width, chan_width = [], []
 
     m = close.size
     for i in range(m):
-        F = (1.0 - na) * (last_f + last_v + 0.5 * last_a) + na * close[i]
+        F = (1.0 - na) * (last_f + last_v + 0.5 * last_a) + na * close.iloc[i]
         V = (1.0 - nb) * (last_v + last_a) + nb * (F - last_f)
         A = (1.0 - nc) * last_a + nc * (V - last_v)
         result.append((F + V + 0.5 * A))
@@ -51,11 +52,11 @@ def hwc(
             # channel width
             chan_width.append(upper[i] - lower[i])
             # channel percentage price position
-            chan_pct_width.append((close[i] - lower[i]) / (upper[i] - lower[i]))
+            chan_pct_width.append((close.iloc[i] - lower[i]) / (upper[i] - lower[i]))
             # print('channel_eval (width|percentageWidth):', chan_width[i], chan_pct_width[i])
 
         # update values
-        last_price = close[i]
+        last_price = close.iloc[i]
         last_a = A
         last_f = F
         last_v = V

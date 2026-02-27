@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Quantitative Qualitative Estimation (QQE)
+from typing import Any, Optional
 import numpy as np
 from numpy import maximum as npMaximum
 from numpy import minimum as npMinimum
@@ -13,15 +14,15 @@ from pandas_ta_classic.utils import get_drift, get_offset, verify_series
 
 
 def qqe(
-    close,
-    length=None,
-    smooth=None,
-    factor=None,
-    mamode=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    close: Series,
+    length: Optional[int] = None,
+    smooth: Optional[int] = None,
+    factor: Optional[float] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Quantitative Qualitative Estimation (QQE)"""
     # Validate arguments
     length = int(length) if length and length > 0 else 14
@@ -34,7 +35,7 @@ def qqe(
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     rsi_ = rsi(close, length)

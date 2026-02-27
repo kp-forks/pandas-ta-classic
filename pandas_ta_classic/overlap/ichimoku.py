@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 # Ichimoku Kinko Hyo (ICHIMOKU)
-from pandas import date_range, DataFrame, RangeIndex, Timedelta
+from typing import Any, Optional, Tuple
+from pandas import date_range, DataFrame, RangeIndex, Timedelta, Series
 from .midprice import midprice
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
 def ichimoku(
-    high,
-    low,
-    close,
-    tenkan=None,
-    kijun=None,
-    senkou=None,
-    include_chikou=True,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    tenkan: Optional[int] = None,
+    kijun: Optional[int] = None,
+    senkou: Optional[int] = None,
+    include_chikou: bool = True,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Tuple[Optional[DataFrame], Optional[DataFrame]]:
     """Indicator: Ichimoku Kinkō Hyō (Ichimoku)"""
     tenkan = int(tenkan) if tenkan and tenkan > 0 else 9
     kijun = int(kijun) if kijun and kijun > 0 else 26
@@ -119,7 +120,7 @@ def ichimoku(
         _span_a.index = _span_b.index = ext_index
     else:
         df_freq = close.index.value_counts().mode()[0]
-        tdelta = Timedelta(df_freq, unit="d")
+        tdelta = Timedelta(df_freq, unit="D")
         new_dt = date_range(start=last + tdelta, periods=kijun, freq="B")
         spandf = DataFrame(index=new_dt, columns=[span_a.name, span_b.name])
         _span_a.index = _span_b.index = new_dt

@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 # Linear Decay (DECAY)
+from typing import Any, Optional
 from numpy import exp as npExp
-from pandas import DataFrame
+from pandas import DataFrame, Series
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def decay(close, kind=None, length=None, mode=None, offset=None, **kwargs):
+def decay(
+    close: Series,
+    kind: Optional[str] = None,
+    length: Optional[int] = None,
+    mode: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Decay"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 5
@@ -14,7 +22,7 @@ def decay(close, kind=None, length=None, mode=None, offset=None, **kwargs):
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     _mode = "L"
@@ -23,7 +31,7 @@ def decay(close, kind=None, length=None, mode=None, offset=None, **kwargs):
         diff = close.shift(1) - npExp(-length)
     else:  # "linear"
         diff = close.shift(1) - (1 / length)
-    diff[0] = close[0]
+    diff.iloc[0] = close.iloc[0]
     tdf = DataFrame({"close": close, "diff": diff, "0": 0})
     ld = tdf.max(axis=1)
 

@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 # Volume Profile (VP)
-from numpy import array_split
+from typing import Any, Optional
+from numpy import arange as npArange
+from numpy import array_split as npArraySplit
 from numpy import mean
-from pandas import cut, concat, DataFrame
+from pandas import cut, concat, DataFrame, Series
 from pandas_ta_classic.utils import signed_series, verify_series
 
 
-def vp(close, volume, width=None, **kwargs):
+def vp(
+    close: Series,
+    volume: Series,
+    width: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Volume Profile (VP)"""
     # Validate arguments
     width = int(width) if width and width > 0 else 10
@@ -15,7 +22,7 @@ def vp(close, volume, width=None, **kwargs):
     sort_close = kwargs.pop("sort_close", False)
 
     if close is None or volume is None:
-        return
+        return None
 
     # Setup
     signed_price = signed_series(close, 1)
@@ -63,7 +70,7 @@ def vp(close, volume, width=None, **kwargs):
             ]
         ]
     else:
-        vp_ranges = array_split(vp, width)
+        vp_ranges = [vp.iloc[idx] for idx in npArraySplit(npArange(len(vp)), width)]
         result = (
             {
                 low_price_col: r[close_col].min(),

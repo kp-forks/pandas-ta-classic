@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from typing import Tuple
+from typing import Any, Dict, Optional, Tuple, Union, cast
 
 import numpy as np
 from numpy import log as npLog
@@ -48,7 +48,7 @@ def calmar_ratio(close: Series, method: str = "percent", years: int = 3) -> floa
     n_years_ago = close.index[-1] - Timedelta(days=365.25 * years)
     close = close[close.index > n_years_ago]
 
-    return cagr(close) / max_drawdown(close, method=method)
+    return cagr(close) / cast(float, max_drawdown(close, method=method))
 
 
 def downside_deviation(
@@ -107,7 +107,9 @@ def log_max_drawdown(close: Series) -> float:
     return log_return - max_drawdown(close, method="log")
 
 
-def max_drawdown(close: Series, method: str = None, all: bool = False) -> float:
+def max_drawdown(
+    close: Series, method: Optional[str] = None, all: bool = False
+) -> Union[float, Dict[str, float]]:
     """Maximum Drawdown from close. Default: 'dollar'.
 
     Args:
@@ -138,10 +140,10 @@ def max_drawdown(close: Series, method: str = None, all: bool = False) -> float:
 def optimal_leverage(
     close: Series,
     benchmark_rate: float = 0.0,
-    period: Tuple[float, int] = RATE["TRADING_DAYS_PER_YEAR"],
+    period: Union[float, int] = RATE["TRADING_DAYS_PER_YEAR"],
     log: bool = False,
     capital: float = 1.0,
-    **kwargs,
+    **kwargs: Any,
 ) -> float:
     """Optimal Leverage of a series. NOTE: Incomplete. Do NOT use.
 
@@ -173,7 +175,7 @@ def optimal_leverage(
     return amount
 
 
-def pure_profit_score(close: Series) -> Tuple[float, int]:
+def pure_profit_score(close: Series) -> Union[float, int]:
     """Pure Profit Score of a series.
 
     Args:
@@ -195,7 +197,7 @@ def sharpe_ratio(
     benchmark_rate: float = 0.0,
     log: bool = False,
     use_cagr: bool = False,
-    period: int = RATE["TRADING_DAYS_PER_YEAR"],
+    period: Union[float, int] = RATE["TRADING_DAYS_PER_YEAR"],
 ) -> float:
     """Sharpe Ratio of a series.
 
@@ -215,7 +217,7 @@ def sharpe_ratio(
     returns = percent_return(close=close) if not log else log_return(close=close)
 
     if use_cagr:
-        return cagr(close) / volatility(close, returns, log=log)
+        return cagr(close) / volatility(close, log=log)
     else:
         period_mu = period * returns.mean()
         period_std = npSqrt(period) * returns.std()
@@ -244,7 +246,11 @@ def sortino_ratio(
 
 
 def volatility(
-    close: Series, tf: str = "years", returns: bool = False, log: bool = False, **kwargs
+    close: Series,
+    tf: str = "years",
+    returns: bool = False,
+    log: bool = False,
+    **kwargs: Any,
 ) -> float:
     """Volatility of a series. Default: 'years'
 
@@ -262,14 +268,13 @@ def volatility(
     """
     close = verify_series(close)
 
+    _returns: Series
     if not returns:
-        returns = percent_return(close=close) if not log else log_return(close=close)
+        _returns = percent_return(close=close) if not log else log_return(close=close)
     else:
-        returns = close
+        _returns = close
 
-    returns = log_geometric_mean(returns).std()
-    # factor = returns.shape[0] / total_time(returns, tf)
-    # if kwargs.pop("nearest_day", False) and tf.lower() == "years":
-    # factor = int(factor + 1)
-    # return npSqrt(factor) * returns.std()
-    return returns
+    factor = _returns.shape[0] / total_time(_returns, tf)
+    if kwargs.pop("nearest_day", False) and tf.lower() == "years":
+        factor = int(factor + 1)
+    return float(npSqrt(factor) * _returns.std())

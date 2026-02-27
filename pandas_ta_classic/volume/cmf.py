@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
 # Chaikin Money Flow (CMF)
+from typing import Any, Optional
+from pandas import Series
 from pandas_ta_classic.utils import get_offset, non_zero_range, verify_series
 
 
-def cmf(high, low, close, volume, open_=None, length=None, offset=None, **kwargs):
+def cmf(
+    high: Series,
+    low: Series,
+    close: Series,
+    volume: Series,
+    open_: Optional[Series] = None,
+    length: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Chaikin Money Flow (CMF)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 20
@@ -20,7 +31,7 @@ def cmf(high, low, close, volume, open_=None, length=None, offset=None, **kwargs
     offset = get_offset(offset)
 
     if high is None or low is None or close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     if open_ is not None:

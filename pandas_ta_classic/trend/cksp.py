@@ -1,11 +1,22 @@
 # -*- coding: utf-8 -*-
 # Chande Kroll Stop (CKSP)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.volatility import atr
 from pandas_ta_classic.utils import get_offset, verify_series
 
 
-def cksp(high, low, close, p=None, x=None, q=None, tvmode=None, offset=None, **kwargs):
+def cksp(
+    high: Series,
+    low: Series,
+    close: Series,
+    p: Optional[int] = None,
+    x: Optional[float] = None,
+    q: Optional[int] = None,
+    tvmode: Optional[bool] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Chande Kroll Stop (CKSP)"""
     # Validate Arguments
     # TV defaults=(10,1,9), book defaults = (10,3,20)
@@ -18,7 +29,7 @@ def cksp(high, low, close, p=None, x=None, q=None, tvmode=None, offset=None, **k
     low = verify_series(low, _length)
     close = verify_series(close, _length)
     if high is None or low is None or close is None:
-        return
+        return None
 
     offset = get_offset(offset)
     tvmode = tvmode if isinstance(tvmode, bool) else True

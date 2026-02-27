@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
 # Volume Weighted Average Price (VWAP)
+from typing import Any, Optional
+from pandas import Series
 from .hlc3 import hlc3
 from pandas_ta_classic.utils import get_offset, is_datetime_ordered, verify_series
 
 
-def vwap(high, low, close, volume, anchor=None, offset=None, **kwargs):
+def vwap(
+    high: Series,
+    low: Series,
+    close: Series,
+    volume: Series,
+    anchor: Optional[str] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Volume Weighted Average Price (VWAP)"""
     # Validate Arguments
     high = verify_series(high)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Kaufman Adaptive Moving Average (KAMA)
+from typing import Any, Optional
 import numpy as np
 from pandas import Series
 
@@ -7,7 +8,15 @@ npNaN = np.nan
 from pandas_ta_classic.utils import get_drift, get_offset, non_zero_range, verify_series
 
 
-def kama(close, length=None, fast=None, slow=None, drift=None, offset=None, **kwargs):
+def kama(
+    close: Series,
+    length: Optional[int] = None,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[Series]:
     """Indicator: Kaufman's Adaptive Moving Average (KAMA)"""
     # Validate Arguments
     length = int(length) if length and length > 0 else 10
@@ -18,7 +27,7 @@ def kama(close, length=None, fast=None, slow=None, drift=None, offset=None, **kw
     offset = get_offset(offset)
 
     if close is None:
-        return
+        return None
 
     # Calculate Result
     def weight(length: int) -> float:

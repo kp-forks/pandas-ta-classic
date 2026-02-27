@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
 # Klinger Volume Oscillator (KVO)
-from pandas import DataFrame
+from typing import Any, Optional
+from pandas import DataFrame, Series
 from pandas_ta_classic.overlap.hlc3 import hlc3
 from pandas_ta_classic.overlap.ma import ma
 from pandas_ta_classic.utils import get_drift, get_offset, signed_series, verify_series
 
 
 def kvo(
-    high,
-    low,
-    close,
-    volume,
-    fast=None,
-    slow=None,
-    signal=None,
-    mamode=None,
-    drift=None,
-    offset=None,
-    **kwargs,
-):
+    high: Series,
+    low: Series,
+    close: Series,
+    volume: Series,
+    fast: Optional[int] = None,
+    slow: Optional[int] = None,
+    signal: Optional[int] = None,
+    mamode: Optional[str] = None,
+    drift: Optional[int] = None,
+    offset: Optional[int] = None,
+    **kwargs: Any,
+) -> Optional[DataFrame]:
     """Indicator: Klinger Volume Oscillator (KVO)"""
     # Validate arguments
     fast = int(fast) if fast and fast > 0 else 34
@@ -34,7 +35,7 @@ def kvo(
     offset = get_offset(offset)
 
     if high is None or low is None or close is None or volume is None:
-        return
+        return None
 
     # Calculate Result
     signed_volume = volume * signed_series(hlc3(high, low, close), 1)
