@@ -25,7 +25,7 @@ def vidya(
     if close is None:
         return None
 
-    def _cmo(source: Series, n: int, d: int):
+    def _cmo(source: Series, n: int, d: int) -> Series:
         """Chande Momentum Oscillator (CMO) - Inlined to avoid circular import
 
         Note: This is inlined rather than imported from pandas_ta_classic.momentum.cmo
